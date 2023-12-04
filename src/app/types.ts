@@ -49,7 +49,7 @@ export interface Bloque {
   descanso: Descanso;
 }
 
-export type Routine = Bloque[];
+export type Routine = ArrayMinOne<Bloque>;
 
 export type Level = 'Principiante' | 'Intermedio' | 'Avanzado' | 'Experto';
 
@@ -58,5 +58,5 @@ export interface Planificacion {
   month: number;
   link: string;
   level: Level;
-  routine: Routine[];
+  routine: ArrayMinOne<Routine>;
 }
