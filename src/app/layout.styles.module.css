@@ -1,0 +1,4 @@
+.wrapper {
+  @apply p-6 max-w-5xl mx-auto;
+  min-height: calc(100dvh - var(--cm-navbar-height));
+}
