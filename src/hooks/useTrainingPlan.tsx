@@ -6,12 +6,12 @@ import { trainingPlans } from "@/db/plan.db"
 export default function useTrainingPlan(slug: string) {
   const [trainingPlan, setTrainingPlan] = useState<TrainingPlan | undefined>(undefined)
 
-  const getTrainingPlan = (list: TrainingPlan[], slug: string) => {
+  const findTrainingPlan = (list: TrainingPlan[], slug: string) => {
     return list.find(plan => plan.slug === slug)
   }
 
   useEffect(() => {
-    setTrainingPlan(getTrainingPlan(trainingPlans, slug))
+    setTrainingPlan(findTrainingPlan(trainingPlans, slug))
   }, [slug])
 
   return {

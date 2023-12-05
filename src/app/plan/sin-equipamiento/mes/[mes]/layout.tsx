@@ -7,8 +7,6 @@ type layoutProps = React.PropsWithChildren & {
 }
 
 export default function layout({ children, params }: layoutProps) {
-  const title = "Sin equipamiento"
-
   return (
     <>
       <H2>Mes {params.mes}</H2>

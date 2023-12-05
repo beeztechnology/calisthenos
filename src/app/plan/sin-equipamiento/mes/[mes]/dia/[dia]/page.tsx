@@ -22,11 +22,8 @@ export default function Dia({ params }: pageProps) {
     routine = routineList[dia - 1]
   }
 
-  return (
-    <>
-      {routine && (
-        <RoutineTable day={dia} routine={routine} label={`Rutina dia ${dia} del mes ${mes}`} />
-      )}
-    </>
-  )
+  if (routine) {
+    return <RoutineTable day={dia} routine={routine} label={`Rutina dia ${dia} del mes ${mes}`} />
+  }
+  return <></>
 }

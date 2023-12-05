@@ -6,12 +6,8 @@ import useTrainingPlan from "@/hooks/useTrainingPlan"
 export default function SinEquipamiento() {
   const { trainingPlan } = useTrainingPlan(SIN_EQUIPAMIENTO);
 
-  return (
-    <>
-      {trainingPlan ?
-        <PlanificationContent planificacion={trainingPlan.planificacion} />
-        : <></>
-      }
-    </>
-  )
+  if (trainingPlan) {
+    return <PlanificationContent planificacion={trainingPlan.planificacion} />
+  }
+  return <></>
 }
