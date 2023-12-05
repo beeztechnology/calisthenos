@@ -6,10 +6,10 @@ import { PlanificationList } from "./PlanificationList";
 import { Level, Planificacion } from "../types";
 
 interface PlanificationContentProps {
-  courses?: Planificacion[];
+  planificacion?: Planificacion[];
 }
 
-export default function PlanificationContent({ courses = [] }: PlanificationContentProps) {
+export default function PlanificationContent({ planificacion = [] }: PlanificationContentProps) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["1"]));
 
   const PRINCIPIANTE: Level = "Principiante"
@@ -18,31 +18,31 @@ export default function PlanificationContent({ courses = [] }: PlanificationCont
   const EXPERTO: Level = "Experto"
 
   const getPrincipiantes = () => {
-    return courses.filter((item) => {
+    return planificacion.filter((item) => {
       return item.level === PRINCIPIANTE
     })
   }
 
   const getIntermedios = () => {
-    return courses.filter((item) => {
+    return planificacion.filter((item) => {
       return item.level === INTERMEDIO
     })
   }
 
   const getAvanzados = () => {
-    return courses.filter((item) => {
+    return planificacion.filter((item) => {
       return item.level === AVANZADO
     })
   }
 
   const getExpertos = () => {
-    return courses.filter((item) => {
+    return planificacion.filter((item) => {
       return item.level === EXPERTO
     })
   }
 
   return (
-    <div>
+    <>
       <H2>Contenido de la planificación</H2>
       <Accordion variant="bordered"
         selectedKeys={selectedKeys}
@@ -62,6 +62,6 @@ export default function PlanificationContent({ courses = [] }: PlanificationCont
           <PlanificationList list={getExpertos()} label="Contenido para personas con un nivel experto" />
         </AccordionItem>
       </Accordion>
-    </div>
+    </>
   );
 }

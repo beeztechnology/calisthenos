@@ -1,6 +1,8 @@
+'use client'
 import RoutineTable from "@/app/components/RoutineTable";
-import { plan } from "@/app/plan/sin-equipamiento/plan.db";
 import { Routine } from "@/app/types";
+import { SIN_EQUIPAMIENTO } from "@/db/constants.db";
+import useTrainingPlan from "@/hooks/useTrainingPlan";
 
 interface pageProps {
   params: {
@@ -9,11 +11,12 @@ interface pageProps {
   }
 }
 
-export default function page({ params }: pageProps) {
+export default function Dia({ params }: pageProps) {
+  const { trainingPlan } = useTrainingPlan(SIN_EQUIPAMIENTO)
   const mes = Number(params.mes)
   const dia = Number(params.dia)
 
-  const routineList: Routine[] = plan.find(routine => routine.month === mes)?.routine || []
+  const routineList: Routine[] = trainingPlan?.planificacion.find(routine => routine.month === mes)?.routine || []
   let routine: Routine | undefined = undefined;
   if (routineList.length > 0 && dia - 1 < routineList.length) {
     routine = routineList[dia - 1]

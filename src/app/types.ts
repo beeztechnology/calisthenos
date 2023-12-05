@@ -63,3 +63,10 @@ export interface Planificacion {
   level: Level;
   routine: Routine[];
 }
+
+export interface TrainingPlan {
+  title: string;
+  slug: string;
+  description: string;
+  planificacion: Planificacion[]
+}

@@ -1,0 +1,1 @@
+export const SIN_EQUIPAMIENTO = 'sin-entrenamiento'
