@@ -1,5 +1,6 @@
 import { Link, Listbox, ListboxItem } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
+import { Planificacion } from "../types";
 
 interface PlanificationListProps {
   list: Planificacion[];
@@ -18,16 +19,20 @@ export function PlanificationList({ list, label }: PlanificationListProps) {
 
   return (
     <Listbox variant="bordered" aria-label={label}>
-      {list.map((item, index, arr) => (
-        <ListboxItem
-          key={item.id}
-          showDivider={index !== arr.length - 1}
-        >
-          <Link href={getPath(item)} color="foreground">
-            Mes {item.month}
-          </Link>
-        </ListboxItem>
-      ))}
+      {list.map((item, index, arr) => {
+        const textValue = `Mes ${item.month}`
+        return (
+          <ListboxItem
+            key={item.id}
+            showDivider={index !== arr.length - 1}
+            textValue={textValue}
+          >
+            <Link href={getPath(item)} color="foreground" className="w-full">
+              {textValue}
+            </Link>
+          </ListboxItem>
+        )
+      })}
     </Listbox>
   )
 }
