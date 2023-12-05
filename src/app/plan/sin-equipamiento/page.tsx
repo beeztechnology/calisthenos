@@ -1,4 +1,3 @@
-import H1 from "@/app/components/Atom/H1"
 import PlanificationContent from "@/app/components/PlanificationContent"
 import React from 'react'
 import { plan } from "./plan.db"
