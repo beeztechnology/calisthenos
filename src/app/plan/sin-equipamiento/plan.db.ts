@@ -82,36 +82,33 @@ export const plan: Planificacion[] = [
         {
           key: 'A',
           series: {
-            min: 2,
-            max: 4
+            range: [2, 4]
           },
           ejercicios: [
             {
               name: 'Muscle up',
               repes: {
-                min: 2,
-                max: 4
+                range: [2, 4]
               },
               tempo: 'Rápido'
             }
           ],
           descanso: {
-            minutes: 5
+            fixed: 300,
+            isTime: true
           }
         },
         {
           key: 'B',
           series: {
-            min: 3,
-            max: 5
+            range: [3, 5]
           },
           ejercicios: [
             {
               name: 'Dominadas',
               intensidad: '"Perfectas"',
               repes: {
-                min: 3,
-                max: 5
+                range: [3, 5]
               },
               tempo: 'Controlado'
             },
@@ -119,28 +116,26 @@ export const plan: Planificacion[] = [
               name: 'Flexiones de brazo',
               intensidad: 'Aplauso',
               repes: {
-                min: 4,
-                max: 8
+                range: [4, 8]
               },
               tempo: 'Explosivo'
             }
           ],
           descanso: {
-            minutes: 4
+            fixed: 240,
+            isTime: true
           }
         },
         {
           key: 'C',
           series: {
-            min: 2,
-            max: 4
+            range: [2, 4],
           },
           ejercicios: [
             {
               name: 'Remos invertidos',
               repes: {
-                min: 15,
-                max: 30
+                range: [15, 30]
               },
               tempo: "20X1"
             },
@@ -148,54 +143,48 @@ export const plan: Planificacion[] = [
               name: 'Flexiones de brazo',
               intensidad: 'Una mano',
               repes: {
-                min: 3,
-                max: 6,
+                range: [3, 6],
                 cadaLado: true
               },
               tempo: "30X1"
             }
           ],
           descanso: {
-            minutes: 3
+            fixed: 180,
+            isTime: true
           }
         },
         {
           key: 'D',
           series: {
-            min: 2,
-            max: 4
+            range: [2, 4]
           },
           ejercicios: [
             {
               name: 'Aperturas T + I',
               repes: {
-                min: 8,
-                max: 15
+                range: [8, 15]
               },
               tempo: "30X1"
             }
           ],
           descanso: {
-            minutes: 2
+            fixed: 120,
+            isTime: true
           }
         },
         {
           key: 'E',
           series: {
-            min: 3,
-            max: 5
+            range: [3, 5]
           },
           ejercicios: [
             {
               name: 'L-sit',
               intensidad: 'Elevado',
               repes: {
-                min: {
-                  seconds: 10
-                },
-                max: {
-                  seconds: 30
-                }
+                range: [10, 30],
+                isTime: true
               },
               tempo: 'Isométrico'
             },
@@ -203,19 +192,15 @@ export const plan: Planificacion[] = [
               name: 'Cuelgues',
               intensidad: 'Una mano',
               repes: {
-                min: {
-                  seconds: 10
-                },
-                max: {
-                  seconds: 30
-                }
+                range: [10, 30],
+                isTime: true
               },
               tempo: 'Isométrico'
             }
           ],
           descanso: {
-            minutes: 1,
-            seconds: 30
+            fixed: 90,
+            isTime: true
           }
         }
       ]

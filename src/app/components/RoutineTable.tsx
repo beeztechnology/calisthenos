@@ -1,5 +1,5 @@
 'use client'
-import type { AMRAP, Descanso, EMOM, Exercise, Interval, IntervalFixed, Letter, Repeticion, Routine, Serie, Tempo, Time } from "@/app/types";
+import type { AMRAP, Descanso, EMOM, Exercise, Range, Fixed, Letter, Repeticion, Routine, Serie, Tempo, Piramide, WithTime } from "@/app/types";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from "@nextui-org/react";
 
 type BloqueExercise = {
@@ -49,142 +49,96 @@ export default function RoutineTable({ routine, day, label }: RoutingTableProps)
     },
   ];
 
-  const isTime = (item: Descanso | Time | number): item is Time => {
-    if (typeof item === 'object') {
-      if ((item as Time).minutes || (item as Time).seconds) {
-        return true
-      }
-    }
-    return false;
-  }
-
-  const timeToString = (time: Time): string => {
-    const seconds = time.seconds || '00';
-    let minutes ='';
-    if (time.minutes) {
-      minutes = time.minutes + "'"
-    }
-    return `${minutes}${seconds}"`
-  }
-
-  const intervalToString = <T extends number | Time>(interval: Interval<T>): string => {
-    let minString = '', maxString = ''
-    if (isIntervalTime(interval)) {
-      minString = timeToString(interval.min)
-      maxString = timeToString(interval.max)
+  const renderTime = (time: number): string => {
+    let seconds: string = (time % 60).toString()
+    if (seconds === '0') {
+      seconds = ''
     } else {
-      minString = interval.min.toString()
-      maxString = interval.max.toString()
+      seconds += '"'
+    }
+    const minutes: string = Math.floor(time / 60).toString();
+    if (minutes === '0') {
+      return seconds
+    }
+    return `${minutes}'${seconds}`
+  }
+
+  const renderRange = (R: Range | WithTime<Range>): string => {
+    let minString = R.range[0].toString()
+    let maxString = R.range[1].toString()
+    if (isRangeTime(R)) {
+      minString = renderTime(R.range[0])
+      maxString = renderTime(R.range[1])
     }
     return `${minString} - ${maxString}`
   }
 
   const isAMRAP = (serie: Serie): serie is AMRAP => {
-    if (typeof serie === 'object') {
-      if ((serie as AMRAP).amrap) {
-        return true
-      }
-    }
-    return false;
+    if (typeof serie !== 'object') return false;
+    return !!(serie as AMRAP).amrap
   }
 
   const isEMOM = (serie: Serie): serie is EMOM => {
-    if (typeof serie === 'object') {
-      if ((serie as EMOM).emom) {
-        return true
-      }
-    }
-    return false;
+    if (typeof serie !== 'object') return false;
+    return !!(serie as EMOM).emom
   }
 
-  const isIntervalFixed = <T extends number | Time>(item: unknown): item is IntervalFixed<T> => {
-    if (typeof item === 'object') {
-      if ((item as IntervalFixed<T>).value) {
-        return true
-      }
-    }
-    return false;
+  const isFixed = (item: unknown): item is Fixed => {
+    if (typeof item !== 'object') return false;
+    return !!(item as Fixed).fixed
   }
 
-  const isInterval = <T extends number | Time>(item: unknown): item is Interval<T> => {
-    if (typeof item === 'object') {
-      if ((item as Interval<T>).min) {
-        return true
-      }
-    }
-    return false;
+  const isFixedTime = (item: unknown): item is WithTime<Fixed> => {
+    if (!isFixed(item)) return false;
+    return (item as WithTime<Fixed>).isTime
   }
 
-  const isIntervalNumber = (item: Serie | Tempo | Repeticion): item is Interval<number> => {
-    if (typeof item === 'object') {
-      const itemInt = item as Interval;
-      if (typeof itemInt.min === 'number') {
-        return true
-      }
-    }
-    return false;
+  const isRange = (item: unknown): item is Range => {
+    if (typeof item !== 'object') return false;
+    return !!(item as Range).range
   }
 
-  const isIntervalTime = <T extends number | Time>(item: Descanso | Interval<T> | Repeticion): item is Interval<Time> => {
-    if (typeof item === 'object') {
-      if (isTime((item as Interval<Time>).min)) {
-        return true
-      }
-    }
-    return false;
+  const isRangeTime = (item: unknown): item is WithTime<Range> => {
+    if (!isRange(item)) return false;
+    return (item as WithTime<Range>).isTime
   }
 
-  const seriesToString = (serie: Serie): string => {
-    if (isAMRAP(serie)) {
-      return `${serie.amrap}' AMRAP`
-    }
-    if (isEMOM(serie)) {
-      return `${serie.emom}' EMOM`
-    }
-    if (isIntervalNumber(serie)) {
-      return intervalToString(serie)
-    }
+  const renderSeries = (serie: Serie): string => {
+    if (isAMRAP(serie)) return `${serie.amrap}' AMRAP`
+    if (isEMOM(serie)) return `${serie.emom}' EMOM`
+    if (isRange(serie)) return renderRange(serie)
     return serie
   }
 
-  const descansoToString = (descanso: Descanso): string => {
-    if (isIntervalTime(descanso)) {
-      return intervalToString(descanso)
-    }
-    if (isTime(descanso)) {
-      return timeToString(descanso)
-    }
+  const renderDescanso = (descanso: Descanso): string => {
+    if (isRangeTime(descanso)) return renderRange(descanso)
+    if (isFixedTime(descanso)) return renderTime(descanso.fixed)
     return descanso
   }
 
-  const isArray = (reps: Repeticion): reps is number[] => {
-    return Array.isArray(reps)
-  }
-
-  const tempoToString = (tempo?: Tempo): string => {
+  const renderTempo = (tempo?: Tempo): string => {
     if (!tempo) return '-'
-    if (isIntervalNumber(tempo)) {
-      return intervalToString(tempo)
-    }
+    if (isRange(tempo)) return renderRange(tempo)
     return tempo;
   }
 
-  const repesToString = (reps: Repeticion): string => {
-    if (isArray(reps)) {
-      return reps.reduce((prev, curr, index) => {
-        if (index === 0) {
-          return `${curr}`
-        }
+  const isPiramide = (reps: Repeticion): reps is Piramide => {
+    return !!(reps as Piramide).piramide
+  }
+
+  const renderRepes = (reps: Repeticion): string => {
+    if (isPiramide(reps)) {
+      return reps.piramide.reduce((prev, curr, index) => {
+        if (index === 0) return `${curr}`
         return `${prev}+${curr}`
       }, '')
     }
-    if (isInterval(reps) || isIntervalFixed(reps)) {
+    if (isRange(reps) || isFixed(reps)) {
       let res = ''
-      if (isInterval(reps)) {
-        // @ts-expect-error
-        res = intervalToString(reps)
+      if (isRange(reps)) {
+        res = renderRange(reps)
       } else {
-        res = reps.value.toString()
+        res = reps.fixed.toString()
       }
       if (reps.cadaLado) {
         res += ' (c/lado)'
@@ -206,18 +160,18 @@ export default function RoutineTable({ routine, day, label }: RoutingTableProps)
       const ejercicio: BloqueExercise = {
         ejercicio: exercise.name,
         intensidad: exercise.intensidad,
-        tempo: tempoToString(exercise.tempo),
-        repes: repesToString(exercise.repes),
+        tempo: renderTempo(exercise.tempo),
+        repes: renderRepes(exercise.repes),
         key,
-        series: seriesToString(bloque.series),
-        descanso: descansoToString(bloque.descanso)
+        series: renderSeries(bloque.series),
+        descanso: renderDescanso(bloque.descanso)
       };
       bloqueExercises.push(ejercicio)
     }
   }
 
   return (
-    <Table aria-label={label}>
+    <Table isStriped aria-label={label}>
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>

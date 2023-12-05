@@ -6,32 +6,36 @@ export type Rapido = 'Rápido';
 export type Explosivo = 'Explosivo';
 export type RepeticionMaxima = 'MAX';
 
-export type Time = {
-  minutes?: number;
-  seconds?: number;
-}
 export type AMRAP = {
-  amrap: Time;
+  amrap: number;
 }
 export type EMOM = {
-  emom: Time;
+  emom: number;
 }
-export type Interval<T extends number | Time = number> = {
-  min: T;
-  max: T;
+export type Range = {
+  range: [number, number];
 }
-export type IntervalFixed<T extends number | Time = number> = {
-  value: T;
+export type Fixed = {
+  fixed: number;
+}
+export type WithTime<T extends {}> = T & {
+  isTime: true;
 }
 
-export type Serie = Interval | AMRAP | EMOM | Autodefinido;
-export type Repeticion = (Interval | IntervalFixed<number> | Interval<Time> | IntervalFixed<Time>) & { cadaLado?: boolean; } | number[] | RepeticionMaxima;
+export type Serie = Range | AMRAP | EMOM | Autodefinido;
+export type WithCadaLado<T extends {}> = T & {
+  cadaLado?: boolean;
+}
+export type Piramide = {
+  piramide: number[]
+}
+export type Repeticion = WithCadaLado<WithTime<Range> | Range | WithTime<Fixed> | Fixed> | Piramide | RepeticionMaxima;
 
 export type TempoUndefined = '-';
 export type UnitTempo = number | 'X' | TempoUndefined;
 export type TempoString = `${UnitTempo}${UnitTempo}${UnitTempo}${UnitTempo}` | Controlado | Isometrico | Rapido | Explosivo
-export type Tempo =  Interval | TempoString | TempoUndefined;
-export type Descanso = Interval<Time> | Time | Autodefinido;
+export type Tempo = WithTime<Range> | TempoString | TempoUndefined;
+export type Descanso = WithTime<Range> | WithTime<Fixed> | Autodefinido;
 
 export interface Exercise {
   name: string;
