@@ -5,7 +5,6 @@ export type Isometrico = 'Isométrico';
 export type Rapido = 'Rápido';
 export type Explosivo = 'Explosivo';
 export type RepeticionMaxima = 'MAX';
-export type ArrayMinOne<T> = [T, ...T[]]
 
 export type Time = {
   minutes?: number;
@@ -45,11 +44,11 @@ export interface Exercise {
 export interface Bloque {
   key: Letter;
   series: Serie;
-  ejercicios: ArrayMinOne<Exercise>;
+  ejercicios: Exercise[];
   descanso: Descanso;
 }
 
-export type Routine = ArrayMinOne<Bloque>;
+export type Routine = Bloque[];
 
 export type Level = 'Principiante' | 'Intermedio' | 'Avanzado' | 'Experto';
 
@@ -58,5 +57,5 @@ export interface Planificacion {
   month: number;
   link: string;
   level: Level;
-  routine: ArrayMinOne<Routine>;
+  routine: Routine[];
 }
