@@ -1,21 +1,20 @@
 'use client';
 import { TrainingPlan } from "@/app/types"
 import { useEffect, useState } from 'react'
-import { trainingPlans } from "@/db/plan.db"
 
-export default function useTrainingPlan(slug: string) {
+export default function useTrainingPlan(_slug: string) {
   const [trainingPlan, setTrainingPlan] = useState<TrainingPlan | undefined>(undefined)
-
-  const findTrainingPlan = (list: TrainingPlan[], slug: string) => {
-    return list.find(plan => plan.slug === slug)
-  }
+  const [slug, setSlug] = useState(_slug)
 
   useEffect(() => {
-    setTrainingPlan(findTrainingPlan(trainingPlans, slug))
+    fetch(`/api/plan/${slug}`)
+      .then(async (response) => {
+        setTrainingPlan(await response.json())
+      })
   }, [slug])
 
   return {
     trainingPlan,
-    setTrainingPlan
+    updateTrainingPlan: setSlug
   }
 }
