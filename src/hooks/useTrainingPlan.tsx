@@ -2,11 +2,13 @@
 import { TrainingPlan } from "@/app/types"
 import { useEffect, useState } from 'react'
 
-export default function useTrainingPlan(_slug: string) {
+function useTrainingPlan() {
   const [trainingPlan, setTrainingPlan] = useState<TrainingPlan | undefined>(undefined)
-  const [slug, setSlug] = useState(_slug)
+  const [slug, setSlug] = useState<string>('')
 
   useEffect(() => {
+    console.log("object");
+    if (!slug?.length) return
     fetch(`/api/plan/${slug}`)
       .then(async (response) => {
         setTrainingPlan(await response.json())
@@ -18,3 +20,5 @@ export default function useTrainingPlan(_slug: string) {
     updateTrainingPlan: setSlug
   }
 }
+
+export default useTrainingPlan;

@@ -1,1 +1,1 @@
-export const SIN_EQUIPAMIENTO = 'sin-entrenamiento'
+export const SIN_EQUIPAMIENTO = 'sin-equipamiento'

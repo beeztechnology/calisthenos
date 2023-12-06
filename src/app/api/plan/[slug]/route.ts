@@ -9,6 +9,6 @@ interface Options {
 }
 
 export async function GET(req: NextRequest, { params: { slug } }: Options) {
-  const trainingPlan = list.find(p => p.slug === slug) || {}
+  const trainingPlan = list.find(p => p.slug === slug) ?? {}
   return new Response(JSON.stringify(trainingPlan))
 }
