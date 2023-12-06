@@ -189,8 +189,10 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
   }
 
   return (
-    <Table rowSelection={{
-      type: 'checkbox'
-    }} columns={columns} dataSource={data} bordered />
+    <div className="overflow-x-auto">
+      <Table rowSelection={{
+        type: 'checkbox'
+      }} columns={columns} dataSource={data} bordered pagination={false} />
+    </div>
   )
 }
