@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Divider } from "@nextui-org/react";
+import Link from "next/link";
 
 export interface TrainingPlanProps {
   title: string;
@@ -24,7 +25,7 @@ export default function TrainingPlan({ title, description, link }: TrainingPlanP
       <CardFooter>
         <Link
           href={link}
-          className="flex gap-2"
+          className="flex gap-2 items-center link"
         >
           <p>Comenzar</p>
           <i className="fa-solid fa-arrow-right" style={{ color: 'inherit' }}></i>

@@ -1,5 +1,5 @@
 'use client'
-import { Link } from "@nextui-org/react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Planificacion } from "../types";
 
@@ -22,7 +22,7 @@ export default function MonthContent({ planificacion }: MonthContentProps) {
       <ol className="list-disc ml-8">
         {getDays().map(day => (
           <li key={day}>
-            <Link className="py-2 pr-2" href={`${currentPath}/dia/${day}`}>Día {day}</Link>
+            <Link className="py-2 pr-2 link" href={`${currentPath}/dia/${day}`}>Día {day}</Link>
           </li>
         ))}
       </ol>

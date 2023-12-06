@@ -1,8 +1,8 @@
 'use client'
 import MonthContent from "@/app/components/MonthContent"
 import { Planificacion } from "@/app/types"
-import useTrainingPlan from "@/hooks/useTrainingPlan"
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { TrainingPlanContext } from "../../layout"
 
 type MonthPageProps = {
   params: {
@@ -13,12 +13,8 @@ type MonthPageProps = {
 
 export default function MonthPage({ params }: MonthPageProps) {
   const [plan, setPlan] = useState<Planificacion | undefined>(undefined)
-  const { trainingPlan, updateTrainingPlan } = useTrainingPlan()
+  const trainingPlan = useContext(TrainingPlanContext)
   const mes = Number(params.mes)
-
-  useEffect(() => {
-    updateTrainingPlan(params.plan)
-  }, [params.plan, updateTrainingPlan])
 
   useEffect(() => {
     setPlan(trainingPlan?.planificacion.find(el => el.month === mes))

@@ -1,8 +1,8 @@
 'use client'
 import RoutineTable from "@/app/components/RoutineTable";
+import { TrainingPlanContext } from "@/app/plan/[plan]/layout";
 import { Routine } from "@/app/types";
-import useTrainingPlan from "@/hooks/useTrainingPlan";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 interface DiaPageProps {
   params: {
@@ -14,13 +14,9 @@ interface DiaPageProps {
 
 export default function DiaPage({ params }: DiaPageProps) {
   const [routine, setRoutine] = useState<Routine | undefined>(undefined)
-  const { trainingPlan, updateTrainingPlan } = useTrainingPlan()
+  const trainingPlan = useContext(TrainingPlanContext)
   const mes = Number(params.mes)
   const dia = Number(params.dia)
-
-  useEffect(() => {
-    updateTrainingPlan(params.plan)
-  }, [params.plan, updateTrainingPlan])
 
   useEffect(() => {
     const list: Routine[] = trainingPlan?.planificacion.find(routine => routine.month === mes)?.routine || []

@@ -1,6 +1,7 @@
-import { Link, Listbox, ListboxItem } from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { Planificacion } from "../types";
+import Link from "next/link";
 
 interface PlanificationListProps {
   list: Planificacion[];
@@ -27,7 +28,7 @@ export function PlanificationList({ list, label }: PlanificationListProps) {
             showDivider={index !== arr.length - 1}
             textValue={textValue}
           >
-            <Link href={getPath(item)} color="foreground" className="w-full">
+            <Link href={getPath(item)} className="w-full link">
               {textValue}
             </Link>
           </ListboxItem>

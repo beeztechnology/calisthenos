@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .link {
+    @apply text-blue-500;
+  }
+}
+
 html,
 body {
   overflow-wrap: break-word;
