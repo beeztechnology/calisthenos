@@ -13,6 +13,7 @@ body {
   overflow-wrap: break-word;
   word-wrap: break-word;
   text-wrap: pretty;
+  @apply leading-8;
 }
 
 h1,
