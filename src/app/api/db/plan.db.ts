@@ -89,7 +89,7 @@ const sinEquipamiento: TrainingPlan = {
       routine: [
         [
           {
-            key: 'A',
+            id: randomId(),
             series: {
               range: [2, 4]
             },
@@ -108,7 +108,7 @@ const sinEquipamiento: TrainingPlan = {
             }
           },
           {
-            key: 'B',
+            id: randomId(),
             series: {
               range: [3, 5]
             },
@@ -136,7 +136,7 @@ const sinEquipamiento: TrainingPlan = {
             }
           },
           {
-            key: 'C',
+            id: randomId(),
             series: {
               range: [2, 4],
             },
@@ -164,7 +164,7 @@ const sinEquipamiento: TrainingPlan = {
             }
           },
           {
-            key: 'D',
+            id: randomId(),
             series: {
               range: [2, 4]
             },
@@ -183,7 +183,7 @@ const sinEquipamiento: TrainingPlan = {
             }
           },
           {
-            key: 'E',
+            id: randomId(),
             series: {
               range: [3, 5]
             },

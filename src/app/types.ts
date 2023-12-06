@@ -46,7 +46,7 @@ export interface Exercise {
 }
 
 export interface Bloque {
-  key: Letter;
+  id: string;
   series: Serie;
   ejercicios: Exercise[];
   descanso: Descanso;

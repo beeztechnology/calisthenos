@@ -153,9 +153,9 @@ export default function RoutineTable({ routine, day, label }: RoutingTableProps)
     const bloque = routine[i];
     for (let j = 0; j < bloque.ejercicios.length; j++) {
       const exercise = bloque.ejercicios[j]
-      let key = bloque.key.toString();
+      let key = String.fromCharCode(97 + i).toUpperCase();
       if (bloque.ejercicios.length > 1) {
-        key = `${bloque.key}${j + 1}`
+        key = `${key}~${j + 1}`
       }
       const ejercicio: BloqueExercise = {
         ejercicio: exercise.name,
