@@ -2,6 +2,10 @@ import type { TrainingPlan } from "@/app/types";
 import { randomBytes } from "crypto";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
 
+const randomId = () => {
+  return randomBytes(20).toString('hex');
+}
+
 const sinEquipamiento: TrainingPlan = {
   slug: SIN_EQUIPAMIENTO,
   title: 'Sin equipamiento',
@@ -10,77 +14,77 @@ const sinEquipamiento: TrainingPlan = {
     {
       month: 1,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Principiante',
       routine: []
     },
     {
       month: 2,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Principiante',
       routine: []
     },
     {
       month: 3,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Principiante',
       routine: []
     },
     {
       month: 4,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Intermedio',
       routine: []
     },
     {
       month: 5,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Intermedio',
       routine: []
     },
     {
       month: 6,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Intermedio',
       routine: []
     },
     {
       month: 7,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Avanzado',
       routine: []
     },
     {
       month: 8,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Avanzado',
       routine: []
     },
     {
       month: 9,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Avanzado',
       routine: []
     },
     {
       month: 10,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Experto',
       routine: []
     },
     {
       month: 11,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Experto',
       routine: [
         [
@@ -214,7 +218,7 @@ const sinEquipamiento: TrainingPlan = {
     {
       month: 12,
       link: '',
-      id: randomBytes(20).toString('hex'),
+      id: randomId(),
       level: 'Experto',
       routine: [],
     },

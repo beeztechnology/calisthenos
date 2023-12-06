@@ -2,7 +2,7 @@ import React from 'react'
 import H1 from "../components/Atom/H1"
 import TrainingPlan from "../components/TrainingPlan"
 import styles from './page.module.css';
-import { ANILLAS, BARRAS, SIN_EQUIPAMIENTO } from "@/db/constants.db";
+import { ANILLAS, BARRAS, SIN_EQUIPAMIENTO } from "@/app/api/db/constants.db";
 
 interface Plan {
   title: string;
