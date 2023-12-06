@@ -5,7 +5,8 @@ import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";
 
 type BloqueExercise = {
-  key: Element | ReactElement | string;
+  key: string;
+  bloque: Element | ReactElement | string;
   series: string;
   descanso: string;
   tempo: string;
@@ -28,7 +29,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
   const columns: ColumnsType<BloqueExercise> = [
     {
       title: "BLOQUE",
-      dataIndex: "key",
+      dataIndex: "bloque",
       onCell: sharedOnCell
     },
     {
@@ -179,7 +180,8 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
         intensidad: exercise.intensidad,
         tempo: renderTempo(exercise.tempo),
         repes: renderRepes(exercise.repes),
-        key: keyString,
+        bloque: keyString,
+        key: keyString + j,
         series: renderSeries(bloque.series),
         descanso: renderDescanso(bloque.descanso),
         rowSpan,
@@ -190,9 +192,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
 
   return (
     <div className="overflow-x-auto">
-      <Table rowSelection={{
-        type: 'checkbox'
-      }} columns={columns} dataSource={data} bordered pagination={false} />
+      <Table columns={columns} dataSource={data} bordered pagination={false} />
     </div>
   )
 }
