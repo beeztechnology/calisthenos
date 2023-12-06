@@ -1,11 +1,11 @@
 import H3 from "@/app/components/Atom/H3"
 import React from 'react'
 
-type layoutProps = React.PropsWithChildren & {
+type LayoutProps = React.PropsWithChildren & {
   params: { dia: string }
 }
 
-export default function layout({ children, params }: layoutProps) {
+export default function Layout({ children, params }: LayoutProps) {
   return (
     <>
       <H3>Día {params.dia}</H3>

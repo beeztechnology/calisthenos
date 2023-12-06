@@ -1,23 +1,22 @@
 'use client';
-import { TrainingPlan } from "@/app/types"
-import { useEffect, useState } from 'react'
+import { TrainingPlan } from "@/app/types";
+import { useCallback, useState } from 'react';
 
 function useTrainingPlan() {
   const [trainingPlan, setTrainingPlan] = useState<TrainingPlan | undefined>(undefined)
-  const [slug, setSlug] = useState<string>('')
 
-  useEffect(() => {
-    console.log("object");
+  const updateTrainingPlan = useCallback((slug: string) => {
+    console.log("useTrainingPlan");
     if (!slug?.length) return
     fetch(`/api/plan/${slug}`)
       .then(async (response) => {
         setTrainingPlan(await response.json())
       })
-  }, [slug])
+  }, [])
 
   return {
     trainingPlan,
-    updateTrainingPlan: setSlug
+    updateTrainingPlan
   }
 }
 

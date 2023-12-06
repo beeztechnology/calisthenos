@@ -1,22 +1,26 @@
 'use client'
 import RoutineTable from "@/app/components/RoutineTable";
 import { Routine } from "@/app/types";
-import { SIN_EQUIPAMIENTO } from "@/db/constants.db";
 import useTrainingPlan from "@/hooks/useTrainingPlan";
 import { useEffect, useState } from "react";
 
-interface pageProps {
+interface DiaPageProps {
   params: {
     mes: string;
     dia: string;
+    plan: string;
   }
 }
 
-export default function Dia({ params }: pageProps) {
+export default function DiaPage({ params }: DiaPageProps) {
   const [routine, setRoutine] = useState<Routine | undefined>(undefined)
-  const { trainingPlan } = useTrainingPlan(SIN_EQUIPAMIENTO)
+  const { trainingPlan, updateTrainingPlan } = useTrainingPlan()
   const mes = Number(params.mes)
   const dia = Number(params.dia)
+
+  useEffect(() => {
+    updateTrainingPlan(params.plan)
+  }, [params.plan, updateTrainingPlan])
 
   useEffect(() => {
     const list: Routine[] = trainingPlan?.planificacion.find(routine => routine.month === mes)?.routine || []

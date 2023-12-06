@@ -1,14 +1,13 @@
 'use client'
 import PlanificationContent from "@/app/components/PlanificationContent"
-import { SIN_EQUIPAMIENTO } from "@/db/constants.db"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
 import { useEffect } from "react"
 
-type PageProps = {
+type PlanPageProps = {
   params: { plan: string }
 }
 
-export default function Page({ params: { plan } }: PageProps) {
+export default function PlanPage({ params: { plan } }: PlanPageProps) {
   const { trainingPlan, updateTrainingPlan } = useTrainingPlan();
 
   useEffect(() => {
