@@ -1,7 +1,7 @@
 'use client'
 import RoutineTable from "@/app/components/RoutineTable";
-import { TrainingPlanContext } from "@/app/plan/[plan]/layout";
 import { Routine } from "@/app/types";
+import { TrainingPlanContext } from "@/contexts/TrainingPlanContext";
 import { useContext, useEffect, useState } from "react";
 
 interface DiaPageProps {

@@ -1,8 +1,8 @@
 'use client'
 import MonthContent from "@/app/components/MonthContent"
 import { Planificacion } from "@/app/types"
+import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import { useContext, useEffect, useState } from 'react'
-import { TrainingPlanContext } from "../../layout"
 
 type MonthPageProps = {
   params: {

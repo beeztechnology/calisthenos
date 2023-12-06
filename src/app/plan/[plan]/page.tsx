@@ -1,7 +1,7 @@
 'use client'
 import PlanificationContent from "@/app/components/PlanificationContent"
+import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import { useContext } from "react"
-import { TrainingPlanContext } from "./layout"
 
 type PlanPageProps = {
 }
