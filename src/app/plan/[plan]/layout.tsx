@@ -1,13 +1,12 @@
 'use client'
 import H1 from "@/app/components/Atom/H1"
-import { TrainingPlan } from "@/app/types"
+import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
-import React, { createContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 type LayoutPlanProps = {
   params: { plan: string }
 } & React.PropsWithChildren
-export const TrainingPlanContext = createContext<TrainingPlan | undefined>(undefined)
 
 export default function LayoutPlan({ children, params: { plan } }: LayoutPlanProps) {
   const { trainingPlan, updateTrainingPlan } = useTrainingPlan()
