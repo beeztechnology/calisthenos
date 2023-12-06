@@ -1,51 +1,61 @@
 'use client'
-import type { AMRAP, Descanso, EMOM, Exercise, Range, Fixed, Letter, Repeticion, Routine, Serie, Tempo, Piramide, WithTime } from "@/app/types";
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from "@nextui-org/react";
+import type { AMRAP, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types";
+import { Table } from "antd";
+import type { ColumnsType } from 'antd/es/table';
+import { ReactElement } from "react";
 
 type BloqueExercise = {
-  key: string;
+  key: Element | ReactElement | string;
   series: string;
   descanso: string;
   tempo: string;
   repes: string;
   ejercicio: string;
+  rowSpan: number;
 } & Pick<Exercise, 'intensidad'>
 
 interface RoutingTableProps {
   routine: Routine;
-  day: number;
-  label: string;
 }
 
-export default function RoutineTable({ routine, day, label }: RoutingTableProps) {
-  const columns = [
+export default function RoutineTable({ routine }: RoutingTableProps) {
+  const sharedOnCell = (data: BloqueExercise) => {
+    return {
+      rowSpan: data.rowSpan
+    }
+  }
+
+  const columns: ColumnsType<BloqueExercise> = [
     {
-      key: "key",
-      label: "BLOQUE",
+      title: "BLOQUE",
+      dataIndex: "key",
+      onCell: sharedOnCell
     },
     {
-      key: "ejercicio",
-      label: "EJERCICIO",
+      title: "EJERCICIO",
+      dataIndex: "ejercicio",
     },
     {
-      key: "intensidad",
-      label: "INTENSIDAD",
+      title: "INTENSIDAD",
+      dataIndex: "intensidad",
     },
     {
-      key: "series",
-      label: "SERIES",
+      title: "SERIES",
+      dataIndex: "series",
+      onCell: sharedOnCell
     },
     {
-      key: "repes",
-      label: "REPES",
+      title: "REPES",
+      dataIndex: "repes",
     },
     {
-      key: "tempo",
-      label: "TEMPO",
+      title: "TEMPO",
+      dataIndex: "tempo",
     },
     {
-      key: "descanso",
-      label: "DESCANSO",
+      title: "DESCANSO",
+      dataIndex: "descanso",
+      onCell: sharedOnCell
     },
   ];
 
@@ -148,42 +158,39 @@ export default function RoutineTable({ routine, day, label }: RoutingTableProps)
     return reps
   }
 
-  const bloqueExercises: BloqueExercise[] = [];
+  const data: BloqueExercise[] = [];
   for (let i = 0; i < routine.length; i++) {
     const bloque = routine[i];
-    for (let j = 0; j < bloque.ejercicios.length; j++) {
-      const exercise = bloque.ejercicios[j]
-      let key = String.fromCharCode(97 + i).toUpperCase();
-      if (bloque.ejercicios.length > 1) {
-        key = `${key}~${j + 1}`
+    const ejercicios = bloque.ejercicios;
+    const N = ejercicios.length;
+    for (let j = 0; j < N; j++) {
+      const exercise = ejercicios[j]
+      const keyString = String.fromCharCode(97 + i).toUpperCase();
+      let rowSpan = 1;
+      if (N > 1) {
+        if (j === 0) {
+          rowSpan = N;
+        } else {
+          rowSpan = 0;
+        }
       }
       const ejercicio: BloqueExercise = {
         ejercicio: exercise.name,
         intensidad: exercise.intensidad,
         tempo: renderTempo(exercise.tempo),
         repes: renderRepes(exercise.repes),
-        key,
+        key: keyString,
         series: renderSeries(bloque.series),
-        descanso: renderDescanso(bloque.descanso)
+        descanso: renderDescanso(bloque.descanso),
+        rowSpan,
       };
-      bloqueExercises.push(ejercicio)
+      data.push(ejercicio)
     }
   }
 
   return (
-    <Table isStriped aria-label={label}>
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-      </TableHeader>
-      <TableBody items={bloqueExercises}>
-        {(bloque) => (
-          <TableRow key={bloque.key}>
-            {(columnKey) => (
-              <TableCell>{getKeyValue(bloque, columnKey)}</TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <Table rowSelection={{
+      type: 'checkbox'
+    }} columns={columns} dataSource={data} bordered />
   )
 }

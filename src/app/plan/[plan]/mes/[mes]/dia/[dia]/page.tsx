@@ -26,7 +26,7 @@ export default function DiaPage({ params }: DiaPageProps) {
   }, [trainingPlan?.planificacion, dia, mes])
 
   if (routine) {
-    return <RoutineTable day={dia} routine={routine} label={`Rutina dia ${dia} del mes ${mes}`} />
+    return <RoutineTable routine={routine} />
   }
   return <></>
 }

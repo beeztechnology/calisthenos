@@ -1,4 +1,4 @@
-import type { TrainingPlan } from "@/app/types";
+import { Level, type TrainingPlan } from "@/app/types";
 import { randomBytes } from "crypto";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
 
@@ -15,77 +15,77 @@ const sinEquipamiento: TrainingPlan = {
       month: 1,
       link: '',
       id: randomId(),
-      level: 'Principiante',
+      level: Level.PRINCIPIANTE,
       routine: []
     },
     {
       month: 2,
       link: '',
       id: randomId(),
-      level: 'Principiante',
+      level: Level.PRINCIPIANTE,
       routine: []
     },
     {
       month: 3,
       link: '',
       id: randomId(),
-      level: 'Principiante',
+      level: Level.PRINCIPIANTE,
       routine: []
     },
     {
       month: 4,
       link: '',
       id: randomId(),
-      level: 'Intermedio',
+      level: Level.INTERMEDIO,
       routine: []
     },
     {
       month: 5,
       link: '',
       id: randomId(),
-      level: 'Intermedio',
+      level: Level.INTERMEDIO,
       routine: []
     },
     {
       month: 6,
       link: '',
       id: randomId(),
-      level: 'Intermedio',
+      level: Level.INTERMEDIO,
       routine: []
     },
     {
       month: 7,
       link: '',
       id: randomId(),
-      level: 'Avanzado',
+      level: Level.AVANZADO,
       routine: []
     },
     {
       month: 8,
       link: '',
       id: randomId(),
-      level: 'Avanzado',
+      level: Level.AVANZADO,
       routine: []
     },
     {
       month: 9,
       link: '',
       id: randomId(),
-      level: 'Avanzado',
+      level: Level.AVANZADO,
       routine: []
     },
     {
       month: 10,
       link: '',
       id: randomId(),
-      level: 'Experto',
+      level: Level.EXPERTO,
       routine: []
     },
     {
       month: 11,
       link: '',
       id: randomId(),
-      level: 'Experto',
+      level: Level.EXPERTO,
       routine: [
         [
           {
@@ -219,7 +219,7 @@ const sinEquipamiento: TrainingPlan = {
       month: 12,
       link: '',
       id: randomId(),
-      level: 'Experto',
+      level: Level.EXPERTO,
       routine: [],
     },
   ]
