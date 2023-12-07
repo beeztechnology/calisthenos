@@ -1,16 +1,13 @@
-import type { Metadata } from 'next'
 import { Bitter } from 'next/font/google'
 import './globals.css'
 import Navbar from "./components/Navbar"
 import styles from './layout.styles.module.css';
 import StyledComponentsRegistry from '@/lib/AntdRegistry';
+import { metadata as _metadata } from "./metadata";
 
 const font = Bitter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'CALISMOVE®',
-  description: '',
-}
+export const metadata = _metadata
 
 export default function RootLayout({
   children,

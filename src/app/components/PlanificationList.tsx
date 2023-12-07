@@ -1,6 +1,6 @@
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { Planificacion } from "../types";
+import { Planificacion } from "../types/training-plan";
 import Link from "next/link";
 
 interface PlanificationListProps {

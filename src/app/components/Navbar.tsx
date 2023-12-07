@@ -2,6 +2,7 @@
 import { Navbar as NextNavbar, NavbarBrand, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import Link from "next/link";
 import React from "react";
+import { metadata } from "../metadata";
 
 interface MenuItem {
   name: string;
@@ -18,9 +19,13 @@ export default function Navbar() {
       href: '/definicion'
     },
     {
+      name: "Ejercicios",
+      href: '/ejercicios'
+    },
+    {
       name: "Planes de entrenamiento",
       href: '/plan'
-    }
+    },
   ];
 
   return (
@@ -33,7 +38,7 @@ export default function Navbar() {
         />
         <NavbarBrand>
           <Link href="/" color="foreground" className="font-bold">
-            CALISMOVE®
+            {metadata.title?.toString()}
           </Link>
         </NavbarBrand>
       </NavbarContent>

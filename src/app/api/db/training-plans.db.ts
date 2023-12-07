@@ -1,4 +1,4 @@
-import { Level, type TrainingPlan } from "@/app/types";
+import { Level, type TrainingPlan } from "@/app/types/training-plan";
 import { randomBytes } from "crypto";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
 

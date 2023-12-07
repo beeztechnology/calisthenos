@@ -3,7 +3,7 @@ import { Accordion, AccordionItem } from "@nextui-org/react";
 import React from "react";
 import H2 from "./Atom/H2";
 import { PlanificationList } from "./PlanificationList";
-import { Level, Planificacion } from "../types";
+import { Level, Planificacion } from "../types/training-plan";
 
 interface PlanificationContentProps {
   planificacion?: Planificacion[];

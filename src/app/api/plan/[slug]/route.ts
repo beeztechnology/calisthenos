@@ -1,4 +1,4 @@
-import { trainingPlans as list } from "@/app/api/db/plan.db"
+import { trainingPlans as list } from "@/app/api/db/training-plans.db"
 import { NextRequest } from "next/server";
 
 interface Params {

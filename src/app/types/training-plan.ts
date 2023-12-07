@@ -57,6 +57,7 @@ export interface Bloque {
   series: Serie;
   ejercicios: Exercise[];
   descanso: Descanso;
+  restExercises?: Descanso
 }
 
 export type Routine = Bloque[];

@@ -1,6 +1,6 @@
 'use client'
 import MonthContent from "@/app/components/MonthContent"
-import { Planificacion } from "@/app/types"
+import { Planificacion } from "@/app/types/training-plan"
 import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import { useContext, useEffect, useState } from 'react'
 

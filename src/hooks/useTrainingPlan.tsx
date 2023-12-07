@@ -1,5 +1,5 @@
 'use client';
-import { TrainingPlan } from "@/app/types";
+import { TrainingPlan } from "@/app/types/training-plan";
 import { useCallback, useState } from 'react';
 
 function useTrainingPlan() {

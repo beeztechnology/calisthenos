@@ -1,5 +1,5 @@
 'use client'
-import type { AMRAP, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types";
+import type { AMRAP, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
 import { Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";

@@ -1,6 +1,6 @@
 'use client'
 import RoutineTable from "@/app/components/RoutineTable";
-import { Routine } from "@/app/types";
+import { Routine } from "@/app/types/training-plan";
 import { TrainingPlanContext } from "@/contexts/TrainingPlanContext";
 import { useContext, useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ interface DiaPageProps {
 }
 
 export default function DiaPage({ params }: DiaPageProps) {
-  const [routine, setRoutine] = useState<Routine | undefined>(undefined)
+  const [routine, setRoutine] = useState<Routine>([])
   const trainingPlan = useContext(TrainingPlanContext)
   const mes = Number(params.mes)
   const dia = Number(params.dia)
@@ -25,8 +25,5 @@ export default function DiaPage({ params }: DiaPageProps) {
     }
   }, [trainingPlan?.planificacion, dia, mes])
 
-  if (routine) {
-    return <RoutineTable routine={routine} />
-  }
-  return <></>
+  return <RoutineTable routine={routine} />
 }

@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Planificacion } from "../types";
+import { Planificacion } from "../types/training-plan";
 
 interface MonthContentProps {
   planificacion: Planificacion;
