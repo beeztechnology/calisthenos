@@ -1,4 +1,5 @@
 import { Level } from "./training-plan";
+import { Optional, OptionalType, RecommendedType } from './global';
 
 export const MuscleWorkZone = {
   BICEPS: 'Biceps',
@@ -27,7 +28,7 @@ export const Equipment = {
   BANDA_ELASTICA: 'Banda elastica',
   AB_WHEEL: 'Rueda abdominal'
 } as const
-export type EquipmentType = typeof Equipment[keyof typeof Equipment]
+export type EquipmentType = typeof Equipment[keyof typeof Equipment] | OptionalType<typeof Equipment[keyof typeof Equipment]> | RecommendedType<typeof Equipment[keyof typeof Equipment]>
 
 export const Modality = {
   ESTATICO: 'Estático',

@@ -127,7 +127,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
   }
 
   const renderEquipment = (equipments: EquipmentType[]) => {
-    return <ul className="list-disc pl-2">
+    return <ul className="list-disc pl-6">
       {equipments.map((equipment, index) => (
         <li key={`${index}`}>{equipment}</li>
       ))}
