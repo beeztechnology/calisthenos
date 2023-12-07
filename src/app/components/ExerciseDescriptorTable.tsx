@@ -144,7 +144,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
 
   return (
     <div className="overflow-x-auto">
-      <Table sticky columns={columns} dataSource={mapData()} bordered pagination={false} />
+      <Table columns={columns} dataSource={mapData()} bordered pagination={false} />
     </div>
   )
 }
