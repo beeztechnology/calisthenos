@@ -4,20 +4,12 @@ import { Key, ReactElement, useCallback, useEffect, useState } from 'react';
 import { Equipment, EquipmentType, ExerciseDescriptor, Modality, MuscleWorkZone, MuscleWorkZoneType } from "../types/exercises";
 import { Level } from "../types/training-plan";
 
-type ExerciseDescriptorRow = {
-  key: string;
-  name: ExerciseDescriptor['name'];
-  muscleWorkZones: string[],
-  equipment: string[],
-  level: string,
-} & Pick<ExerciseDescriptor, 'modality'>
-
 interface ExerciseDescriptorTableProps {
   exercises: ExerciseDescriptor[]
 }
 
 export default function ExerciseDescriptorTable({ exercises }: ExerciseDescriptorTableProps) {
-  const [data, setData] = useState<ExerciseDescriptorRow[]>([])
+  const [data, setData] = useState<ExerciseDescriptor[]>([])
 
   const renderName = (name: ExerciseDescriptor['name']): string => {
     let newName = `${name.english}`;
@@ -27,7 +19,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     return newName
   }
 
-  const columns: ColumnsType<ExerciseDescriptorRow> = [
+  const columns: ColumnsType<ExerciseDescriptor> = [
     {
       title: "NAME",
       dataIndex: "name",
@@ -69,7 +61,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
         })),
       filterSearch: true,
       onFilter: (value, record) => {
-        return record.muscleWorkZones.includes(value.toString())
+        return record.muscleWorkZones.includes(value.toString() as MuscleWorkZoneType)
       },
       render: (value) => renderWorkZones(value)
     },
@@ -85,7 +77,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
         })),
       filterSearch: true,
       onFilter: (value, record) => {
-        return record.equipment.includes(value.toString())
+        return record.equipment.includes(value.toString() as EquipmentType)
       },
       render: (value) => renderEquipment(value)
     },
@@ -142,30 +134,17 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     </ul>
   }
 
-  const init = useCallback(() => {
-    const newData: ExerciseDescriptorRow[] = []
-    for (let i = 0; i < exercises.length; i++) {
-      const exercise = exercises[i];
-      const newExercise: ExerciseDescriptorRow = {
-        key: exercise.id,
-        name: exercise.name,
-        muscleWorkZones: exercise.muscleWorkZones,
-        equipment: exercise.equipment,
-        level: exercise.level,
-        modality: exercise.modality,
-      }
-      newData.push(newExercise)
-    }
-    setData(newData)
-  }, [exercises])
+  const mapData = () => {
+    return data.map(exercise => ({ ...exercise, key: exercise.id }))
+  }
 
   useEffect(() => {
-    init()
-  }, [init])
+    setData(exercises)
+  }, [exercises])
 
   return (
     <div className="overflow-x-auto">
-      <Table columns={columns} dataSource={data} bordered pagination={false} />
+      <Table sticky columns={columns} dataSource={mapData()} bordered pagination={false} />
     </div>
   )
 }
