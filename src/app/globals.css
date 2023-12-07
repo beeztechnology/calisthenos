@@ -8,6 +8,10 @@
   }
 }
 
+.ant-btn-primary {
+  background: #1677ff;
+}
+
 html,
 body {
   overflow-wrap: break-word;
@@ -25,7 +29,7 @@ h6 {
   word-break: break-all;
 }
 
-:not(div[class *= "group-[.is-splitted]"]) > :is(h2, h3, h4, h5, h6) {
+:not(div[class*="group-[.is-splitted]"]) > :is(h2, h3, h4, h5, h6) {
   @apply mt-8;
 }
 
