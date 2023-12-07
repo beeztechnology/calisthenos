@@ -1,5 +1,5 @@
 'use client'
-import type { AMRAP, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
+import type { AMRAP, Bloque, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { renderTime } from "@/utils/render";
 import { Checkbox, Space, Table } from "antd";
@@ -11,13 +11,9 @@ import Counter from "./Counter";
 type BloqueExercise = {
   key: string;
   bloque: Element | ReactElement | string;
-  series: string;
-  descanso: string | ReactElement;
-  tempo: string;
-  repes: string;
   ejercicio: string;
   rowSpan: number;
-} & Pick<Exercise, 'intensidad'>
+} & Pick<Exercise, 'intensidad' | 'tempo' | 'repes'> & Pick<Bloque, 'series' | 'descanso'>
 
 interface RoutingTableProps {
   routine: Routine;
@@ -57,29 +53,38 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       dataIndex: "series",
       align: 'center',
       onCell: sharedOnCell,
+      render: (value) => renderSeries(value)
     },
     {
       title: "SERIES COMPLETADAS",
       dataIndex: "done",
       align: 'center',
       onCell: sharedOnCell,
-      render: () => <Counter />
+      render: (_, record) => {
+        if (isEMOM(record.series) || isAMRAP(record.series)) {
+          return <>-</>
+        }
+        return <Counter />
+      }
     },
     {
       title: "REPES",
       dataIndex: "repes",
       align: 'center',
+      render: (value) => renderRepes(value)
     },
     {
       title: "TEMPO",
       dataIndex: "tempo",
       align: 'center',
+      render: (value) => renderTempo(value)
     },
     {
       title: "DESCANSO",
       dataIndex: "descanso",
       onCell: sharedOnCell,
       align: 'center',
+      render: (value) => renderDescanso(value)
     },
   ];
 
@@ -180,6 +185,22 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return reps
   }
 
+  const getBloqueId = (number: number) => {
+    return String.fromCharCode(97 + number).toUpperCase()
+  }
+
+  const getRowSpan = (exercisesSize: number, exercise_index: number) => {
+    let rowSpan = 1;
+    if (exercisesSize > 1) {
+      if (exercise_index === 0) {
+        rowSpan = exercisesSize;
+      } else {
+        rowSpan = 0;
+      }
+    }
+    return rowSpan;
+  }
+
   const data: BloqueExercise[] = [];
   for (let i = 0; i < routine.length; i++) {
     const bloque = routine[i];
@@ -187,24 +208,16 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     const N = ejercicios.length;
     for (let j = 0; j < N; j++) {
       const exercise = ejercicios[j]
-      let rowSpan = 1;
-      if (N > 1) {
-        if (j === 0) {
-          rowSpan = N;
-        } else {
-          rowSpan = 0;
-        }
-      }
       const ejercicio: BloqueExercise = {
         ejercicio: exercise.name,
-        intensidad: exercise.intensidad,
-        tempo: renderTempo(exercise.tempo),
-        repes: renderRepes(exercise.repes),
-        bloque: String.fromCharCode(97 + i).toUpperCase(),
-        key: randomId(),
-        series: renderSeries(bloque.series),
-        descanso: renderDescanso(bloque.descanso),
-        rowSpan,
+        intensidad: exercise.intensidad || '-',
+        tempo: exercise.tempo,
+        repes: exercise.repes,
+        bloque: getBloqueId(i),
+        key: bloque.id,
+        series: bloque.series,
+        descanso: bloque.descanso,
+        rowSpan: getRowSpan(N, j),
       };
       data.push(ejercicio)
     }
