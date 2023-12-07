@@ -5,6 +5,8 @@ import { Checkbox, Space, Statistic, Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";
 import Counter from "./Counter";
+import Countdown from "./Countdown";
+import { renderTime } from "@/utils/render";
 
 type BloqueExercise = {
   key: string;
@@ -32,6 +34,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     {
       title: "BLOQUE",
       dataIndex: "bloque",
+      align: 'center',
       onCell: sharedOnCell,
       render: (value) => {
         return <Space>
@@ -47,47 +50,38 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     {
       title: "INTENSIDAD",
       dataIndex: "intensidad",
+      align: 'center',
     },
     {
       title: "SERIES",
       dataIndex: "series",
+      align: 'center',
       onCell: sharedOnCell,
     },
     {
       title: "SERIES COMPLETADAS",
       dataIndex: "done",
-      onCell: sharedOnCell,
       align: 'center',
+      onCell: sharedOnCell,
       render: () => <Counter />
     },
     {
       title: "REPES",
       dataIndex: "repes",
+      align: 'center',
     },
     {
       title: "TEMPO",
       dataIndex: "tempo",
+      align: 'center',
     },
     {
       title: "DESCANSO",
       dataIndex: "descanso",
-      onCell: sharedOnCell
+      onCell: sharedOnCell,
+      align: 'center',
     },
   ];
-
-  const renderTime = (time: number): string => {
-    let seconds: string = (time % 60).toString()
-    if (seconds === '0') {
-      seconds = ''
-    } else {
-      seconds += '"'
-    }
-    const minutes: string = Math.floor(time / 60).toString();
-    if (minutes === '0') {
-      return seconds
-    }
-    return `${minutes}'${seconds}`
-  }
 
   const renderRange = (R: Range | WithTime<Range>): string => {
     let minString = R.range[0].toString()
@@ -137,15 +131,21 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
   }
 
   const renderDescanso = (descanso: Descanso): string | ReactElement => {
-    if (isRangeTime(descanso)) return renderRange(descanso)
-    if (isFixedTime(descanso)) return (
-      <div>
-        {renderTime(descanso.fixed)}
-        {/* TODO */}
-        {/* <Statistic.Countdown format={"mm'ss\""} value={Date.now() + descanso.fixed * 1000}></Statistic.Countdown> */}
-      </div>
+    if (isRangeTime(descanso)) return (
+      <>
+        {renderRange(descanso)}
+        <Countdown initialValue={descanso.range[1]} />
+      </>
     )
-    return descanso
+    if (isFixedTime(descanso)) return (
+      <Countdown initialValue={descanso.fixed} />
+    )
+    return (
+      <>
+        {descanso}
+        <Countdown />
+      </>
+    )
   }
 
   const renderTempo = (tempo?: Tempo): string => {
