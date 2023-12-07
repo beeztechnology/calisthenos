@@ -208,6 +208,96 @@ const sinEquipamiento: TrainingPlan = {
               isTime: true
             }
           }
+        ],
+        [
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            ejercicios: [
+              {
+                name: 'Sentadilla a una pierna + Cosaca',
+                repes: { range: [3, 6], cadaLado: true },
+                tempo: '30X1'
+              },
+              {
+                name: 'Curl Nórdico',
+                intensidad: 'Excéntricas',
+                repes: { range: [5, 10] },
+                tempo: {
+                  range: [3, 8],
+                  isTime: true
+                }
+              },
+            ],
+            descanso: {
+              fixed: 300,
+              isTime: true
+            }
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            ejercicios: [
+              {
+                name: 'Aducción de Copenhague',
+                intensidad: 'Full',
+                repes: { range: [4, 8], cadaLado: true },
+                tempo: '30X1'
+              }
+            ],
+            descanso: { fixed: 180, isTime: true }
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            ejercicios: [
+              {
+                name: 'Sentadillas Gironda',
+                intensidad: 'Asistidas',
+                repes: { range: [6, 12] },
+                tempo: '30X1'
+              },
+              {
+                name: 'Elevación Glúteos a una pierna',
+                intensidad: 'Elevado',
+                repes: { range: [10, 20] },
+                tempo: '30X1'
+              }
+            ],
+            descanso: { fixed: 180, isTime: true }
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            ejercicios: [
+              {
+                name: 'Paseo Lateral',
+                intensidad: 'Sentadilla',
+                repes: { range: [10, 20], cadaLado: true },
+                tempo: 'Controlado'
+              }
+            ],
+            descanso: {
+              fixed: 120,
+              isTime: true
+            }
+          },
+          {
+            id: randomId(),
+            series: { range: [1, 3] },
+            ejercicios: [
+              {
+                name: 'Elevaciones de Tibia',
+                intensidad: 'Déficit',
+                repes: { range: [15, 30] },
+                tempo: '40X1'
+              }
+            ],
+            descanso: {
+              fixed: 120,
+              isTime: true
+            }
+          }
         ]
       ]
     },

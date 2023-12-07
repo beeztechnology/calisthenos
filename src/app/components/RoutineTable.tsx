@@ -1,14 +1,16 @@
 'use client'
 import type { AMRAP, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
-import { Table } from "antd";
+import { randomId } from "@/utils/random";
+import { Checkbox, Space, Statistic, Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";
+import Counter from "./Counter";
 
 type BloqueExercise = {
   key: string;
   bloque: Element | ReactElement | string;
   series: string;
-  descanso: string;
+  descanso: string | ReactElement;
   tempo: string;
   repes: string;
   ejercicio: string;
@@ -30,7 +32,13 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     {
       title: "BLOQUE",
       dataIndex: "bloque",
-      onCell: sharedOnCell
+      onCell: sharedOnCell,
+      render: (value) => {
+        return <Space>
+          <Checkbox />
+          {value}
+        </Space>
+      }
     },
     {
       title: "EJERCICIO",
@@ -43,7 +51,14 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     {
       title: "SERIES",
       dataIndex: "series",
-      onCell: sharedOnCell
+      onCell: sharedOnCell,
+    },
+    {
+      title: "SERIES COMPLETADAS",
+      dataIndex: "done",
+      onCell: sharedOnCell,
+      align: 'center',
+      render: () => <Counter />
     },
     {
       title: "REPES",
@@ -121,9 +136,15 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return serie
   }
 
-  const renderDescanso = (descanso: Descanso): string => {
+  const renderDescanso = (descanso: Descanso): string | ReactElement => {
     if (isRangeTime(descanso)) return renderRange(descanso)
-    if (isFixedTime(descanso)) return renderTime(descanso.fixed)
+    if (isFixedTime(descanso)) return (
+      <div>
+        {renderTime(descanso.fixed)}
+        {/* TODO */}
+        {/* <Statistic.Countdown format={"mm'ss\""} value={Date.now() + descanso.fixed * 1000}></Statistic.Countdown> */}
+      </div>
+    )
     return descanso
   }
 
@@ -166,7 +187,6 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     const N = ejercicios.length;
     for (let j = 0; j < N; j++) {
       const exercise = ejercicios[j]
-      const keyString = String.fromCharCode(97 + i).toUpperCase();
       let rowSpan = 1;
       if (N > 1) {
         if (j === 0) {
@@ -180,8 +200,8 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
         intensidad: exercise.intensidad,
         tempo: renderTempo(exercise.tempo),
         repes: renderRepes(exercise.repes),
-        bloque: keyString,
-        key: keyString + j,
+        bloque: String.fromCharCode(97 + i).toUpperCase(),
+        key: randomId(),
         series: renderSeries(bloque.series),
         descanso: renderDescanso(bloque.descanso),
         rowSpan,
