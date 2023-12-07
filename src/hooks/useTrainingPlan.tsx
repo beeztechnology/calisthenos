@@ -6,7 +6,6 @@ function useTrainingPlan() {
   const [trainingPlan, setTrainingPlan] = useState<TrainingPlan | undefined>(undefined)
 
   const updateTrainingPlan = useCallback((slug: string) => {
-    console.log("useTrainingPlan");
     if (!slug?.length) return
     fetch(`/api/plan/${slug}`)
       .then(async (response) => {

@@ -1,25 +1,28 @@
 import { Level } from "./training-plan";
 
 export const MuscleWorkZone = {
-  BRAZO: 'Brazo',
-  ESPALDA: 'Espalda',
-  PECHO: 'Pecho',
-  HOMBRO: 'Hombro',
+  BICEPS: 'Biceps',
+  TRICEPS: 'Triceps',
+  DORSALES: 'Dorsales',
+  PECTORALES: 'Pectorales',
+  DELTOIDES: 'Deltoides',
   CORE: 'Core',
-  ABS: 'Abdominales'
+  ABS: 'Abs',
+  ESPALDA_BAJA: 'Espalda baja',
+  PIERNA: 'Pierna'
 } as const
 export type MuscleWorkZoneType = typeof MuscleWorkZone[keyof typeof MuscleWorkZone]
 
 export const Equipment = {
-  SIN_EQUIPO: 'Sin equipo',
   BARRA: 'Barra',
   BARRA_DOMINADAS: 'Barra de dominadas',
   BARRA_PARALELAS: 'Paralelas altas',
   MINI_PARALELAS: 'Mini paralelas',
   HOME_ARTICLES: 'Artículos del hogar',
   ANILLAS: 'Anillas',
+  PELOTA: 'Pelota',
   TRX: 'TRX',
-  BANCO: 'Banco / soporte',
+  SOPORTE: 'Banco / soporte / Apoyo',
   ESTANTE: 'Estante',
   BANDA_ELASTICA: 'Banda elastica',
   AB_WHEEL: 'Rueda abdominal'
@@ -33,12 +36,12 @@ export const Modality = {
 export type ModalityType = typeof Modality[keyof typeof Modality]
 
 export interface ExerciseDescriptor {
+  id: string;
   name: {
     english: string;
-    spanish?: string;
+    spanish: string;
   };
-  description?: string;
-  steps: string[];
+  instructions: string[];
   level: Level;
   muscleWorkZones: MuscleWorkZoneType[];
   equipment: EquipmentType[];

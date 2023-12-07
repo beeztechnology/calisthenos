@@ -1,10 +1,6 @@
 import { Level, type TrainingPlan } from "@/app/types/training-plan";
-import { randomBytes } from "crypto";
+import { randomId } from "@/utils/random";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
-
-const randomId = () => {
-  return randomBytes(20).toString('hex');
-}
 
 const sinEquipamiento: TrainingPlan = {
   slug: SIN_EQUIPAMIENTO,
