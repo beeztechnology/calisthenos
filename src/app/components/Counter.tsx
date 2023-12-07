@@ -1,6 +1,6 @@
 import { Button, Space } from "antd"
-import Image from "next/image"
 import React, { useState } from 'react'
+import MyImage from '@/app/components/Image';
 
 export default function Counter() {
   const [value, setValue] = useState(0)
@@ -15,12 +15,14 @@ export default function Counter() {
 
   return (
     <div className="flex flex-col gap-2 items-center">
-      <p>{value}</p>
       <Space>
         <Button onClick={() => decrement()}>
-          <Image src="plus.svg" alt="plus icon"  />
+          <MyImage src="/minus.svg" alt="plus icon" />
         </Button>
-        <Button onClick={() => increment()}>➕</Button>
+        <p>{value}</p>
+        <Button onClick={() => increment()}>
+          <MyImage src="/plus.svg" alt="plus icon" />
+        </Button>
       </Space>
     </div>
   )

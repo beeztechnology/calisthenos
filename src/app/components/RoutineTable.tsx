@@ -1,12 +1,12 @@
 'use client'
 import type { AMRAP, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
-import { Checkbox, Space, Statistic, Table } from "antd";
+import { renderTime } from "@/utils/render";
+import { Checkbox, Space, Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";
-import Counter from "./Counter";
 import Countdown from "./Countdown";
-import { renderTime } from "@/utils/render";
+import Counter from "./Counter";
 
 type BloqueExercise = {
   key: string;
@@ -134,11 +134,11 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     if (isRangeTime(descanso)) return (
       <>
         {renderRange(descanso)}
-        <Countdown initialValue={descanso.range[1]} />
+        <Countdown defaultValue={descanso.range[1]} />
       </>
     )
     if (isFixedTime(descanso)) return (
-      <Countdown initialValue={descanso.fixed} />
+      <Countdown defaultValue={descanso.fixed} />
     )
     return (
       <>

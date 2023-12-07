@@ -1,4 +1,4 @@
-import { Level, type TrainingPlan } from "@/app/types/training-plan";
+import { Autodefinido, Level, type TrainingPlan } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
 
@@ -306,7 +306,84 @@ const sinEquipamiento: TrainingPlan = {
       link: '',
       id: randomId(),
       level: Level.EXPERTO,
-      routine: [],
+      routine: [
+        [],
+        [],
+        [
+          {
+            id: randomId(),
+            series: { emom: 10 },
+            ejercicios: [
+              {
+                name: 'Burpees',
+                repes: {
+                  fixed: 8
+                }
+              }
+            ],
+            descanso: Autodefinido
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            ejercicios: [
+              {
+                name: 'Flexiones Handstand',
+                intensidad: 'Pared',
+                repes: { range: [5, 10] }
+              },
+              {
+                name: 'Dominadas',
+                intensidad: '2 Toallas',
+                repes: { range: [5, 15] }
+              }
+            ],
+            descanso: Autodefinido
+          },
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            ejercicios: [
+              {
+                name: 'Fondos rusos',
+                repes: { range: [3, 6] },
+                intensidad: 'Paralelas'
+              },
+              {
+                name: 'Remos Arqueros',
+                repes: { range: [8, 15], cadaLado: true }
+              }
+            ],
+            descanso: Autodefinido
+          },
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            ejercicios: [
+              {
+                name: 'Face pull',
+                repes: { range: [10, 20] }
+              }
+            ],
+            descanso: Autodefinido
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            ejercicios: [
+              {
+                name: 'Plancha avanzada',
+                repes: { range: [10, 30], isTime: true }
+              },
+              {
+                name: 'Hollow Body Hold',
+                repes: { range: [10, 30], isTime: true }
+              }
+            ],
+            descanso: Autodefinido
+          }
+        ]
+      ],
     },
   ]
 }
