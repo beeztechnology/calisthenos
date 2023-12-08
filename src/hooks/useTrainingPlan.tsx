@@ -3,8 +3,8 @@ import { useTrainingPlanStore } from "@/store/useTrainingPlanStore";
 import { useCallback } from 'react';
 
 function useTrainingPlan() {
-  const { current, setTrainingPlan, trainingPlans, setCurrent } = useTrainingPlanStore(({ current, setTrainingPlan, trainingPlans, setCurrent }) => ({
-    current,
+  const { getCurrentTrainingPlan, setTrainingPlan, trainingPlans, setCurrent } = useTrainingPlanStore(({ getCurrentTrainingPlan, setTrainingPlan, trainingPlans, setCurrent }) => ({
+    getCurrentTrainingPlan,
     setTrainingPlan,
     setCurrent,
     trainingPlans
@@ -25,7 +25,7 @@ function useTrainingPlan() {
   }, [setTrainingPlan, trainingPlans, setCurrent])
 
   return {
-    trainingPlan: trainingPlans[current],
+    trainingPlan: getCurrentTrainingPlan(),
     getTrainingPlan
   }
 }

@@ -1,9 +1,7 @@
 'use client'
 import H2 from "@/app/components/Atom/H2"
-import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
 import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
-import { usePathname } from "next/navigation"
 import React, { Key, useEffect } from 'react'
 
 type LayoutPlanProps = {
@@ -35,10 +33,10 @@ export default function LayoutPlan({ children, params: { plan } }: LayoutPlanPro
   }, [plan, getTrainingPlan])
 
   return (
-    <TrainingPlanContext.Provider value={trainingPlan}>
+    <>
       <H2>{trainingPlan?.title}</H2>
       <p>{trainingPlan?.description}</p>
       {children}
-    </TrainingPlanContext.Provider>
+    </>
   )
 }

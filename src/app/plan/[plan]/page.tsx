@@ -1,16 +1,15 @@
 'use client'
 import PlanificationContent from "@/app/components/PlanificationContent"
-import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
-import { useContext } from "react"
+import useTrainingPlan from "@/hooks/useTrainingPlan"
 
 type PlanPageProps = {
 }
 
 export default function PlanPage({ }: PlanPageProps) {
-  const trainingPlan = useContext(TrainingPlanContext)
+  const { trainingPlan } = useTrainingPlan()
 
   if (trainingPlan) {
-    return <PlanificationContent planificacion={trainingPlan.planificacion} />
+    return <PlanificationContent planificacion={trainingPlan?.planificacion} />
   }
   return <></>
 }

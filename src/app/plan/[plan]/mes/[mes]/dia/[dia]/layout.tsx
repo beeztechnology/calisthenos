@@ -28,7 +28,7 @@ export default function Layout({ children, params: { plan, mes, dia } }: LayoutP
   useEffect(() => {
     const key: Key = 4
     if (trainingPlan) {
-      const planificacion = trainingPlan.planificacion.find(plan => plan.month === Number(mes))
+      const planificacion = trainingPlan?.planificacion.find(plan => plan.month === Number(mes))
       const _days: SegmentedLabeledOption[] = []
       planificacion?.routine.forEach((_, i) => {
         _days.push({
