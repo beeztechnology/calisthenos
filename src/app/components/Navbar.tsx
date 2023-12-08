@@ -33,10 +33,7 @@ export default function Navbar() {
   ];
 
   function itemRender(item: ItemType, params: AnyObject, items: ItemType[], paths: string[]) {
-    const last = items.indexOf(item) === items.length - 1;
-    return last
-      ? <Link href={paths.join('/')}>{item.title}</Link>
-      : <Link href={"/"}>{item.title}</Link>;
+    return <Link href={item.href ?? ''}>{item.title}</Link>
   }
 
   return (

@@ -12,18 +12,23 @@ type LayoutPlanProps = {
 
 export default function LayoutPlan({ children, params: { plan } }: LayoutPlanProps) {
   const { trainingPlan, updateTrainingPlan } = useTrainingPlan()
-  const addItem = useBreadcrumbStore((state) => state.addItem)
+  const { addItem, removeItem } = useBreadcrumbStore(({ addItem, removeItem }) => ({
+    addItem, removeItem
+  }))
   const currentPath = usePathname()
 
   useEffect(() => {
     if (trainingPlan) {
       addItem({
         title: trainingPlan?.title,
-        key: currentPath,
-        href: currentPath,
+        key: plan,
+        href: `/plan/${plan}`,
       })
     }
-  }, [addItem, currentPath, trainingPlan])
+    return () => {
+      removeItem(plan)
+    }
+  }, [addItem, removeItem, currentPath, trainingPlan, plan])
 
   useEffect(() => {
     updateTrainingPlan(plan)

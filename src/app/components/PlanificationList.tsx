@@ -15,7 +15,7 @@ export function PlanificationList({ list, label }: PlanificationListProps) {
     if (link.length > 0) {
       return currentPathname + link;
     }
-    return `${currentPathname}/mes/${month.toString()}`
+    return `${currentPathname}/mes/${month.toString()}/dia/1`
   }
 
   return (

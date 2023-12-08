@@ -7,6 +7,7 @@ import { immer } from 'zustand/middleware/immer'
 interface BreadcrumbStore {
   items: ItemType[]
   addItem: (newItem: Draft<ItemType>) => void
+  removeItem: (keyToDelete: Key) => void
 }
 
 const findItemByKey = (items: ItemType[], key?: Key) => {
@@ -18,6 +19,12 @@ export const useBreadcrumbStore = create<BreadcrumbStore, [["zustand/immer", nev
   addItem: (newItem) => set((state) => {
     if (!findItemByKey(state.items, newItem.key)) {
       state.items.push(newItem)
+    }
+  }),
+  removeItem: (key: Key) => set((state) => {
+    const itemToDelete = state.items.findIndex(el => el.key === key)
+    if (itemToDelete !== -1) {
+      state.items.splice(itemToDelete, 1);
     }
   })
 })))
