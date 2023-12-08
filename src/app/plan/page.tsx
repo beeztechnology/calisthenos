@@ -31,7 +31,6 @@ export default function PlanesDeEntrenamiento() {
 
   return (
     <div className="max-w-5xl">
-      <H1>Planes de entrenamiento</H1>
       <div className={styles['wrapper_cards']}>
         {planes.map(plan => (
           <TrainingPlan key={plan.title} {...plan} link={`/plan/${plan.link}`} />

@@ -1,20 +1,31 @@
 'use client';
-import { TrainingPlan } from "@/app/types/training-plan";
-import { useCallback, useState } from 'react';
+import { useTrainingPlanStore } from "@/store/useTrainingPlan.store";
+import { useCallback } from 'react';
 
 function useTrainingPlan() {
-  const [trainingPlan, setTrainingPlan] = useState<TrainingPlan | undefined>(undefined)
+  const { current, setTrainingPlan, trainingPlans, setCurrent } = useTrainingPlanStore(({ current, setTrainingPlan, trainingPlans, setCurrent }) => ({
+    current,
+    setTrainingPlan,
+    setCurrent,
+    trainingPlans
+  }))
 
   const updateTrainingPlan = useCallback((slug: string) => {
     if (!slug?.length) return
+    if (trainingPlans[slug]) {
+      setCurrent(slug)
+      return
+    }
     fetch(`/api/plan/${slug}`)
-      .then(async (response) => {
-        setTrainingPlan(await response.json())
+      .then(res => res.json())
+      .then((res) => {
+        setTrainingPlan(res)
+        return res
       })
-  }, [])
+  }, [setTrainingPlan, trainingPlans, setCurrent])
 
   return {
-    trainingPlan,
+    trainingPlan: trainingPlans[current],
     updateTrainingPlan
   }
 }

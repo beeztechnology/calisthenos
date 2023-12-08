@@ -17,9 +17,11 @@ const findItemByKey = (items: ItemType[], key?: Key) => {
 export const useBreadcrumbStore = create<BreadcrumbStore, [["zustand/immer", never]]>(immer((set) => ({
   items: [] as BreadcrumbStore['items'],
   addItem: (newItem) => set((state) => {
-    if (!findItemByKey(state.items, newItem.key)) {
-      state.items.push(newItem)
-    }
+    if (findItemByKey(state.items, newItem.key)) return
+    state.items.push(newItem)
+    state.items.sort((a, b) => {
+      return Number(a.key) - Number(b.key)
+    })
   }),
   removeItem: (key: Key) => set((state) => {
     const itemToDelete = state.items.findIndex(el => el.key === key)

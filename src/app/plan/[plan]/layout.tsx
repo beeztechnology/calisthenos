@@ -1,10 +1,10 @@
 'use client'
-import H1 from "@/app/components/Atom/H1"
+import H2 from "@/app/components/Atom/H2"
 import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
 import { useBreadcrumbStore } from "@/store/breadcrumb.store"
 import { usePathname } from "next/navigation"
-import React, { useEffect } from 'react'
+import React, { Key, useEffect } from 'react'
 
 type LayoutPlanProps = {
   params: { plan: string }
@@ -15,20 +15,20 @@ export default function LayoutPlan({ children, params: { plan } }: LayoutPlanPro
   const { addItem, removeItem } = useBreadcrumbStore(({ addItem, removeItem }) => ({
     addItem, removeItem
   }))
-  const currentPath = usePathname()
 
   useEffect(() => {
+    const key: Key = 2
     if (trainingPlan) {
       addItem({
         title: trainingPlan?.title,
-        key: plan,
+        key,
         href: `/plan/${plan}`,
       })
     }
     return () => {
-      removeItem(plan)
+      removeItem(key)
     }
-  }, [addItem, removeItem, currentPath, trainingPlan, plan])
+  }, [addItem, removeItem, trainingPlan, plan])
 
   useEffect(() => {
     updateTrainingPlan(plan)
@@ -36,7 +36,7 @@ export default function LayoutPlan({ children, params: { plan } }: LayoutPlanPro
 
   return (
     <TrainingPlanContext.Provider value={trainingPlan}>
-      <H1>Plan de entrenamiento:<br />{trainingPlan?.title}</H1>
+      <H2>{trainingPlan?.title}</H2>
       <p>{trainingPlan?.description}</p>
       {children}
     </TrainingPlanContext.Provider>

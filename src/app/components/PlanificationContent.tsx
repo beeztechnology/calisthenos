@@ -4,6 +4,7 @@ import React from "react";
 import H2 from "./Atom/H2";
 import { PlanificationList } from "./PlanificationList";
 import { Level, Planificacion } from "../types/training-plan";
+import H3 from "./Atom/H3";
 
 interface PlanificationContentProps {
   planificacion?: Planificacion[];
@@ -43,7 +44,7 @@ export default function PlanificationContent({ planificacion = [] }: Planificati
 
   return (
     <>
-      <H2>Contenido de la planificación</H2>
+      <H3>Contenido de la planificación</H3>
       <Accordion variant="bordered"
         selectedKeys={selectedKeys}
         // @ts-expect-error
