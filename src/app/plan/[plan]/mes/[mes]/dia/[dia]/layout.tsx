@@ -1,7 +1,7 @@
 'use client'
 import { TrainingPlan } from "@/app/types/training-plan"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
-import { useBreadcrumbStore } from "@/store/breadcrumb.store"
+import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
 import { Segmented } from "antd"
 import { SegmentedLabeledOption } from "antd/es/segmented"
 import Link from "next/link"

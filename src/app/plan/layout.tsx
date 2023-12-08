@@ -2,7 +2,7 @@
 import { LazyProps } from "framer-motion"
 import React, { Key, useEffect } from 'react'
 import H1 from "../components/Atom/H1"
-import { useBreadcrumbStore } from "@/store/breadcrumb.store"
+import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
 
 type LayoutProps = {
 

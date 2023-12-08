@@ -1,7 +1,7 @@
 'use client'
 import { HomeOutlined } from "@ant-design/icons"
 import React, { useEffect } from 'react'
-import { useBreadcrumbStore } from "@/store/breadcrumb.store"
+import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
 import { usePathname } from "next/navigation"
 
 export default function RootLayoutClient() {

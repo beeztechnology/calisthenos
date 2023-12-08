@@ -1,7 +1,7 @@
 'use client'
 import H2 from "@/app/components/Atom/H2"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
-import { useBreadcrumbStore } from "@/store/breadcrumb.store"
+import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
 import React, { Key, useEffect } from 'react'
 
 type LayoutProps = React.PropsWithChildren & {

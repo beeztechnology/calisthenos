@@ -2,7 +2,7 @@
 import H2 from "@/app/components/Atom/H2"
 import { TrainingPlanContext } from "@/contexts/TrainingPlanContext"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
-import { useBreadcrumbStore } from "@/store/breadcrumb.store"
+import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
 import { usePathname } from "next/navigation"
 import React, { Key, useEffect } from 'react'
 

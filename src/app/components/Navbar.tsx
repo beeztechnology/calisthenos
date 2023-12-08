@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { metadata } from "../metadata";
 import Breadcrumb, { ItemType } from "antd/es/breadcrumb/Breadcrumb";
-import { useBreadcrumbStore } from "../../store/breadcrumb.store";
+import { useBreadcrumbStore } from "../../store/useBreadcrumbStore";
 import { AnyObject } from "antd/es/_util/type";
 
 interface MenuItem {
