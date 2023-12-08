@@ -2,7 +2,7 @@
 import type { AMRAP, Bloque, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { renderTime } from "@/utils/render";
-import { Checkbox, Space, Table } from "antd";
+import { Checkbox, Space, Table, Typography } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";
 import Countdown from "./Countdown";
@@ -49,25 +49,6 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       align: 'center',
     },
     {
-      title: "SERIES",
-      dataIndex: "series",
-      align: 'center',
-      onCell: sharedOnCell,
-      render: (value) => renderSeries(value)
-    },
-    {
-      title: "SERIES COMPLETADAS",
-      dataIndex: "done",
-      align: 'center',
-      onCell: sharedOnCell,
-      render: (_, record) => {
-        if (isEMOM(record.series) || isAMRAP(record.series)) {
-          return <>-</>
-        }
-        return <Counter />
-      }
-    },
-    {
       title: "REPES",
       dataIndex: "repes",
       align: 'center',
@@ -78,6 +59,13 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       dataIndex: "tempo",
       align: 'center',
       render: (value) => renderTempo(value)
+    },
+    {
+      title: "SERIES",
+      dataIndex: "series",
+      align: 'center',
+      onCell: sharedOnCell,
+      render: (value) => renderSeries(value)
     },
     {
       title: "DESCANSO",
@@ -128,10 +116,21 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return (item as WithTime<Range>).isTime
   }
 
-  const renderSeries = (serie: Serie): string => {
-    if (isAMRAP(serie)) return `${serie.amrap}' AMRAP`
-    if (isEMOM(serie)) return `${serie.emom}' EMOM`
-    if (isRange(serie)) return renderRange(serie)
+  const renderSeries = (serie: Serie): string | ReactElement => {
+    if (isAMRAP(serie)) return <p className="text-lg">{serie.amrap}&apos; AMRAP</p>
+    if (isEMOM(serie)) return <p className="text-lg">{serie.emom}&apos; EMOM</p>
+    if (isRange(serie) || isFixed(serie)) {
+      const series = isRange(serie)
+        ? renderRange(serie)
+        : serie.fixed
+      return (
+        <div className="flex flex-col gap-3">
+          <p className="text-lg">{series}</p>
+          <p><strong><em>Finalizadas</em></strong></p>
+          <Counter max={isRange(serie) ? serie.range[1] : serie.fixed} />
+        </div>
+      )
+    }
     return serie
   }
 
@@ -214,7 +213,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
         tempo: exercise.tempo,
         repes: exercise.repes,
         bloque: getBloqueId(i),
-        key: bloque.id,
+        key: bloque.id + j,
         series: bloque.series,
         descanso: bloque.descanso,
         rowSpan: getRowSpan(N, j),

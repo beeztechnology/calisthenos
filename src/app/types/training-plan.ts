@@ -28,7 +28,7 @@ export type WithTime<T extends {}> = T & {
   isTime: true;
 }
 
-export type Serie = Range | AMRAP | EMOM | typeof Autodefinido;
+export type Serie = Range | Fixed | AMRAP | EMOM | typeof Autodefinido;
 export type WithCadaLado<T extends {}> = T & {
   cadaLado?: boolean;
 }

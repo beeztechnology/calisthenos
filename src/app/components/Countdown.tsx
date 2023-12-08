@@ -1,8 +1,7 @@
 import { renderTime } from "@/utils/render";
 import { Button } from "antd";
-import Paragraph from "antd/es/typography/Paragraph";
 import { useEffect, useState } from 'react';
-import MyImage from "./Image";
+import MyImage from "./MyImage";
 
 interface CountdownProps {
   defaultValue?: number;
@@ -40,6 +39,9 @@ export default function Countdown({ defaultValue = 210 }: CountdownProps) {
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
+    if (value === 0) {
+      setStarted(false)
+    }
     if (started && value > 0) {
       intervalId = setTimeout(() => {
         setValue(value - 1)
@@ -50,7 +52,7 @@ export default function Countdown({ defaultValue = 210 }: CountdownProps) {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <Paragraph className="text-2xl mb-0">{renderTime(value)}</Paragraph>
+      <p className="text-2xl">{renderTime(value)}</p>
 
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 justify-center">
