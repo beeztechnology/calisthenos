@@ -20,7 +20,6 @@ export default function Layout({ children, params: { mes, plan } }: LayoutProps)
       addItem({
         title: `Mes ${mes}`,
         key,
-        href: `/plan/${plan}/mes/${mes}`,
       })
     }
     return () => {

@@ -10,7 +10,7 @@ function useTrainingPlan() {
     trainingPlans
   }))
 
-  const updateTrainingPlan = useCallback((slug: string) => {
+  const getTrainingPlan = useCallback((slug: string) => {
     if (!slug?.length) return
     if (trainingPlans[slug]) {
       setCurrent(slug)
@@ -26,7 +26,7 @@ function useTrainingPlan() {
 
   return {
     trainingPlan: trainingPlans[current],
-    updateTrainingPlan
+    getTrainingPlan
   }
 }
 

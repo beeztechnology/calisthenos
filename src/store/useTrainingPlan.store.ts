@@ -7,9 +7,10 @@ type TrainingPlanStore = {
   current: TrainingPlan['slug']
   setTrainingPlan: (newPlan: TrainingPlan) => void
   setCurrent: (slug: TrainingPlan['slug']) => void
+  hasTrainingPlan: (slug: string) => boolean
 }
 
-export const useTrainingPlanStore = create<TrainingPlanStore, [["zustand/immer", never]]>(immer((set) => ({
+export const useTrainingPlanStore = create<TrainingPlanStore, [["zustand/immer", never]]>(immer((set, get) => ({
   trainingPlans: {},
   current: '',
   setTrainingPlan: (newPlan) => set((state) => {
@@ -18,5 +19,8 @@ export const useTrainingPlanStore = create<TrainingPlanStore, [["zustand/immer",
   }),
   setCurrent: (slug) => set((state) => {
     state.current = slug;
-  })
+  }),
+  hasTrainingPlan: (slug: string) => {
+    return !!get().trainingPlans[slug]
+  }
 })))

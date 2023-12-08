@@ -11,7 +11,7 @@ type LayoutPlanProps = {
 } & React.PropsWithChildren
 
 export default function LayoutPlan({ children, params: { plan } }: LayoutPlanProps) {
-  const { trainingPlan, updateTrainingPlan } = useTrainingPlan()
+  const { trainingPlan, getTrainingPlan } = useTrainingPlan()
   const { addItem, removeItem } = useBreadcrumbStore(({ addItem, removeItem }) => ({
     addItem, removeItem
   }))
@@ -31,8 +31,8 @@ export default function LayoutPlan({ children, params: { plan } }: LayoutPlanPro
   }, [addItem, removeItem, trainingPlan, plan])
 
   useEffect(() => {
-    updateTrainingPlan(plan)
-  }, [plan, updateTrainingPlan])
+    getTrainingPlan(plan)
+  }, [plan, getTrainingPlan])
 
   return (
     <TrainingPlanContext.Provider value={trainingPlan}>
