@@ -1,12 +1,13 @@
 'use client'
-import { TrainingPlan } from "@/app/types/training-plan"
 import useTrainingPlan from "@/hooks/useTrainingPlan"
+
 import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
 import { Segmented } from "antd"
 import { SegmentedLabeledOption } from "antd/es/segmented"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React, { Key, useCallback, useEffect, useState } from 'react'
+import './layout.css';
 
 type LayoutProps = React.PropsWithChildren & {
   params: { dia: string, plan: string, mes: string }
@@ -32,8 +33,8 @@ export default function Layout({ children, params: { plan, mes, dia } }: LayoutP
       const _days: SegmentedLabeledOption[] = []
       planificacion?.routine.forEach((_, i) => {
         _days.push({
-          label: <Link href={getNewPath(`${i + 1}`)}>{DIA} {i + 1}</Link>,
-          value: `${DIA} ${i + 1}`
+          label: <Link className="py-1 px-4" href={getNewPath(`${i + 1}`)}>{DIA} {i + 1}</Link>,
+          value: `${DIA} ${i + 1}`,
         })
       })
       setDays(_days)
@@ -50,7 +51,7 @@ export default function Layout({ children, params: { plan, mes, dia } }: LayoutP
 
   return (
     <>
-      <Segmented className="[&.ant-segmented]:mb-6" options={days} defaultValue={`${DIA} ${dia}`} />
+      <Segmented options={days} defaultValue={`${DIA} ${dia}`} />
       {children}
     </>
   )

@@ -1,0 +1,7 @@
+.ant-segmented.ant-segmented {
+  @apply mb-6;
+
+  .ant-segmented-item-label {
+    @apply p-0;
+  }
+}
