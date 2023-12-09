@@ -28,7 +28,10 @@ export const Equipment = {
   BANDA_ELASTICA: 'Banda elastica',
   AB_WHEEL: 'Rueda abdominal'
 } as const
-export type Equipment = typeof Equipment[keyof typeof Equipment] | OptionalType<typeof Equipment[keyof typeof Equipment]> | RecommendedType<typeof Equipment[keyof typeof Equipment]>
+export type Equipment =
+  | typeof Equipment[keyof typeof Equipment]
+  | OptionalType<typeof Equipment[keyof typeof Equipment]>
+  | RecommendedType<typeof Equipment[keyof typeof Equipment]>
 
 export const Modality = {
   ESTATICO: 'Estático',
@@ -36,7 +39,7 @@ export const Modality = {
 } as const
 export type Modality = typeof Modality[keyof typeof Modality]
 
-export interface ExerciseDescriptorType {
+export interface IExerciseDescriptor {
   id: string;
   name: {
     english: string;

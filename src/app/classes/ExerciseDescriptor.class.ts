@@ -1,8 +1,8 @@
 import { randomId } from "@/utils/random"
 import { Level } from "../types/level";
-import { Equipment, Modality, MuscleWorkZone } from "../types/exercises";
+import { Equipment, IExerciseDescriptor, Modality, MuscleWorkZone } from "../types/exercises";
 
-export class ExerciseDescriptor {
+export class ExerciseDescriptor implements IExerciseDescriptor {
   private readonly _id: string = randomId();
   private readonly _name: Record<"english" | "spanish", string>;
   private readonly _instructions: string[];

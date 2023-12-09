@@ -1,17 +1,18 @@
 import { Rate, Space, Tag } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
 import { useCallback, useEffect, useState } from 'react';
-import { Equipment, Equipment, ExerciseDescriptorType, Modality, MuscleWorkZone, MuscleWorkZone } from "../types/exercises";
+import { Equipment, IExerciseDescriptor, Modality, MuscleWorkZone } from "../types/exercises";
 import { Level } from "../types/level";
+import { ExerciseDescriptor } from "../classes/ExerciseDescriptor.class";
 
 interface ExerciseDescriptorTableProps {
-  exercises: ExerciseDescriptorType[]
+  exercises: IExerciseDescriptor[]
 }
 
 export default function ExerciseDescriptorTable({ exercises }: ExerciseDescriptorTableProps) {
-  const [data, setData] = useState<ExerciseDescriptorType[]>([])
+  const [data, setData] = useState<IExerciseDescriptor[]>([])
 
-  const renderName = (name: ExerciseDescriptorType['name']): string => {
+  const renderName = (name: IExerciseDescriptor['name']): string => {
     let newName = `${name.english}`;
     if (name.spanish) {
       newName += ` (${name.spanish})`;
@@ -19,7 +20,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     return newName
   }
 
-  const columns: ColumnsType<ExerciseDescriptorType> = [
+  const columns: ColumnsType<IExerciseDescriptor> = [
     {
       title: "NAME",
       dataIndex: "name",

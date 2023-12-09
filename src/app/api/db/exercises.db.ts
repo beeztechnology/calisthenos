@@ -1,10 +1,10 @@
 import { ExerciseDescriptor } from "@/app/classes/ExerciseDescriptor.class";
-import { Equipment as E, ExerciseDescriptorType, Modality as M, MuscleWorkZone as Z } from "@/app/types/exercises";
+import { Equipment as E, IExerciseDescriptor, Modality as M, MuscleWorkZone as Z } from "@/app/types/exercises";
 import { Optional, Recommended } from "@/app/types/global";
 import { Level } from "@/app/types/level";
 import { randomId } from "@/utils/random";
 
-export const exercises: ExerciseDescriptorType[] = [
+export const exercises: IExerciseDescriptor[] = [
   new ExerciseDescriptor(
     'Wall Push-up',
     'Flexión en pared',
