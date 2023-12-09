@@ -12,7 +12,7 @@ export const MuscleWorkZone = {
   ESPALDA_BAJA: 'Espalda baja',
   PIERNA: 'Pierna'
 } as const
-export type MuscleWorkZoneType = typeof MuscleWorkZone[keyof typeof MuscleWorkZone]
+export type MuscleWorkZone = typeof MuscleWorkZone[keyof typeof MuscleWorkZone]
 
 export const Equipment = {
   BARRA: 'Barra',
@@ -28,15 +28,15 @@ export const Equipment = {
   BANDA_ELASTICA: 'Banda elastica',
   AB_WHEEL: 'Rueda abdominal'
 } as const
-export type EquipmentType = typeof Equipment[keyof typeof Equipment] | OptionalType<typeof Equipment[keyof typeof Equipment]> | RecommendedType<typeof Equipment[keyof typeof Equipment]>
+export type Equipment = typeof Equipment[keyof typeof Equipment] | OptionalType<typeof Equipment[keyof typeof Equipment]> | RecommendedType<typeof Equipment[keyof typeof Equipment]>
 
 export const Modality = {
   ESTATICO: 'Estático',
   DINAMICO: 'Dinámico',
 } as const
-export type ModalityType = typeof Modality[keyof typeof Modality]
+export type Modality = typeof Modality[keyof typeof Modality]
 
-export interface ExerciseDescriptor {
+export interface ExerciseDescriptorType {
   id: string;
   name: {
     english: string;
@@ -44,7 +44,7 @@ export interface ExerciseDescriptor {
   };
   instructions: string[];
   level: Level;
-  muscleWorkZones: MuscleWorkZoneType[];
-  equipment: EquipmentType[];
-  modality: ModalityType;
+  muscleWorkZones: MuscleWorkZone[];
+  equipment: Equipment[];
+  modality: Modality;
 }

@@ -1,26 +1,21 @@
-import { Equipment as E, ExerciseDescriptor, Modality as M, MuscleWorkZone as Z } from "@/app/types/exercises";
+import { ExerciseDescriptor } from "@/app/classes/ExerciseDescriptor.class";
+import { Equipment as E, ExerciseDescriptorType, Modality as M, MuscleWorkZone as Z } from "@/app/types/exercises";
 import { Optional, Recommended } from "@/app/types/global";
 import { Level } from "@/app/types/level";
 import { randomId } from "@/utils/random";
 
-export const exercises: ExerciseDescriptor[] = [
-  {
-    id: randomId(),
-    name: {
-      english: 'Wall Push-up',
-      spanish: 'Flexión en pared',
-    },
-    instructions: ['Realiza este ejercicio frente a una pared.', 'Coloca las manos en la pared a la altura de los hombros.', 'Mantén el cuerpo recto desde la cabeza hasta los pies.', 'Flexiona los codos para acercar el pecho a la pared.', 'Extiende los codos para volver a la posición inicial.'],
-    level: Level.PRINCIPIANTE,
-    muscleWorkZones: [
+export const exercises: ExerciseDescriptorType[] = [
+  new ExerciseDescriptor(
+    'Wall Push-up',
+    'Flexión en pared',
+    ['Realiza este ejercicio frente a una pared.', 'Coloca las manos en la pared a la altura de los hombros.', 'Mantén el cuerpo recto desde la cabeza hasta los pies.', 'Flexiona los codos para acercar el pecho a la pared.', 'Extiende los codos para volver a la posición inicial.'],
+    Level.PRINCIPIANTE,
+    [
       Z.PECTORALES,
       Z.TRICEPS,
       Z.DELTOIDES,
       Z.CORE
-    ],
-    equipment: [],
-    modality: M.DINAMICO,
-  },
+    ]),
   {
     id: randomId(),
     name: {
@@ -528,7 +523,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Slider Pushup',
       spanish: 'Deslizador Flexiones'
     },
-    instructions: ['Colócate en posición de plancha con las manos apoyadas en un slider.','Desliza una mano hacia afuera mientras mantienes el cuerpo recto.','Realiza una flexión con el brazo extendido.','Vuelve a la posición inicial deslizando la mano de regreso.','Repite el proceso con la otra mano.','Alterna entre las manos para completar las repeticiones deseadas.'],
+    instructions: ['Colócate en posición de plancha con las manos apoyadas en un slider.', 'Desliza una mano hacia afuera mientras mantienes el cuerpo recto.', 'Realiza una flexión con el brazo extendido.', 'Vuelve a la posición inicial deslizando la mano de regreso.', 'Repite el proceso con la otra mano.', 'Alterna entre las manos para completar las repeticiones deseadas.'],
     level: Level.INTERMEDIO,
     muscleWorkZones: [
       // TODO
@@ -542,7 +537,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Explosive Full Body Push Up',
       spanish: 'Flexión explosiva de cuerpo completo'
     },
-    instructions: ['Colócate en posición de plancha con las manos a la altura de los hombros.','Desciende rápidamente hacia abajo flexionando los codos.','Realiza un impulso explosivo hacia arriba, levantando las manos del suelo.','Asegúrate de mantener el cuerpo recto durante todo el movimiento.','Aterriza suavemente y repite el ejercicio para completar las repeticiones deseadas.'],
+    instructions: ['Colócate en posición de plancha con las manos a la altura de los hombros.', 'Desciende rápidamente hacia abajo flexionando los codos.', 'Realiza un impulso explosivo hacia arriba, levantando las manos del suelo.', 'Asegúrate de mantener el cuerpo recto durante todo el movimiento.', 'Aterriza suavemente y repite el ejercicio para completar las repeticiones deseadas.'],
     level: Level.INTERMEDIO,
     muscleWorkZones: [
       // TODO
@@ -556,7 +551,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Handstand Push Up on Rings',
       spanish: 'Flexión de Pino o en vertical en Anillas'
     },
-    instructions: ['Cuelga anillas a una altura adecuada y asegúralas firmemente.','Colócate en posición invertida con las manos en el suelo y los pies apoyados en las anillas.','Flexiona los codos para bajar el cuerpo hacia las anillas.','Empuja hacia arriba para volver a la posición inicial.','Mantén el cuerpo alineado y los codos apuntando hacia afuera durante el movimiento.','Realiza el ejercicio controladamente para evitar balanceos innecesarios.','Completa las repeticiones deseadas.'],
+    instructions: ['Cuelga anillas a una altura adecuada y asegúralas firmemente.', 'Colócate en posición invertida con las manos en el suelo y los pies apoyados en las anillas.', 'Flexiona los codos para bajar el cuerpo hacia las anillas.', 'Empuja hacia arriba para volver a la posición inicial.', 'Mantén el cuerpo alineado y los codos apuntando hacia afuera durante el movimiento.', 'Realiza el ejercicio controladamente para evitar balanceos innecesarios.', 'Completa las repeticiones deseadas.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -570,7 +565,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Full Planche',
       spanish: 'Plancha Completa'
     },
-    instructions: ['Inicia en posición de plancha con las manos apoyadas en el suelo y los dedos apuntando hacia adelante.','Levanta las piernas del suelo, manteniendo el cuerpo en posición horizontal.','Apoya el peso en las manos y extiende completamente los codos.','Mantén la posición el mayor tiempo posible.','Asegúrate de mantener el cuerpo alineado y los músculos contraídos.','Baja controladamente para volver a la posición inicial.','Practica regularmente para mejorar la resistencia y estabilidad.'],
+    instructions: ['Inicia en posición de plancha con las manos apoyadas en el suelo y los dedos apuntando hacia adelante.', 'Levanta las piernas del suelo, manteniendo el cuerpo en posición horizontal.', 'Apoya el peso en las manos y extiende completamente los codos.', 'Mantén la posición el mayor tiempo posible.', 'Asegúrate de mantener el cuerpo alineado y los músculos contraídos.', 'Baja controladamente para volver a la posición inicial.', 'Practica regularmente para mejorar la resistencia y estabilidad.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -584,7 +579,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Pseudo Planche Push-up',
       spanish: 'Flexión Pseudo Plancha'
     },
-    instructions: ['Comienza en posición de flexión con las manos colocadas más adelante de lo habitual.','Inclina el torso hacia adelante, llevando el peso hacia las manos y adelantando los hombros.','Desciende flexionando los codos mientras mantienes el cuerpo inclinado hacia adelante.','Empuja hacia arriba, manteniendo la posición de inclinación.','Asegúrate de mantener los codos cerca del cuerpo durante todo el movimiento.','Realiza el ejercicio controladamente para maximizar la activación de los músculos.','Completa las repeticiones deseadas.'],
+    instructions: ['Comienza en posición de flexión con las manos colocadas más adelante de lo habitual.', 'Inclina el torso hacia adelante, llevando el peso hacia las manos y adelantando los hombros.', 'Desciende flexionando los codos mientras mantienes el cuerpo inclinado hacia adelante.', 'Empuja hacia arriba, manteniendo la posición de inclinación.', 'Asegúrate de mantener los codos cerca del cuerpo durante todo el movimiento.', 'Realiza el ejercicio controladamente para maximizar la activación de los músculos.', 'Completa las repeticiones deseadas.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -598,7 +593,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Planche Push-up',
       spanish: 'Flexión Plancha'
     },
-    instructions: ['Comienza en posición de plancha con las manos colocadas más adelante de lo habitual.','Levanta las piernas del suelo, manteniendo el cuerpo en posición horizontal.','Desciende flexionando los codos mientras mantienes el cuerpo en posición de plancha.','Empuja hacia arriba, extendiendo completamente los codos.','Mantén el cuerpo alineado y los músculos contraídos durante todo el movimiento.','Realiza el ejercicio controladamente para maximizar la activación de los músculos.','Completa las repeticiones deseadas.'],
+    instructions: ['Comienza en posición de plancha con las manos colocadas más adelante de lo habitual.', 'Levanta las piernas del suelo, manteniendo el cuerpo en posición horizontal.', 'Desciende flexionando los codos mientras mantienes el cuerpo en posición de plancha.', 'Empuja hacia arriba, extendiendo completamente los codos.', 'Mantén el cuerpo alineado y los músculos contraídos durante todo el movimiento.', 'Realiza el ejercicio controladamente para maximizar la activación de los músculos.', 'Completa las repeticiones deseadas.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -612,7 +607,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'One Arm Chin Up',
       spanish: 'Dominada a una mano'
     },
-    instructions: ['Busca una barra de dominadas sólida y bien sujeta.','Agarra la barra con una sola mano, con la palma hacia ti.','Asegúrate de que el brazo esté completamente extendido.','Levanta el cuerpo hacia arriba utilizando solo el brazo que sostiene la barra.','Mantén el cuerpo alineado y evita balanceos.','Desciende controladamente para volver a la posición inicial.','Realiza el ejercicio en ambas manos para un desarrollo equilibrado.'],
+    instructions: ['Busca una barra de dominadas sólida y bien sujeta.', 'Agarra la barra con una sola mano, con la palma hacia ti.', 'Asegúrate de que el brazo esté completamente extendido.', 'Levanta el cuerpo hacia arriba utilizando solo el brazo que sostiene la barra.', 'Mantén el cuerpo alineado y evita balanceos.', 'Desciende controladamente para volver a la posición inicial.', 'Realiza el ejercicio en ambas manos para un desarrollo equilibrado.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -626,7 +621,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Assisted One Arm Pushup',
       spanish: 'Flexión a una mano asistida'
     },
-    instructions: ['Colócate en posición de flexión con las manos a la altura de los hombros.','Apoya una mano sobre una superficie elevada, como un bloque o banco.','Extiende la pierna del lado opuesto a la mano apoyada hacia atrás.','Desciende hacia abajo flexionando el codo de la mano libre.','Utiliza la pierna extendida para asistir en el movimiento.','Empuja hacia arriba, manteniendo el control con la pierna.','Alterna entre las manos para un desarrollo equitativo.','Realiza el ejercicio controladamente para maximizar la activación de los músculos.'],
+    instructions: ['Colócate en posición de flexión con las manos a la altura de los hombros.', 'Apoya una mano sobre una superficie elevada, como un bloque o banco.', 'Extiende la pierna del lado opuesto a la mano apoyada hacia atrás.', 'Desciende hacia abajo flexionando el codo de la mano libre.', 'Utiliza la pierna extendida para asistir en el movimiento.', 'Empuja hacia arriba, manteniendo el control con la pierna.', 'Alterna entre las manos para un desarrollo equitativo.', 'Realiza el ejercicio controladamente para maximizar la activación de los músculos.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -640,7 +635,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'One Arm Pushup',
       spanish: 'Flexión a una mano'
     },
-    instructions: ['Colócate en posición de flexión con las manos a la altura de los hombros.','Distribuye el peso hacia un lado y apoya una mano en la parte baja de la espalda.','Mantén el cuerpo recto y alineado durante todo el movimiento.','Desciende flexionando el codo de la mano libre hacia abajo.','Empuja hacia arriba, extendiendo completamente el codo.','Asegúrate de mantener la estabilidad y evitar balanceos.','Realiza el ejercicio en ambas manos para un desarrollo equilibrado.','Controla el movimiento para maximizar la activación muscular.'],
+    instructions: ['Colócate en posición de flexión con las manos a la altura de los hombros.', 'Distribuye el peso hacia un lado y apoya una mano en la parte baja de la espalda.', 'Mantén el cuerpo recto y alineado durante todo el movimiento.', 'Desciende flexionando el codo de la mano libre hacia abajo.', 'Empuja hacia arriba, extendiendo completamente el codo.', 'Asegúrate de mantener la estabilidad y evitar balanceos.', 'Realiza el ejercicio en ambas manos para un desarrollo equilibrado.', 'Controla el movimiento para maximizar la activación muscular.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -654,7 +649,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Feet Elevated One Arm Push up',
       spanish: 'Flexión a una mano con pies elevados'
     },
-    instructions: ['Coloca los pies en una superficie elevada, como un banco o una plataforma.','Adopta la posición de flexión con las manos a la altura de los hombros.','Distribuye el peso hacia un lado y apoya una mano en la parte baja de la espalda.','Mantén el cuerpo recto y alineado durante todo el movimiento.','Desciende flexionando el codo de la mano libre hacia abajo.','Utiliza la elevación de los pies para intensificar el ejercicio.','Empuja hacia arriba, extendiendo completamente el codo.','Asegúrate de mantener la estabilidad y evitar balanceos.','Realiza el ejercicio en ambas manos para un desarrollo equilibrado.','Controla el movimiento para maximizar la activación muscular.'],
+    instructions: ['Coloca los pies en una superficie elevada, como un banco o una plataforma.', 'Adopta la posición de flexión con las manos a la altura de los hombros.', 'Distribuye el peso hacia un lado y apoya una mano en la parte baja de la espalda.', 'Mantén el cuerpo recto y alineado durante todo el movimiento.', 'Desciende flexionando el codo de la mano libre hacia abajo.', 'Utiliza la elevación de los pies para intensificar el ejercicio.', 'Empuja hacia arriba, extendiendo completamente el codo.', 'Asegúrate de mantener la estabilidad y evitar balanceos.', 'Realiza el ejercicio en ambas manos para un desarrollo equilibrado.', 'Controla el movimiento para maximizar la activación muscular.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -668,7 +663,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'One Handed Clap Push Up',
       spanish: 'Flexión de Manos con Aplauso a una Sola Mano'
     },
-    instructions: ['Adopta la posición de flexión con las manos a la altura de los hombros.','Apoya una mano en la parte baja de la espalda, distribuyendo el peso hacia un lado.','Desciende flexionando el codo de la mano libre hacia abajo.','Impulsa el cuerpo hacia arriba con suficiente fuerza para realizar un aplauso con la mano libre.','Asegúrate de mantener el cuerpo recto y alineado durante todo el movimiento.','Controla el descenso para prepararte para el siguiente aplauso.','Realiza el ejercicio en ambas manos para un desarrollo equilibrado.'],
+    instructions: ['Adopta la posición de flexión con las manos a la altura de los hombros.', 'Apoya una mano en la parte baja de la espalda, distribuyendo el peso hacia un lado.', 'Desciende flexionando el codo de la mano libre hacia abajo.', 'Impulsa el cuerpo hacia arriba con suficiente fuerza para realizar un aplauso con la mano libre.', 'Asegúrate de mantener el cuerpo recto y alineado durante todo el movimiento.', 'Controla el descenso para prepararte para el siguiente aplauso.', 'Realiza el ejercicio en ambas manos para un desarrollo equilibrado.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO
@@ -682,7 +677,7 @@ export const exercises: ExerciseDescriptor[] = [
       english: 'Single Arm Elevated Push Up',
       spanish: 'Flexión de Brazo Único con Elevación'
     },
-    instructions: ['Coloca una mano en una superficie elevada, como un bloque o banco.','Adopta la posición de flexión con la mano restante a la altura del hombro.','Mantén el cuerpo recto y alineado durante todo el movimiento.','Desciende flexionando el codo de la mano en el suelo.','Asegúrate de mantener la estabilidad y evitar balanceos.','Empuja hacia arriba, extendiendo completamente el codo.','Utiliza la elevación para intensificar el ejercicio.','Realiza el ejercicio en ambas manos para un desarrollo equilibrado.','Controla el movimiento para maximizar la activación muscular.'],
+    instructions: ['Coloca una mano en una superficie elevada, como un bloque o banco.', 'Adopta la posición de flexión con la mano restante a la altura del hombro.', 'Mantén el cuerpo recto y alineado durante todo el movimiento.', 'Desciende flexionando el codo de la mano en el suelo.', 'Asegúrate de mantener la estabilidad y evitar balanceos.', 'Empuja hacia arriba, extendiendo completamente el codo.', 'Utiliza la elevación para intensificar el ejercicio.', 'Realiza el ejercicio en ambas manos para un desarrollo equilibrado.', 'Controla el movimiento para maximizar la activación muscular.'],
     level: Level.AVANZADO,
     muscleWorkZones: [
       // TODO

@@ -1,17 +1,17 @@
 import { Rate, Space, Tag } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
 import { useCallback, useEffect, useState } from 'react';
-import { Equipment, EquipmentType, ExerciseDescriptor, Modality, MuscleWorkZone, MuscleWorkZoneType } from "../types/exercises";
+import { Equipment, Equipment, ExerciseDescriptorType, Modality, MuscleWorkZone, MuscleWorkZone } from "../types/exercises";
 import { Level } from "../types/level";
 
 interface ExerciseDescriptorTableProps {
-  exercises: ExerciseDescriptor[]
+  exercises: ExerciseDescriptorType[]
 }
 
 export default function ExerciseDescriptorTable({ exercises }: ExerciseDescriptorTableProps) {
-  const [data, setData] = useState<ExerciseDescriptor[]>([])
+  const [data, setData] = useState<ExerciseDescriptorType[]>([])
 
-  const renderName = (name: ExerciseDescriptor['name']): string => {
+  const renderName = (name: ExerciseDescriptorType['name']): string => {
     let newName = `${name.english}`;
     if (name.spanish) {
       newName += ` (${name.spanish})`;
@@ -19,7 +19,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     return newName
   }
 
-  const columns: ColumnsType<ExerciseDescriptor> = [
+  const columns: ColumnsType<ExerciseDescriptorType> = [
     {
       title: "NAME",
       dataIndex: "name",
@@ -61,7 +61,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
         })),
       filterSearch: true,
       onFilter: (value, record) => {
-        return record.muscleWorkZones.includes(value.toString() as MuscleWorkZoneType)
+        return record.muscleWorkZones.includes(value.toString() as MuscleWorkZone)
       },
       render: (value) => renderWorkZones(value)
     },
@@ -77,7 +77,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
         })),
       filterSearch: true,
       onFilter: (value, record) => {
-        return record.equipment.includes(value.toString() as EquipmentType)
+        return record.equipment.includes(value.toString() as Equipment)
       },
       render: (value) => renderEquipment(value)
     },
@@ -118,7 +118,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     </div>
   }, [])
 
-  const renderWorkZones = (workZone: MuscleWorkZoneType[]) => {
+  const renderWorkZones = (workZone: MuscleWorkZone[]) => {
     return <Space size={[0, 'small']} wrap>
       {workZone.sort().map((zone, index) => (
         <Tag key={`${index}`}>{zone}</Tag>
@@ -126,7 +126,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     </Space>
   }
 
-  const renderEquipment = (equipments: EquipmentType[]) => {
+  const renderEquipment = (equipments: Equipment[]) => {
     return <ul className="list-disc pl-6">
       {equipments.map((equipment, index) => (
         <li key={`${index}`}>{equipment}</li>
