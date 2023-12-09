@@ -1,8 +1,8 @@
 import { Rate, Space, Tag } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
-import { Key, ReactElement, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Equipment, EquipmentType, ExerciseDescriptor, Modality, MuscleWorkZone, MuscleWorkZoneType } from "../types/exercises";
-import { Level } from "../types/training-plan";
+import { Level } from "../types/level";
 
 interface ExerciseDescriptorTableProps {
   exercises: ExerciseDescriptor[]

@@ -1,6 +1,6 @@
 import { Equipment as E, ExerciseDescriptor, Modality as M, MuscleWorkZone as Z } from "@/app/types/exercises";
 import { Optional, Recommended } from "@/app/types/global";
-import { Level } from "@/app/types/training-plan";
+import { Level } from "@/app/types/level";
 import { randomId } from "@/utils/random";
 
 export const exercises: ExerciseDescriptor[] = [
