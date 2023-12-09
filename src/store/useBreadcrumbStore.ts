@@ -1,7 +1,7 @@
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb"
 import { Draft } from "immer"
 import { Key } from "react"
-import { create } from 'zustand'
+import { StateCreator, create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
 interface BreadcrumbStore {
@@ -14,7 +14,7 @@ const findItemByKey = (items: ItemType[], key?: Key) => {
   return items.find(item => item.key === key)
 }
 
-export const useBreadcrumbStore = create<BreadcrumbStore, [["zustand/immer", never]]>(immer((set) => ({
+const state: StateCreator<BreadcrumbStore, [["zustand/immer", []]]> = (set) => ({
   items: [] as BreadcrumbStore['items'],
   addItem: (newItem) => set((state) => {
     if (findItemByKey(state.items, newItem.key)) return
@@ -29,4 +29,6 @@ export const useBreadcrumbStore = create<BreadcrumbStore, [["zustand/immer", nev
       state.items.splice(itemToDelete, 1);
     }
   })
-})))
+})
+
+export const useBreadcrumbStore = create<BreadcrumbStore, [["zustand/immer", []]]>(immer(state))

@@ -1,5 +1,5 @@
 'use client'
-import type { AMRAP, Bloque, Descanso, EMOM, Exercise, Fixed, Piramide, Range, Repeticion, Routine, Serie, Tempo, WithTime } from "@/app/types/training-plan";
+import type { Bloque, Exercise, Routine, Serie } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { renderTime } from "@/utils/render";
 import { Checkbox, Space, Table, Typography } from "antd";
@@ -7,6 +7,11 @@ import type { ColumnsType } from 'antd/es/table';
 import { ReactElement } from "react";
 import Countdown from "./Countdown";
 import Counter from "./Counter";
+import { AMRAP, EMOM, NEVER, OPTIONAL, Piramide, WithCadaLado, WithTime } from "../types/utilities";
+import { Range } from "../types/range";
+import { Descanso } from "../types/descanso";
+import { Tempo } from "../types/tempo";
+import { Repeticion } from "../types/reps";
 
 type BloqueExercise = {
   key: string;
@@ -76,12 +81,17 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     },
   ];
 
-  const renderRange = (R: Range | WithTime<Range>): string => {
+  const renderRange = (R: WithTime<Range<OPTIONAL>, OPTIONAL>): string => {
     let minString = R.range[0].toString()
-    let maxString = R.range[1].toString()
+    let maxString = R.range[1]?.toString()
     if (isRangeTime(R)) {
       minString = renderTime(R.range[0])
-      maxString = renderTime(R.range[1])
+      if (R.range.length === 2) {
+        maxString = renderTime(R.range[1])
+      }
+    }
+    if (R.range.length === 1) {
+      return minString
     }
     return `${minString} - ${maxString}`
   }
@@ -96,22 +106,22 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return !!(serie as EMOM).emom
   }
 
-  const isFixed = (item: unknown): item is Fixed => {
+  const isFixed = (item: unknown): item is Range<NEVER> => {
     if (typeof item !== 'object') return false;
-    return !!(item as Fixed).fixed
+    return (item as Range<NEVER>).range.length === 1
   }
 
-  const isFixedTime = (item: unknown): item is WithTime<Fixed> => {
+  const isFixedTime = (item: unknown): item is WithTime<Range<NEVER>> => {
     if (!isFixed(item)) return false;
-    return (item as WithTime<Fixed>).isTime
+    return (item as WithTime<Range<NEVER>>).isTime
   }
 
-  const isRange = (item: unknown): item is Range => {
+  const isRange = (item: unknown): item is Range<OPTIONAL> => {
     if (typeof item !== 'object') return false;
-    return !!(item as Range).range
+    return !!(item as Range<OPTIONAL>).range
   }
 
-  const isRangeTime = (item: unknown): item is WithTime<Range> => {
+  const isRangeTime = (item: unknown): item is WithTime<Range<OPTIONAL>> => {
     if (!isRange(item)) return false;
     return (item as WithTime<Range>).isTime
   }
@@ -120,14 +130,12 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     if (isAMRAP(serie)) return <p className="text-lg">{serie.amrap}&apos; AMRAP</p>
     if (isEMOM(serie)) return <p className="text-lg">{serie.emom}&apos; EMOM</p>
     if (isRange(serie) || isFixed(serie)) {
-      const series = isRange(serie)
-        ? renderRange(serie)
-        : serie.fixed
+      const series = renderRange(serie)
       return (
         <div className="flex flex-col gap-3">
           <p className="text-lg">{series}</p>
           <p><strong><em>Finalizadas</em></strong></p>
-          <Counter max={isRange(serie) ? serie.range[1] : serie.fixed} />
+          <Counter max={serie.range[serie.range.length - 1]} />
         </div>
       )
     }
@@ -142,7 +150,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       </>
     )
     if (isFixedTime(descanso)) return (
-      <Countdown defaultValue={descanso.fixed} />
+      <Countdown defaultValue={descanso.range[0]} />
     )
     return (
       <>
@@ -158,8 +166,12 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return tempo;
   }
 
-  const isPiramide = (reps: Repeticion): reps is Piramide => {
+  const isPiramide = (reps: unknown): reps is Piramide => {
     return !!(reps as Piramide).piramide
+  }
+
+  const isCadaLado = (reps: unknown): reps is WithCadaLado<object> => {
+    return !!(reps as WithCadaLado<object>).cadaLado
   }
 
   const renderRepes = (reps: Repeticion): string => {
@@ -173,11 +185,9 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       let res = ''
       if (isRange(reps)) {
         res = renderRange(reps)
-      } else {
-        res = reps.fixed.toString()
-      }
-      if (reps.cadaLado) {
-        res += ' (c/lado)'
+        if (isCadaLado(reps)) {
+          res += ' (c/lado)'
+        }
       }
       return res
     }

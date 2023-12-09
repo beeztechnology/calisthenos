@@ -1,13 +1,14 @@
 import { TrainingPlan } from "@/app/types/training-plan"
+import { Draft } from "immer"
 import { StateCreator, create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
 type TrainingPlanStore = {
   trainingPlans: Record<TrainingPlan['slug'], TrainingPlan>
   currentTrainingPlan: TrainingPlan['slug'] | null
-  setTrainingPlan: (newPlan: TrainingPlan) => void
-  setCurrent: (slug: TrainingPlanStore['currentTrainingPlan']) => void
-  hasTrainingPlan: (slug: string) => boolean
+  setTrainingPlan: (newPlan: Draft<TrainingPlan>) => void
+  setCurrent: (slug: Draft<TrainingPlanStore['currentTrainingPlan']>) => void
+  hasTrainingPlan: (slug: Draft<string>) => boolean
   getCurrentTrainingPlan: () => TrainingPlan | null
 }
 
@@ -21,7 +22,7 @@ const state: StateCreator<TrainingPlanStore, [["zustand/immer", []]]> = (set, ge
   setCurrent: (slug) => set((state) => {
     state.currentTrainingPlan = slug;
   }),
-  hasTrainingPlan: (slug: string) => {
+  hasTrainingPlan: (slug) => {
     return !!get().trainingPlans[slug]
   },
   getCurrentTrainingPlan: () => {

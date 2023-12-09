@@ -1,5 +1,5 @@
-import { Level } from "./training-plan";
-import { Optional, OptionalType, RecommendedType } from './global';
+import { OptionalType, RecommendedType } from './global';
+import { Level } from "./level";
 
 export const MuscleWorkZone = {
   BICEPS: 'Biceps',

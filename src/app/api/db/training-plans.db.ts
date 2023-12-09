@@ -1,6 +1,9 @@
-import { Autodefinido, Level, type TrainingPlan } from "@/app/types/training-plan";
+import type { TrainingPlan } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
+import { Level } from "@/app/types/level";
+import { Tempo } from "@/app/types/tempo";
+import { AUTODEFINIDO } from "@/app/types/utilities";
 
 const sinEquipamiento: TrainingPlan = {
   slug: SIN_EQUIPAMIENTO,
@@ -95,11 +98,11 @@ const sinEquipamiento: TrainingPlan = {
                 repes: {
                   range: [2, 4]
                 },
-                tempo: 'Rápido'
+                tempo: Tempo.RAPIDO
               }
             ],
             descanso: {
-              fixed: 300,
+              range: [300],
               isTime: true
             }
           },
@@ -127,7 +130,7 @@ const sinEquipamiento: TrainingPlan = {
               }
             ],
             descanso: {
-              fixed: 240,
+              range: [240],
               isTime: true
             }
           },
@@ -155,7 +158,7 @@ const sinEquipamiento: TrainingPlan = {
               }
             ],
             descanso: {
-              fixed: 180,
+              range: [180],
               isTime: true
             }
           },
@@ -174,7 +177,7 @@ const sinEquipamiento: TrainingPlan = {
               }
             ],
             descanso: {
-              fixed: 120,
+              range: [120],
               isTime: true
             }
           },
@@ -204,7 +207,7 @@ const sinEquipamiento: TrainingPlan = {
               }
             ],
             descanso: {
-              fixed: 90,
+              range: [90],
               isTime: true
             }
           }
@@ -230,7 +233,7 @@ const sinEquipamiento: TrainingPlan = {
               },
             ],
             descanso: {
-              fixed: 300,
+              range: [300],
               isTime: true
             }
           },
@@ -245,7 +248,7 @@ const sinEquipamiento: TrainingPlan = {
                 tempo: '30X1'
               }
             ],
-            descanso: { fixed: 180, isTime: true }
+            descanso: { range: [180], isTime: true }
           },
           {
             id: randomId(),
@@ -264,7 +267,7 @@ const sinEquipamiento: TrainingPlan = {
                 tempo: '30X1'
               }
             ],
-            descanso: { fixed: 180, isTime: true }
+            descanso: { range: [180], isTime: true }
           },
           {
             id: randomId(),
@@ -278,7 +281,7 @@ const sinEquipamiento: TrainingPlan = {
               }
             ],
             descanso: {
-              fixed: 120,
+              range: [120],
               isTime: true
             }
           },
@@ -294,7 +297,7 @@ const sinEquipamiento: TrainingPlan = {
               }
             ],
             descanso: {
-              fixed: 120,
+              range: [120],
               isTime: true
             }
           }
@@ -317,11 +320,11 @@ const sinEquipamiento: TrainingPlan = {
               {
                 name: 'Burpees',
                 repes: {
-                  fixed: 8
+                  range: [8]
                 }
               }
             ],
-            descanso: Autodefinido
+            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
@@ -338,7 +341,7 @@ const sinEquipamiento: TrainingPlan = {
                 repes: { range: [5, 15] }
               }
             ],
-            descanso: Autodefinido
+            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
@@ -354,7 +357,7 @@ const sinEquipamiento: TrainingPlan = {
                 repes: { range: [8, 15], cadaLado: true }
               }
             ],
-            descanso: Autodefinido
+            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
@@ -365,7 +368,7 @@ const sinEquipamiento: TrainingPlan = {
                 repes: { range: [10, 20] }
               }
             ],
-            descanso: Autodefinido
+            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
@@ -380,7 +383,7 @@ const sinEquipamiento: TrainingPlan = {
                 repes: { range: [10, 30], isTime: true }
               }
             ],
-            descanso: Autodefinido
+            descanso: AUTODEFINIDO
           }
         ]
       ],
