@@ -146,7 +146,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     if (isRangeTime(descanso)) return (
       <>
         {renderRange(descanso)}
-        <Countdown defaultValue={descanso.range[1]} />
+        <Countdown defaultValue={descanso.range[1] ?? descanso.range[0]} />
       </>
     )
     if (isFixedTime(descanso)) return (
