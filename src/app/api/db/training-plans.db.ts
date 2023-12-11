@@ -3,7 +3,7 @@ import { randomId } from "@/utils/random";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
 import { Level } from "@/app/types/level";
 import { Tempo } from "@/app/types/tempo";
-import { AUTODEFINIDO } from "@/app/types/utilities";
+import { AUTODEFINIDO, MAXIMO } from "@/app/types/utilities";
 
 const sinEquipamiento: TrainingPlan = {
   slug: SIN_EQUIPAMIENTO,
@@ -310,7 +310,79 @@ const sinEquipamiento: TrainingPlan = {
       id: randomId(),
       level: Level.EXPERTO,
       routine: [
-        [],
+        [
+          {
+            id: randomId(),
+            series: { range: [1] },
+            ejercicios: [
+              {
+                name: 'Dominadas Pronas',
+                intensidad: 'Piramidal',
+                repes: {
+                  piramide: [2, 4, 6, 8, 6, 4, 2]
+                }
+              }
+            ],
+            descanso: AUTODEFINIDO
+          },
+          {
+            id: randomId(),
+            series: { amrap: 15 },
+            ejercicios: [
+              {
+                name: 'Muscle Up',
+                repes: { range: [3, 6] }
+              }
+            ],
+            descanso: AUTODEFINIDO
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            ejercicios: [
+              {
+                name: 'Dominadas Comando',
+                repes: { range: [4, 8], cadaLado: true }
+              },
+              {
+                name: 'Fondos',
+                repes: { range: [10, 20] }
+              }
+            ],
+            descanso: AUTODEFINIDO
+          },
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            ejercicios: [
+              {
+                name: 'Remos en L',
+                repes: { range: [6, 12] }
+              },
+              {
+                name: 'Flexiones de Brazos',
+                intensidad: 'Déficit',
+                repes: { range: [8, 15] }
+              }
+            ],
+            descanso: AUTODEFINIDO
+          },
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            ejercicios: [
+              {
+                name: 'Pies a barra',
+                repes: { range: [6, 12] }
+              },
+              {
+                name: 'Flexiones Diamante',
+                repes: MAXIMO
+              }
+            ],
+            descanso: AUTODEFINIDO
+          }
+        ],
         [],
         [
           {
