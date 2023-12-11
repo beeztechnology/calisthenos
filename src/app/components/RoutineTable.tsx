@@ -175,7 +175,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     if (isPiramide(reps)) {
       return reps.piramide.reduce((prev, curr, index) => {
         if (index === 0) return `${curr}`
-        return `${prev}+${curr}`
+        return `${prev} + ${curr}`
       }, '')
     }
     if (isRange(reps) || isFixed(reps)) {
