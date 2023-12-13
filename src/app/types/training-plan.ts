@@ -7,7 +7,7 @@ import { AMRAP, AUTODEFINIDO, EMOM, NEVER, OPTIONAL } from "./utilities";
 
 export type Serie = Range<OPTIONAL> | AMRAP | EMOM | typeof AUTODEFINIDO;
 
-export interface Exercise {
+export interface IExercise {
   name: string;
   description?: string;
   intensidad?: string;
@@ -15,16 +15,16 @@ export interface Exercise {
   tempo?: Tempo;
 }
 
-export interface Bloque {
+export interface IBloque {
   id: string;
   description?: string;
   series: Serie;
-  ejercicios: Exercise[];
+  ejercicios: IExercise[];
   descanso: Descanso;
   restExercises?: Descanso
 }
 
-export type Routine = Bloque[];
+export type Routine = IBloque[];
 
 export interface Planificacion {
   id: string;

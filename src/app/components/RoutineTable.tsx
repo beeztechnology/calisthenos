@@ -1,5 +1,5 @@
 'use client'
-import type { Bloque, Exercise, Routine, Serie } from "@/app/types/training-plan";
+import type { IBloque, IExercise, Routine, Serie } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { renderTime } from "@/utils/render";
 import { Checkbox, Space, Table, Typography } from "antd";
@@ -18,7 +18,7 @@ type BloqueExercise = {
   bloque: Element | ReactElement | string;
   ejercicio: string;
   rowSpan: number;
-} & Pick<Exercise, 'intensidad' | 'tempo' | 'repes'> & Pick<Bloque, 'series' | 'descanso'>
+} & Pick<IExercise, 'intensidad' | 'tempo' | 'repes'> & Pick<IBloque, 'series' | 'descanso'>
 
 interface RoutingTableProps {
   routine: Routine;
@@ -146,7 +146,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     if (isRangeTime(descanso)) return (
       <>
         {renderRange(descanso)}
-        <Countdown defaultValue={descanso.range[1]} />
+        <Countdown defaultValue={descanso.range[0] ?? descanso.range[1]} />
       </>
     )
     if (isFixedTime(descanso)) return (
