@@ -38,16 +38,16 @@ export default function Countdown({ defaultValue = 210 }: CountdownProps) {
   const incDecValue = 30
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    let timeoutId: NodeJS.Timeout;
     if (value === 0) {
       setStarted(false)
     }
     if (started && value > 0) {
-      intervalId = setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setValue(value - 1)
       }, 1000);
     }
-    return () => clearTimeout(intervalId)
+    return () => clearTimeout(timeoutId)
   }, [started, value, setValue])
 
   return (

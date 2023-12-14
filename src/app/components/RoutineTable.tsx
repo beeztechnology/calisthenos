@@ -145,12 +145,9 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
   const renderDescanso = (descanso: Descanso): string | ReactElement => {
     if (isRangeTime(descanso)) return (
       <>
-        {renderRange(descanso)}
-        <Countdown defaultValue={descanso.range[0] ?? descanso.range[1]} />
+        {!!descanso.range[1] && renderRange(descanso)}
+        <Countdown defaultValue={descanso.range[1] ?? descanso.range[0]} />
       </>
-    )
-    if (isFixedTime(descanso)) return (
-      <Countdown defaultValue={descanso.range[0]} />
     )
     return (
       <>
@@ -178,7 +175,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     if (isPiramide(reps)) {
       return reps.piramide.reduce((prev, curr, index) => {
         if (index === 0) return `${curr}`
-        return `${prev}+${curr}`
+        return `${prev} + ${curr}`
       }, '')
     }
     if (isRange(reps) || isFixed(reps)) {
