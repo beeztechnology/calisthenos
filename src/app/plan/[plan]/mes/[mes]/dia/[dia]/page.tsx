@@ -1,5 +1,5 @@
 'use client'
-import RoutineTable from "@/app/components/RoutineTable";
+import RoutineTable from "@/app/components/RoutingTable";
 import { Routine } from "@/app/types/training-plan";
 import useTrainingPlan from "@/hooks/useTrainingPlan";
 import { useEffect, useState } from "react";

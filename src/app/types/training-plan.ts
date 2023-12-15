@@ -5,7 +5,7 @@ import { Repeticion } from "./reps";
 import { Tempo } from "./tempo";
 import { AMRAP, AUTODEFINIDO, EMOM, NEVER, OPTIONAL } from "./utilities";
 
-export type Serie = Range<OPTIONAL> | AMRAP | EMOM | typeof AUTODEFINIDO;
+export type ISerie = Range<OPTIONAL> | AMRAP | EMOM | typeof AUTODEFINIDO;
 
 export interface IExercise {
   name: string;
@@ -18,7 +18,7 @@ export interface IExercise {
 export interface IBloque {
   id: string;
   description?: string;
-  series: Serie;
+  series: ISerie;
   ejercicios: IExercise[];
   descanso: Descanso;
   restExercises?: Descanso

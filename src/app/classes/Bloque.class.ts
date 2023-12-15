@@ -1,17 +1,17 @@
 import { randomId } from "@/utils/random";
 import { Descanso } from "../types/descanso";
-import { IBloque, IExercise, Serie } from "../types/training-plan";
+import { IBloque, IExercise, ISerie } from "../types/training-plan";
 import { AUTODEFINIDO } from "../types/utilities";
 
 export class Bloque implements IBloque {
   private _id: string;
-  private _series: Serie;
+  private _series: ISerie;
   private _ejercicios: IExercise[];
   private _descanso: Descanso;
   private _description?: string | undefined;
   private _restExercises?: Descanso | undefined;
 
-  constructor(series: Serie, ejercicios: IExercise[], descanso: Descanso = AUTODEFINIDO, description?: string, restExercises?: Descanso) {
+  constructor(series: ISerie, ejercicios: IExercise[], descanso: Descanso = AUTODEFINIDO, description?: string, restExercises?: Descanso) {
     this._id = randomId();
     this._series = series;
     this._ejercicios = ejercicios;

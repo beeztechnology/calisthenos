@@ -1,18 +1,18 @@
 'use client'
-import type { IBloque, IExercise, Routine, Serie } from "@/app/types/training-plan";
+import type { IBloque, IExercise, Routine, ISerie } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { renderTime } from "@/utils/render";
-import { Space, Table, TableColumnsType } from "antd";
+import { Badge, Space, Table, TableColumnsType } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import { ExpandableConfig } from "antd/es/table/interface";
-import { Key, ReactElement } from "react";
-import { Descanso } from "../types/descanso";
-import { Range } from "../types/range";
-import { Repeticion } from "../types/reps";
-import { Tempo } from "../types/tempo";
-import { AMRAP, EMOM, NEVER, OPTIONAL, Piramide, WithCadaLado, WithTime } from "../types/utilities";
-import Countdown from "./Countdown";
-import Counter from "./Counter";
+import { Key, ReactElement, useState } from "react";
+import { Descanso } from "../../types/descanso";
+import { Range } from "../../types/range";
+import { Repeticion } from "../../types/reps";
+import { AMRAP, EMOM, OPTIONAL, WithTime } from "../../types/utilities";
+import Countdown from "../Countdown";
+import Counter from "../Counter";
+import { isCadaLado, isFixed, isPiramide, isRange, isRangeTime } from "./isType";
 
 type RowExercise = Pick<IExercise, 'intensidad' | 'tempo' | 'repes'> & {
   key: Key,
@@ -24,6 +24,56 @@ type RowBloque = {
   bloque: Element | ReactElement | string;
   exercises: RowExercise[];
 } & Pick<IBloque, 'series' | 'descanso'>
+
+const renderRange = (R: WithTime<Range<OPTIONAL>, OPTIONAL>): string => {
+  let minString = R.range[0].toString()
+  let maxString = R.range[1]?.toString()
+  if (isRangeTime(R)) {
+    minString = renderTime(R.range[0])
+    if (R.range.length === 2) {
+      maxString = renderTime(R.range[1])
+    }
+  }
+  if (R.range.length === 1) {
+    return minString
+  }
+  return `${minString} - ${maxString}`
+}
+
+const Serie = ({ serie }: { serie: ISerie }) => {
+  const [serieValue, setSerie] = useState(0);
+
+  const isAMRAP = (serie: ISerie): serie is AMRAP => {
+    if (typeof serie !== 'object') return false;
+    return !!(serie as AMRAP).amrap
+  }
+
+  const isEMOM = (serie: ISerie): serie is EMOM => {
+    if (typeof serie !== 'object') return false;
+    return !!(serie as EMOM).emom
+  }
+
+  if (isAMRAP(serie)) return <p className="text-lg">{serie.amrap}&apos; AMRAP</p>
+  if (isEMOM(serie)) return <p className="text-lg">{serie.emom}&apos; EMOM</p>
+  if (isRange(serie) || isFixed(serie)) {
+    const series = renderRange(serie)
+    const max = serie.range[serie.range.length - 1];
+    return (
+      <div className="flex flex-col gap-3 items-center">
+        <p className="text-lg">{series}</p>
+        {serieValue === max
+          ? <Badge status="success" text="Finalizado" />
+          : <Badge status="processing" text="En progreso" />
+        }
+        <Counter
+          max={max}
+          onChange={(value) => { setSerie(value) }}
+        />
+      </div>
+    )
+  }
+  return serie
+}
 
 interface RoutingTableProps {
   routine: Routine;
@@ -46,7 +96,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       title: "SERIES",
       dataIndex: "series",
       align: 'center',
-      render: (value) => renderSeries(value)
+      render: (value) => <Serie serie={value} />
     },
     {
       title: "DESCANSO",
@@ -55,67 +105,6 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       render: (value) => renderDescanso(value)
     },
   ];
-
-  const renderRange = (R: WithTime<Range<OPTIONAL>, OPTIONAL>): string => {
-    let minString = R.range[0].toString()
-    let maxString = R.range[1]?.toString()
-    if (isRangeTime(R)) {
-      minString = renderTime(R.range[0])
-      if (R.range.length === 2) {
-        maxString = renderTime(R.range[1])
-      }
-    }
-    if (R.range.length === 1) {
-      return minString
-    }
-    return `${minString} - ${maxString}`
-  }
-
-  const isAMRAP = (serie: Serie): serie is AMRAP => {
-    if (typeof serie !== 'object') return false;
-    return !!(serie as AMRAP).amrap
-  }
-
-  const isEMOM = (serie: Serie): serie is EMOM => {
-    if (typeof serie !== 'object') return false;
-    return !!(serie as EMOM).emom
-  }
-
-  const isFixed = (item: unknown): item is Range<NEVER> => {
-    if (typeof item !== 'object') return false;
-    return (item as Range<NEVER>).range.length === 1
-  }
-
-  const isFixedTime = (item: unknown): item is WithTime<Range<NEVER>> => {
-    if (!isFixed(item)) return false;
-    return (item as WithTime<Range<NEVER>>).isTime
-  }
-
-  const isRange = (item: unknown): item is Range<OPTIONAL> => {
-    if (typeof item !== 'object') return false;
-    return !!(item as Range<OPTIONAL>).range
-  }
-
-  const isRangeTime = (item: unknown): item is WithTime<Range<OPTIONAL>> => {
-    if (!isRange(item)) return false;
-    return (item as WithTime<Range>).isTime
-  }
-
-  const renderSeries = (serie: Serie): string | ReactElement => {
-    if (isAMRAP(serie)) return <p className="text-lg">{serie.amrap}&apos; AMRAP</p>
-    if (isEMOM(serie)) return <p className="text-lg">{serie.emom}&apos; EMOM</p>
-    if (isRange(serie) || isFixed(serie)) {
-      const series = renderRange(serie)
-      return (
-        <div className="flex flex-col gap-3">
-          <p className="text-lg">{series}</p>
-          <p><strong><em>Finalizadas</em></strong></p>
-          <Counter max={serie.range[serie.range.length - 1]} />
-        </div>
-      )
-    }
-    return serie
-  }
 
   const renderDescanso = (descanso: Descanso): string | ReactElement => {
     if (isRangeTime(descanso)) return (
@@ -130,20 +119,6 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
         <Countdown />
       </>
     )
-  }
-
-  const renderTempo = (tempo?: Tempo): string => {
-    if (!tempo) return Tempo.UNDEFINED
-    if (isRange(tempo)) return renderRange(tempo)
-    return tempo;
-  }
-
-  const isPiramide = (reps: unknown): reps is Piramide => {
-    return !!(reps as Piramide).piramide
-  }
-
-  const isCadaLado = (reps: unknown): reps is WithCadaLado<object> => {
-    return !!(reps as WithCadaLado<object>).cadaLado
   }
 
   const renderRepes = (reps: Repeticion): string => {
@@ -169,18 +144,6 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
 
   const getBloqueId = (number: number) => {
     return String.fromCharCode(97 + number).toUpperCase()
-  }
-
-  const getRowSpan = (exercisesSize: number, exercise_index: number) => {
-    let rowSpan = 1;
-    if (exercisesSize > 1) {
-      if (exercise_index === 0) {
-        rowSpan = exercisesSize;
-      } else {
-        rowSpan = 0;
-      }
-    }
-    return rowSpan;
   }
 
   const data: RowBloque[] = [];

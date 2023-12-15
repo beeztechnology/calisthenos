@@ -5,9 +5,10 @@ import MyImage from "./MyImage";
 
 interface CountdownProps {
   defaultValue?: number;
+  max?: number;
 }
 
-function useValue(defaultValue: number) {
+function useValue(defaultValue: number, max: number) {
   const [value, setValue] = useState(defaultValue)
 
   const increment = (valueToincrement: number) => {
@@ -19,7 +20,7 @@ function useValue(defaultValue: number) {
   }
 
   const setNewValue = (newValue: number) => {
-    if (newValue >= 0 && newValue <= 300) {
+    if (newValue >= 0 && newValue <= max) {
       setValue(newValue)
     }
   }
@@ -32,14 +33,14 @@ function useValue(defaultValue: number) {
   }
 }
 
-export default function Countdown({ defaultValue = 210 }: CountdownProps) {
-  const { value, increment, decrement, setValue } = useValue(defaultValue)
+export default function Countdown({ defaultValue = 210, max = 300 }: CountdownProps) {
+  const { value, increment, decrement, setValue } = useValue(defaultValue, max)
   const [started, setStarted] = useState(false)
   const incDecValue = 30
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-    if (value === 0) {
+    if (value <= 0) {
       setStarted(false)
     }
     if (started && value > 0) {
@@ -70,15 +71,15 @@ export default function Countdown({ defaultValue = 210 }: CountdownProps) {
 
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 justify-center">
-          <Button onClick={() => decrement(incDecValue)}>
+          <Button disabled={value <= 0} onClick={() => decrement(incDecValue)}>
             -{incDecValue}s
           </Button>
-          <Button onClick={() => increment(incDecValue)}>
+          <Button disabled={value >= max} onClick={() => increment(incDecValue)}>
             +{incDecValue}s
           </Button>
         </div>
         <div className="flex gap-2 justify-center">
-          <Button onClick={play}>
+          <Button disabled={value <= 0} onClick={play}>
             <MyImage src="/play.svg" alt="play icon" />
           </Button>
           <Button onClick={stop}>
