@@ -1,13 +1,13 @@
 'use client'
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import React from "react";
-import { Planificacion } from "../types/training-plan";
+import { IPlanificacion } from "../types/training-plan";
 import H3 from "./Atom/H3";
 import { PlanificationList } from "./PlanificationList";
 import { Level } from "../types/level";
 
 interface PlanificationContentProps {
-  planificacion?: Planificacion[];
+  planificacion?: IPlanificacion[];
 }
 
 export default function PlanificationContent({ planificacion = [] }: PlanificationContentProps) {

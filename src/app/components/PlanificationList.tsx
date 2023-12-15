@@ -1,17 +1,17 @@
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { Planificacion } from "../types/training-plan";
+import { IPlanificacion } from "../types/training-plan";
 import Link from "next/link";
 
 interface PlanificationListProps {
-  list: Planificacion[];
+  list: IPlanificacion[];
   label: string;
 }
 
 export function PlanificationList({ list, label }: PlanificationListProps) {
   const currentPathname = usePathname()
 
-  const getPath = ({ link, month }: Planificacion) => {
+  const getPath = ({ link, month }: IPlanificacion) => {
     if (link.length > 0) {
       return currentPathname + link;
     }

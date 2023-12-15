@@ -26,7 +26,7 @@ export interface IBloque {
 
 export type Routine = IBloque[];
 
-export interface Planificacion {
+export interface IPlanificacion {
   id: string;
   month: number;
   link: string;
@@ -34,9 +34,9 @@ export interface Planificacion {
   routine: Routine[];
 }
 
-export interface TrainingPlan {
+export interface ITrainPlan {
   title: string;
   slug: string;
   description: string;
-  planificacion: Planificacion[]
+  planificacion: IPlanificacion[]
 }

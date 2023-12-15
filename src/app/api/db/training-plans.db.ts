@@ -1,11 +1,11 @@
-import type { TrainingPlan } from "@/app/types/training-plan";
+import type { ITrainPlan } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { SIN_EQUIPAMIENTO } from "./constants.db";
 import { Level } from "@/app/types/level";
 import { Tempo } from "@/app/types/tempo";
 import { AUTODEFINIDO, MAXIMO } from "@/app/types/utilities";
 
-const sinEquipamiento: TrainingPlan = {
+const sinEquipamiento: ITrainPlan = {
   slug: SIN_EQUIPAMIENTO,
   title: 'Sin equipamiento',
   description: '¿Querés entrenar en casa? ¿Sin equipamiento (o con mínimo)? ¿Nunca antes entrenaste con tu propio peso corporal? En ese caso, estás en la sección adecuada. Aquí te proponemos el apartado teórico de la sección “Sin Equipamiento” con todo lo que deberías saber y aprender antes de empezar a entrenar en casa. Procurá dedicar el tiempo necesario (será poco, no te preocupes), porque una vez que incorpores estos conocimientos, podrás sacarle el máximo provecho no solo a esta planificación de entrenamiento, sino al resto de los contenidos en la Plataforma.',
@@ -462,6 +462,6 @@ const sinEquipamiento: TrainingPlan = {
     },
   ]
 }
-export const trainingPlans: TrainingPlan[] = [
+export const trainingPlans: ITrainPlan[] = [
   sinEquipamiento
 ]
