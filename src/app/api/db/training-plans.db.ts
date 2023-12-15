@@ -92,6 +92,10 @@ const sinEquipamiento: ITrainPlan = {
             series: {
               range: [2, 4]
             },
+            descanso: {
+              range: [300],
+              isTime: true
+            },
             ejercicios: [
               {
                 name: 'Muscle up',
@@ -101,15 +105,15 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: Tempo.RAPIDO
               }
             ],
-            descanso: {
-              range: [300],
-              isTime: true
-            }
           },
           {
             id: randomId(),
             series: {
               range: [3, 5]
+            },
+            descanso: {
+              range: [240],
+              isTime: true
             },
             ejercicios: [
               {
@@ -129,15 +133,15 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: 'Explosivo'
               }
             ],
-            descanso: {
-              range: [240],
-              isTime: true
-            }
           },
           {
             id: randomId(),
             series: {
               range: [2, 4],
+            },
+            descanso: {
+              range: [180],
+              isTime: true
             },
             ejercicios: [
               {
@@ -157,15 +161,15 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: "30X1"
               }
             ],
-            descanso: {
-              range: [180],
-              isTime: true
-            }
           },
           {
             id: randomId(),
             series: {
               range: [2, 4]
+            },
+            descanso: {
+              range: [120],
+              isTime: true
             },
             ejercicios: [
               {
@@ -176,15 +180,15 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: "30X1"
               }
             ],
-            descanso: {
-              range: [120],
-              isTime: true
-            }
           },
           {
             id: randomId(),
             series: {
               range: [3, 5]
+            },
+            descanso: {
+              range: [90],
+              isTime: true
             },
             ejercicios: [
               {
@@ -206,16 +210,16 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: 'Isométrico'
               }
             ],
-            descanso: {
-              range: [90],
-              isTime: true
-            }
           }
         ],
         [
           {
             id: randomId(),
             series: { range: [3, 5] },
+            descanso: {
+              range: [300],
+              isTime: true
+            },
             ejercicios: [
               {
                 name: 'Sentadilla a una pierna + Cosaca',
@@ -232,14 +236,11 @@ const sinEquipamiento: ITrainPlan = {
                 }
               },
             ],
-            descanso: {
-              range: [300],
-              isTime: true
-            }
           },
           {
             id: randomId(),
             series: { range: [2, 4] },
+            descanso: { range: [180], isTime: true },
             ejercicios: [
               {
                 name: 'Aducción de Copenhague',
@@ -248,11 +249,11 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: '30X1'
               }
             ],
-            descanso: { range: [180], isTime: true }
           },
           {
             id: randomId(),
             series: { range: [2, 4] },
+            descanso: { range: [180], isTime: true },
             ejercicios: [
               {
                 name: 'Sentadillas Gironda',
@@ -267,11 +268,14 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: '30X1'
               }
             ],
-            descanso: { range: [180], isTime: true }
           },
           {
             id: randomId(),
             series: { range: [2, 4] },
+            descanso: {
+              range: [120],
+              isTime: true
+            },
             ejercicios: [
               {
                 name: 'Paseo Lateral',
@@ -280,14 +284,14 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: 'Controlado'
               }
             ],
-            descanso: {
-              range: [120],
-              isTime: true
-            }
           },
           {
             id: randomId(),
             series: { range: [1, 3] },
+            descanso: {
+              range: [120],
+              isTime: true
+            },
             ejercicios: [
               {
                 name: 'Elevaciones de Tibia',
@@ -296,11 +300,107 @@ const sinEquipamiento: ITrainPlan = {
                 tempo: '40X1'
               }
             ],
-            descanso: {
-              range: [120],
-              isTime: true
-            }
           }
+        ],
+        [
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            descanso: { range: [300], isTime: true },
+            description: 'Durante este mes realizaremos Muscle Ups dos veces por semana, aumentando la frecuencia y así poder progresar más rápido en el ejercicio por excelencia dentro del mundo de la Calistenia.',
+            ejercicios: [
+              {
+                name: 'Muscle up',
+                repes: { range: [2, 4] },
+                tempo: Tempo.RAPIDO
+              }
+            ],
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            descanso: { range: [240], isTime: true },
+            ejercicios: [
+              {
+                name: 'Flexiones',
+                intensidad: 'Handstand',
+                repes: { range: [3, 8] },
+                tempo: "30X1"
+              },
+              {
+                name: 'Front Lever',
+                intensidad: 'Elevaciones',
+                repes: { range: [3, 5] },
+                tempo: Tempo.CONTROLADO
+              }
+            ]
+          },
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            descanso: { range: [180], isTime: true },
+            ejercicios: [
+              {
+                name: 'Fondos arqueros',
+                intensidad: 'Paralelas',
+                repes: { range: [3, 5] },
+                tempo: "30X1"
+              },
+              {
+                name: 'Dominadas',
+                intensidad: 'Toalla',
+                repes: { range: [5, 10] },
+                tempo: "30X1"
+              }
+            ]
+          },
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            descanso: { range: [120], isTime: true },
+            ejercicios: [
+              {
+                name: 'Face Pull',
+                repes: { range: [10, 20] },
+                tempo: "30X2"
+              }
+            ]
+          },
+          {
+            id: randomId(),
+            series: { range: [2, 4] },
+            descanso: { range: [120], isTime: true },
+            ejercicios: [
+              {
+                name: 'Flexiones Diamante',
+                repes: { range: [10, 20] },
+                tempo: "30X0"
+              },
+              {
+                name: 'Cuelgue supino',
+                intensidad: '90°',
+                repes: { range: [10, 30], isTime: true },
+                tempo: Tempo.ISOMETRICO
+              },
+            ]
+          },
+        ],
+        [
+          {
+            id: randomId(),
+            series: { range: [3, 5] },
+            descanso: { range: [180], isTime: true },
+            ejercicios: [
+              {
+                name: 'Sentadilla Camarón',
+                intensidad: 'Libre / Asistida',
+                repes: { range: [5, 10] },
+                tempo: "30X0"
+              },
+              // TODO
+            ]
+          },
+          // TODO
         ]
       ]
     },
@@ -314,6 +414,7 @@ const sinEquipamiento: ITrainPlan = {
           {
             id: randomId(),
             series: { range: [1] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Dominadas Pronas',
@@ -323,22 +424,22 @@ const sinEquipamiento: ITrainPlan = {
                 }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { amrap: 15 },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Muscle Up',
                 repes: { range: [3, 6] }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [2, 4] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Dominadas Comando',
@@ -349,11 +450,11 @@ const sinEquipamiento: ITrainPlan = {
                 repes: { range: [10, 20] }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [3, 5] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Remos en L',
@@ -365,11 +466,11 @@ const sinEquipamiento: ITrainPlan = {
                 repes: { range: [8, 15] }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [3, 5] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Pies a barra',
@@ -380,7 +481,6 @@ const sinEquipamiento: ITrainPlan = {
                 repes: MAXIMO
               }
             ],
-            descanso: AUTODEFINIDO
           }
         ],
         [],
@@ -388,6 +488,7 @@ const sinEquipamiento: ITrainPlan = {
           {
             id: randomId(),
             series: { emom: 10 },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Burpees',
@@ -396,11 +497,11 @@ const sinEquipamiento: ITrainPlan = {
                 }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [2, 4] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Flexiones Handstand',
@@ -413,11 +514,11 @@ const sinEquipamiento: ITrainPlan = {
                 repes: { range: [5, 15] }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [3, 5] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Fondos rusos',
@@ -429,22 +530,22 @@ const sinEquipamiento: ITrainPlan = {
                 repes: { range: [8, 15], cadaLado: true }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [3, 5] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Face pull',
                 repes: { range: [10, 20] }
               }
             ],
-            descanso: AUTODEFINIDO
           },
           {
             id: randomId(),
             series: { range: [2, 4] },
+            descanso: AUTODEFINIDO,
             ejercicios: [
               {
                 name: 'Plancha avanzada',
@@ -455,7 +556,6 @@ const sinEquipamiento: ITrainPlan = {
                 repes: { range: [10, 30], isTime: true }
               }
             ],
-            descanso: AUTODEFINIDO
           }
         ]
       ],
