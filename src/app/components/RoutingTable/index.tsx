@@ -40,8 +40,8 @@ const renderRange = (R: WithTime<Range<OPTIONAL>, OPTIONAL>): string => {
   return `${minString} - ${maxString}`
 }
 
-const Serie = ({ serie }: { serie: ISerie }) => {
-  const [serieValue, setSerie] = useState(0);
+const Serie = ({ value }: { value: ISerie }) => {
+  const [current, setCurrent] = useState(0);
 
   const isAMRAP = (serie: ISerie): serie is AMRAP => {
     if (typeof serie !== 'object') return false;
@@ -53,26 +53,27 @@ const Serie = ({ serie }: { serie: ISerie }) => {
     return !!(serie as EMOM).emom
   }
 
-  if (isAMRAP(serie)) return <p className="text-lg">{serie.amrap}&apos; AMRAP</p>
-  if (isEMOM(serie)) return <p className="text-lg">{serie.emom}&apos; EMOM</p>
-  if (isRange(serie) || isFixed(serie)) {
-    const series = renderRange(serie)
-    const max = serie.range[serie.range.length - 1];
+
+  if (isAMRAP(value)) return <p className="text-lg">{value.amrap}&apos; AMRAP</p>
+  if (isEMOM(value)) return <p className="text-lg">{value.emom}&apos; EMOM</p>
+  if (isRange(value) || isFixed(value)) {
+    const series = renderRange(value)
+    const max = value.range[value.range.length - 1];
     return (
       <div className="flex flex-col gap-3 items-center">
-        <p className="text-lg">{series}</p>
-        {serieValue === max
+        <p className="text-2xl">{series}</p>
+        {current === max
           ? <Badge status="success" text="Finalizado" />
           : <Badge status="processing" text="En progreso" />
         }
         <Counter
           max={max}
-          onChange={(value) => { setSerie(value) }}
+          onChange={(value) => { setCurrent(value) }}
         />
       </div>
     )
   }
-  return serie
+  return value
 }
 
 interface RoutingTableProps {
@@ -96,7 +97,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
       title: "SERIES",
       dataIndex: "series",
       align: 'center',
-      render: (value) => <Serie serie={value} />
+      render: (value) => <Serie value={value} />
     },
     {
       title: "DESCANSO",
