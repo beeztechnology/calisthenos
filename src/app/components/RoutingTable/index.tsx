@@ -69,17 +69,20 @@ const Serie = ({ value }: { value: ISerie }) => {
     const series = renderRange(value)
     const max = value.range[value.range.length - 1];
     return (
-      <div className="flex flex-col gap-3 items-center">
+      <Space direction="vertical">
         <p className="text-2xl">{series}</p>
-        {current === max
-          ? <Badge status="success" text="Finalizado" />
-          : <Badge status="processing" text="En progreso" />
-        }
-        <Counter
-          max={max}
-          onChange={(value) => { setCurrent(value) }}
-        />
-      </div>
+        <Space direction="vertical" className="border w-full rounded-md p-4">
+          {current === max
+            ? <Badge status="success" text="Finalizado" />
+            : <Badge status="processing" text="En progreso" />
+          }
+          <p className="font-bold">Series finalizadas</p>
+          <Counter
+            max={max}
+            onChange={(value) => { setCurrent(value) }}
+          />
+        </Space>
+      </Space>
     )
   }
   return value
