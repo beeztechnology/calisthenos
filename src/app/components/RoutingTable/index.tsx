@@ -53,9 +53,18 @@ const Serie = ({ value }: { value: ISerie }) => {
     return !!(serie as EMOM).emom
   }
 
-
-  if (isAMRAP(value)) return <p className="text-lg">{value.amrap}&apos; AMRAP</p>
-  if (isEMOM(value)) return <p className="text-lg">{value.emom}&apos; EMOM</p>
+  if (isAMRAP(value)) {
+    return <>
+      <p className="text-lg font-bold"><em>AMRAP</em></p>
+      <Countdown max={value.amrap * 60} defaultValue={value.amrap * 60} />
+    </>
+  }
+  if (isEMOM(value)) {
+    return <>
+      <p className="text-lg font-bold"><em>EMOM</em></p>
+      <Countdown max={value.emom * 60} defaultValue={value.emom * 60} />
+    </>
+  }
   if (isRange(value) || isFixed(value)) {
     const series = renderRange(value)
     const max = value.range[value.range.length - 1];
