@@ -1,5 +1,6 @@
 import { renderTime } from "@/utils/render";
-import { Button, notification } from "antd";
+import { InfoCircleTwoTone } from "@ant-design/icons";
+import { Alert, Button } from "antd";
 import { useEffect, useState } from 'react';
 import MyImage from "./MyImage";
 
@@ -34,7 +35,6 @@ function useValue(defaultValue: number, max: number) {
 }
 
 export default function Countdown({ defaultValue = 210, max = 300 }: CountdownProps) {
-  const [api, contextHolder] = notification.useNotification();
   const { value, increment, decrement, setValue } = useValue(defaultValue, max)
   const [started, setStarted] = useState(false)
   const incDecValue = 30
@@ -43,10 +43,6 @@ export default function Countdown({ defaultValue = 210, max = 300 }: CountdownPr
     let timeoutId: NodeJS.Timeout;
     if (started && value === 0) {
       setStarted(false)
-      api.info({
-        message: '¡Termino el tiempo!',
-        duration: 30 * 1000
-      });
     }
     if (started && value > 0) {
       timeoutId = setTimeout(() => {
@@ -54,7 +50,7 @@ export default function Countdown({ defaultValue = 210, max = 300 }: CountdownPr
       }, 1000);
     }
     return () => clearTimeout(timeoutId)
-  }, [started, value, setValue, api])
+  }, [started, value, setValue])
 
   const play = () => {
     setStarted(true)
@@ -72,7 +68,9 @@ export default function Countdown({ defaultValue = 210, max = 300 }: CountdownPr
 
   return (
     <div className="flex flex-col items-center gap-2">
-      {contextHolder}
+      {value === 0 &&
+        <Alert icon={<InfoCircleTwoTone />} showIcon description="¡Tiempo finalizado!" className="p-2" />
+      }
       <p className="text-2xl">{renderTime(value)}</p>
 
       <div className="flex flex-col gap-2">
