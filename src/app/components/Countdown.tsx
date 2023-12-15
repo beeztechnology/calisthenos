@@ -45,7 +45,7 @@ export default function Countdown({ defaultValue = 210, max = 300 }: CountdownPr
       setStarted(false)
       api.info({
         message: '¡Termino el tiempo!',
-        duration: null
+        duration: 30 * 1000
       });
     }
     if (started && value > 0) {
