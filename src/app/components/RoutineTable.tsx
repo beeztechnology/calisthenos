@@ -13,7 +13,7 @@ import { Descanso } from "../types/descanso";
 import { Tempo } from "../types/tempo";
 import { Repeticion } from "../types/reps";
 
-type BloqueExercise = {
+type RowExercise = {
   key: string;
   bloque: Element | ReactElement | string;
   ejercicio: string;
@@ -25,13 +25,13 @@ interface RoutingTableProps {
 }
 
 export default function RoutineTable({ routine }: RoutingTableProps) {
-  const sharedOnCell = (data: BloqueExercise) => {
+  const sharedOnCell = (data: RowExercise) => {
     return {
       rowSpan: data.rowSpan
     }
   }
 
-  const columns: ColumnsType<BloqueExercise> = [
+  const columns: ColumnsType<RowExercise> = [
     {
       title: "BLOQUE",
       dataIndex: "bloque",
@@ -158,7 +158,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
   }
 
   const renderTempo = (tempo?: Tempo): string => {
-    if (!tempo) return '-'
+    if (!tempo) return Tempo.UNDEFINED
     if (isRange(tempo)) return renderRange(tempo)
     return tempo;
   }
@@ -207,14 +207,14 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return rowSpan;
   }
 
-  const data: BloqueExercise[] = [];
+  const data: RowExercise[] = [];
   for (let i = 0; i < routine.length; i++) {
     const bloque = routine[i];
     const ejercicios = bloque.ejercicios;
     const N = ejercicios.length;
     for (let j = 0; j < N; j++) {
       const exercise = ejercicios[j]
-      const ejercicio: BloqueExercise = {
+      const ejercicio: RowExercise = {
         ejercicio: exercise.name,
         intensidad: exercise.intensidad || '-',
         tempo: exercise.tempo,
