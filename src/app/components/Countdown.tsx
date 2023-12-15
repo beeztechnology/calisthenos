@@ -50,6 +50,20 @@ export default function Countdown({ defaultValue = 210 }: CountdownProps) {
     return () => clearTimeout(timeoutId)
   }, [started, value, setValue])
 
+  const play = () => {
+    setStarted(true)
+  }
+
+  const reset = () => {
+    setValue(defaultValue)
+    setStarted(true)
+  }
+
+  const stop = () => {
+    setValue(defaultValue)
+    setStarted(false)
+  }
+
   return (
     <div className="flex flex-col items-center gap-2">
       <p className="text-2xl">{renderTime(value)}</p>
@@ -64,13 +78,13 @@ export default function Countdown({ defaultValue = 210 }: CountdownProps) {
           </Button>
         </div>
         <div className="flex gap-2 justify-center">
-          <Button onClick={() => setStarted(true)}>
+          <Button onClick={play}>
             <MyImage src="/play.svg" alt="play icon" />
           </Button>
-          <Button onClick={() => { setStarted(false); setValue(defaultValue) }}>
+          <Button onClick={stop}>
             <MyImage src="/square.svg" alt="stop icon" />
           </Button>
-          <Button onClick={() => setValue(defaultValue)}>
+          <Button onClick={reset}>
             <MyImage src="/repeat.svg" alt="repeat icon" />
           </Button>
         </div>

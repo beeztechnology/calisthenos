@@ -2,80 +2,55 @@
 import type { IBloque, IExercise, Routine, Serie } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
 import { renderTime } from "@/utils/render";
-import { Checkbox, Space, Table, Typography } from "antd";
+import { Space, Table, TableColumnsType } from "antd";
 import type { ColumnsType } from 'antd/es/table';
-import { ReactElement } from "react";
+import { ExpandableConfig } from "antd/es/table/interface";
+import { Key, ReactElement } from "react";
+import { Descanso } from "../types/descanso";
+import { Range } from "../types/range";
+import { Repeticion } from "../types/reps";
+import { Tempo } from "../types/tempo";
+import { AMRAP, EMOM, NEVER, OPTIONAL, Piramide, WithCadaLado, WithTime } from "../types/utilities";
 import Countdown from "./Countdown";
 import Counter from "./Counter";
-import { AMRAP, EMOM, NEVER, OPTIONAL, Piramide, WithCadaLado, WithTime } from "../types/utilities";
-import { Range } from "../types/range";
-import { Descanso } from "../types/descanso";
-import { Tempo } from "../types/tempo";
-import { Repeticion } from "../types/reps";
 
-type RowExercise = {
+type RowExercise = Pick<IExercise, 'intensidad' | 'tempo' | 'repes'> & {
+  key: Key,
+  ejercicio: string;
+}
+
+type RowBloque = {
   key: string;
   bloque: Element | ReactElement | string;
-  ejercicio: string;
-  rowSpan: number;
-} & Pick<IExercise, 'intensidad' | 'tempo' | 'repes'> & Pick<IBloque, 'series' | 'descanso'>
+  exercises: RowExercise[];
+} & Pick<IBloque, 'series' | 'descanso'>
 
 interface RoutingTableProps {
   routine: Routine;
 }
 
 export default function RoutineTable({ routine }: RoutingTableProps) {
-  const sharedOnCell = (data: RowExercise) => {
-    return {
-      rowSpan: data.rowSpan
-    }
-  }
-
-  const columns: ColumnsType<RowExercise> = [
+  const columns: ColumnsType<RowBloque> = [
     {
       title: "BLOQUE",
       dataIndex: "bloque",
       align: 'center',
-      onCell: sharedOnCell,
       render: (value) => {
         return <Space>
-          <Checkbox />
+          {/* <Checkbox /> */}
           {value}
         </Space>
       }
     },
     {
-      title: "EJERCICIO",
-      dataIndex: "ejercicio",
-    },
-    {
-      title: "INTENSIDAD",
-      dataIndex: "intensidad",
-      align: 'center',
-    },
-    {
-      title: "REPES",
-      dataIndex: "repes",
-      align: 'center',
-      render: (value) => renderRepes(value)
-    },
-    {
-      title: "TEMPO",
-      dataIndex: "tempo",
-      align: 'center',
-      render: (value) => renderTempo(value)
-    },
-    {
       title: "SERIES",
       dataIndex: "series",
       align: 'center',
-      onCell: sharedOnCell,
       render: (value) => renderSeries(value)
     },
     {
       title: "DESCANSO",
       dataIndex: "descanso",
-      onCell: sharedOnCell,
       align: 'center',
       render: (value) => renderDescanso(value)
     },
@@ -172,6 +147,7 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
   }
 
   const renderRepes = (reps: Repeticion): string => {
+    if (!reps) return '-'
     if (isPiramide(reps)) {
       return reps.piramide.reduce((prev, curr, index) => {
         if (index === 0) return `${curr}`
@@ -207,31 +183,61 @@ export default function RoutineTable({ routine }: RoutingTableProps) {
     return rowSpan;
   }
 
-  const data: RowExercise[] = [];
+  const data: RowBloque[] = [];
   for (let i = 0; i < routine.length; i++) {
     const bloque = routine[i];
     const ejercicios = bloque.ejercicios;
     const N = ejercicios.length;
+    const rowBloque: RowBloque = {
+      bloque: getBloqueId(i),
+      key: bloque.id,
+      series: bloque.series,
+      descanso: bloque.descanso,
+      exercises: [],
+    }
     for (let j = 0; j < N; j++) {
       const exercise = ejercicios[j]
-      const ejercicio: RowExercise = {
-        ejercicio: exercise.name,
-        intensidad: exercise.intensidad || '-',
-        tempo: exercise.tempo,
-        repes: exercise.repes,
-        bloque: getBloqueId(i),
-        key: bloque.id + j,
-        series: bloque.series,
-        descanso: bloque.descanso,
-        rowSpan: getRowSpan(N, j),
-      };
-      data.push(ejercicio)
+      rowBloque.exercises.push(
+        {
+          key: randomId(),
+          ejercicio: exercise.name,
+          intensidad: exercise.intensidad || '-',
+          tempo: exercise.tempo,
+          repes: exercise.repes,
+        }
+      )
     }
+    data.push(rowBloque)
   }
+
+  const expandedRowRender: ExpandableConfig<RowBloque>['expandedRowRender'] = (bloque) => {
+    const COLUMN = {
+      EJERCICIO: 'ejercicio',
+      INTENSIDAD: 'intensidad',
+      REPES: 'repes',
+      TEMPO: 'tempo',
+    }
+    const columns: TableColumnsType<RowExercise> = [
+      { title: COLUMN.EJERCICIO.toUpperCase(), dataIndex: COLUMN.EJERCICIO, key: COLUMN.EJERCICIO },
+      { title: COLUMN.INTENSIDAD.toUpperCase(), dataIndex: COLUMN.INTENSIDAD, key: COLUMN.INTENSIDAD },
+      {
+        title: COLUMN.REPES.toUpperCase(),
+        dataIndex: COLUMN.REPES,
+        key: COLUMN.REPES,
+        render: (value) => renderRepes(value)
+      },
+      { title: COLUMN.TEMPO.toUpperCase(), dataIndex: COLUMN.TEMPO, key: COLUMN.TEMPO },
+    ];
+
+    return <Table columns={columns} dataSource={bloque.exercises} pagination={false} />;
+  };
 
   return (
     <div className="overflow-x-auto">
-      <Table columns={columns} dataSource={data} bordered pagination={false} />
+      <Table columns={columns}
+        rowSelection={{}}
+        expandable={{ expandedRowRender }}
+        dataSource={data} pagination={false} />
     </div>
   )
 }
