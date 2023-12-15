@@ -1,5 +1,5 @@
 import { renderTime } from "@/utils/render";
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import { useEffect, useState } from 'react';
 import MyImage from "./MyImage";
 
@@ -34,14 +34,19 @@ function useValue(defaultValue: number, max: number) {
 }
 
 export default function Countdown({ defaultValue = 210, max = 300 }: CountdownProps) {
-  const { value, increment, decrement, setValue } = useValue(defaultValue, max)
+  const [api, contextHolder] = notification.useNotification();
+  const { value, increment, decrement, setValue } = useValue(1, 1)
   const [started, setStarted] = useState(false)
   const incDecValue = 30
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-    if (value <= 0) {
+    if (started && value === 0) {
       setStarted(false)
+      api.info({
+        message: '¡Termino el tiempo!',
+        duration: null
+      });
     }
     if (started && value > 0) {
       timeoutId = setTimeout(() => {
@@ -49,7 +54,7 @@ export default function Countdown({ defaultValue = 210, max = 300 }: CountdownPr
       }, 1000);
     }
     return () => clearTimeout(timeoutId)
-  }, [started, value, setValue])
+  }, [started, value, setValue, api])
 
   const play = () => {
     setStarted(true)
@@ -67,6 +72,7 @@ export default function Countdown({ defaultValue = 210, max = 300 }: CountdownPr
 
   return (
     <div className="flex flex-col items-center gap-2">
+      {contextHolder}
       <p className="text-2xl">{renderTime(value)}</p>
 
       <div className="flex flex-col gap-2">
