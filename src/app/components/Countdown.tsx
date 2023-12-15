@@ -35,7 +35,7 @@ function useValue(defaultValue: number, max: number) {
 
 export default function Countdown({ defaultValue = 210, max = 300 }: CountdownProps) {
   const [api, contextHolder] = notification.useNotification();
-  const { value, increment, decrement, setValue } = useValue(1, 1)
+  const { value, increment, decrement, setValue } = useValue(defaultValue, max)
   const [started, setStarted] = useState(false)
   const incDecValue = 30
 
