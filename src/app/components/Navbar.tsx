@@ -80,8 +80,10 @@ export default function Navbar() {
           ))}
         </NavbarMenu>
       </NextNavbar>
-      <div className={`p-4 overflow-x-auto inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 data-[show-breadcrumb=false]:opacity-0`} data-show-breadcrumb={showBreadcrumb}>
-        <Breadcrumb items={items} itemRender={(item) => <Link href={item.href ?? ''}>{item.title}</Link>} />
+      <div className={`py-4 overflow-x-auto inset-x-0 backdrop-blur-lg backdrop-saturate-150 bg-background/70 data-[show-breadcrumb=false]:opacity-0`} data-show-breadcrumb={showBreadcrumb}>
+        <div className="max-w-5xl mx-auto px-6">
+          <Breadcrumb className="max-w-5xl" items={items} itemRender={(item) => <Link href={item.href ?? ''}>{item.title}</Link>} />
+        </div>
       </div>
     </div>
   );

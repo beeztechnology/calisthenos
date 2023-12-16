@@ -41,7 +41,6 @@ export default function Layout({ children, params: { plan, level, mes, dia } }: 
       addItem({
         title: `Dia ${dia}`,
         key,
-        href: `/plan/${plan}/${level}/mes/${mes}/dia/${dia}`,
       })
     }
     return () => {
