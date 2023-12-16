@@ -40,13 +40,13 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
       align: 'center',
       filters: Object
         .values(Level)
-        .filter(level => exercises.findIndex(ex => ex.level === level) !== -1)
+        .filter(level => exercises.findIndex(ex => ex.level.slug === level.slug) !== -1)
         .map(mod => ({
-          text: mod,
-          value: mod
+          text: mod.value,
+          value: mod.value
         })),
       onFilter: (value, record) => {
-        return record.level === value
+        return record.level.value === value
       },
       render: (value) => renderLevel(value)
     },
@@ -114,7 +114,7 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
 
   const renderLevel = useCallback((level: Level) => {
     return <div className="flex flex-col gap-2">
-      <em>{level}</em>
+      <em>{level.value}</em>
       <Rate count={4} value={getRate(level)} character={<>💪</>} disabled className="flex" />
     </div>
   }, [])
