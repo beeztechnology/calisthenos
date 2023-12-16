@@ -33,7 +33,7 @@ export default function PlanificationContent({ planificacion = [] }: Planificati
 
   const getExpertos = () => {
     return planificacion.filter((item) => {
-      return item.level === Level.EXPERTO
+      return item.level === Level.MUY_AVANZADO
     })
   }
 
@@ -54,7 +54,7 @@ export default function PlanificationContent({ planificacion = [] }: Planificati
         <AccordionItem key={Level.AVANZADO} aria-label={Level.AVANZADO} title={Level.AVANZADO}>
           <PlanificationList list={getAvanzados()} label="Contenido para personas con un nivel avanzado" />
         </AccordionItem>
-        <AccordionItem key={Level.EXPERTO} aria-label={Level.EXPERTO} title={Level.EXPERTO}>
+        <AccordionItem key={Level.MUY_AVANZADO} aria-label={Level.MUY_AVANZADO} title={Level.MUY_AVANZADO}>
           <PlanificationList list={getExpertos()} label="Contenido para personas con un nivel experto" />
         </AccordionItem>
       </Accordion>

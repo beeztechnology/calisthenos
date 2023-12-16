@@ -1,14 +1,14 @@
 import type { ITrainPlan } from "@/app/types/training-plan";
 import { randomId } from "@/utils/random";
-import { SIN_EQUIPAMIENTO } from "./constants.db";
+import { PESO_CORPORAL } from "./constants.db";
 import { Level } from "@/app/types/level";
 import { Tempo } from "@/app/types/tempo";
 import { AUTODEFINIDO, MAXIMO } from "@/app/types/utilities";
 
 const sinEquipamiento: ITrainPlan = {
-  slug: SIN_EQUIPAMIENTO,
-  title: 'Sin equipamiento',
-  description: '¿Querés entrenar en casa? ¿Sin equipamiento (o con mínimo)? ¿Nunca antes entrenaste con tu propio peso corporal? En ese caso, estás en la sección adecuada. Aquí te proponemos el apartado teórico de la sección “Sin Equipamiento” con todo lo que deberías saber y aprender antes de empezar a entrenar en casa. Procurá dedicar el tiempo necesario (será poco, no te preocupes), porque una vez que incorpores estos conocimientos, podrás sacarle el máximo provecho no solo a esta planificación de entrenamiento, sino al resto de los contenidos en la Plataforma.',
+  slug: PESO_CORPORAL,
+  title: 'Peso corporal',
+  description: '¿Te gustaría comenzar tu entrenamiento en casa? ¿Quizás sin necesidad de equipamiento o con lo mínimo indispensable? Si nunca has experimentado con ejercicios utilizando tu propio peso corporal, has llegado al lugar indicado. Aquí te presentamos la sección teórica de "Peso Corporal", donde encontrarás todo lo que necesitas saber y aprender antes de dar inicio a tu rutina de entrenamiento en casa. Tómate el tiempo necesario (será poco, ¡no te preocupes!), porque una vez que adquieras estos conocimientos, podrás aprovechar al máximo no solo esta planificación de entrenamiento, sino también el resto de los contenidos disponibles en la Plataforma. ¡Vamos a empezar!',
   planificacion: [
     {
       month: 1,
@@ -32,59 +32,59 @@ const sinEquipamiento: ITrainPlan = {
       routine: []
     },
     {
-      month: 4,
+      month: 1,
       link: '',
       id: randomId(),
       level: Level.INTERMEDIO,
       routine: []
     },
     {
-      month: 5,
+      month: 2,
       link: '',
       id: randomId(),
       level: Level.INTERMEDIO,
       routine: []
     },
     {
-      month: 6,
+      month: 3,
       link: '',
       id: randomId(),
       level: Level.INTERMEDIO,
       routine: []
     },
     {
-      month: 7,
+      month: 1,
       link: '',
       id: randomId(),
       level: Level.AVANZADO,
       routine: []
     },
     {
-      month: 8,
+      month: 2,
       link: '',
       id: randomId(),
       level: Level.AVANZADO,
       routine: []
     },
     {
-      month: 9,
+      month: 3,
       link: '',
       id: randomId(),
       level: Level.AVANZADO,
       routine: []
     },
     {
-      month: 10,
+      month: 1,
       link: '',
       id: randomId(),
-      level: Level.EXPERTO,
+      level: Level.MUY_AVANZADO,
       routine: []
     },
     {
-      month: 11,
+      month: 2,
       link: '',
       id: randomId(),
-      level: Level.EXPERTO,
+      level: Level.MUY_AVANZADO,
       routine: [
         [
           {
@@ -405,10 +405,10 @@ const sinEquipamiento: ITrainPlan = {
       ]
     },
     {
-      month: 12,
+      month: 3,
       link: '',
       id: randomId(),
-      level: Level.EXPERTO,
+      level: Level.MUY_AVANZADO,
       routine: [
         [
           {

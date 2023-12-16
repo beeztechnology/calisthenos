@@ -26,7 +26,7 @@ const state: StateCreator<TrainingPlanStore, [["zustand/immer", []]]> = (set, ge
     return !!get().trainingPlans[slug]
   },
   getCurrentTrainingPlan: () => {
-    const {trainingPlans, currentTrainingPlan} = get()
+    const { trainingPlans, currentTrainingPlan } = get()
     if (currentTrainingPlan) {
       return trainingPlans[currentTrainingPlan]
     }

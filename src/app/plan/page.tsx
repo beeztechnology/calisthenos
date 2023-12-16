@@ -1,8 +1,6 @@
-import React from 'react'
-import H1 from "../components/Atom/H1"
-import TrainingPlan from "../components/TrainingPlan"
+import { ANILLAS, BARRAS, PESO_CORPORAL } from "@/app/api/db/constants.db";
+import TrainingPlan from "../components/TrainingPlan";
 import styles from './page.module.css';
-import { ANILLAS, BARRAS, SIN_EQUIPAMIENTO } from "@/app/api/db/constants.db";
 
 interface Plan {
   title: string;
@@ -15,7 +13,7 @@ export default function PlanesDeEntrenamiento() {
     {
       title: "Sin equipamiento",
       description: "¿Te gustaría hacer ejercicio en casa? ¿Sin necesidad de equipos o con lo mínimo indispensable? ¿Es la primera vez que te ejercitas utilizando el peso de tu propio cuerpo?",
-      link: SIN_EQUIPAMIENTO
+      link: PESO_CORPORAL
     },
     {
       title: "Anillas",

@@ -10,10 +10,10 @@ import React, { Key, useCallback, useEffect, useState } from 'react'
 import './layout.css';
 
 type LayoutProps = React.PropsWithChildren & {
-  params: { dia: string, plan: string, mes: string }
+  params: { plan: string, level: string, mes: string, dia: string }
 }
 
-export default function Layout({ children, params: { plan, mes, dia } }: LayoutProps) {
+export default function Layout({ children, params: { plan, level, mes, dia } }: LayoutProps) {
   const { trainingPlan } = useTrainingPlan()
   const { addItem, removeItem } = useBreadcrumbStore(({ addItem, removeItem }) => ({
     addItem, removeItem
@@ -27,9 +27,9 @@ export default function Layout({ children, params: { plan, mes, dia } }: LayoutP
   }, [currentPath])
 
   useEffect(() => {
-    const key: Key = 4
+    const key: Key = 5
     if (trainingPlan) {
-      const planificacion = trainingPlan?.planificacion.find(plan => plan.month === Number(mes))
+      const planificacion = trainingPlan?.planificacion.find(plan => plan.month === Number(mes) && plan.level.slug === level)
       const _days: SegmentedLabeledOption[] = []
       planificacion?.routine.forEach((_, i) => {
         _days.push({
@@ -47,7 +47,7 @@ export default function Layout({ children, params: { plan, mes, dia } }: LayoutP
     return () => {
       removeItem(key)
     }
-  }, [mes, dia, plan, getNewPath, trainingPlan, addItem, removeItem])
+  }, [plan, level, mes, dia, getNewPath, trainingPlan, addItem, removeItem])
 
   return (
     <>
