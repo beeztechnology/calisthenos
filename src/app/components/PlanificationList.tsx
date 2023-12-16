@@ -5,17 +5,18 @@ import Link from "next/link";
 
 interface PlanificationListProps {
   list: IPlanificacion[];
+  level: string;
   label: string;
 }
 
-export function PlanificationList({ list, label }: PlanificationListProps) {
+export function PlanificationList({ list, level, label }: PlanificationListProps) {
   const currentPathname = usePathname()
 
   const getPath = ({ link, month }: IPlanificacion) => {
     if (link.length > 0) {
       return currentPathname + link;
     }
-    return `${currentPathname}/mes/${month.toString()}/dia/1`
+    return `${currentPathname}/${level}/mes/${month.toString()}/dia/1`
   }
 
   return (

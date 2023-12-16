@@ -15,25 +15,25 @@ export default function PlanificationContent({ planificacion = [] }: Planificati
 
   const getPrincipiantes = () => {
     return planificacion.filter((item) => {
-      return item.level === Level.PRINCIPIANTE
+      return item.level.slug === Level.PRINCIPIANTE.slug
     })
   }
 
   const getIntermedios = () => {
     return planificacion.filter((item) => {
-      return item.level === Level.INTERMEDIO
+      return item.level.slug === Level.INTERMEDIO.slug
     })
   }
 
   const getAvanzados = () => {
     return planificacion.filter((item) => {
-      return item.level === Level.AVANZADO
+      return item.level.slug === Level.AVANZADO.slug
     })
   }
 
-  const getExpertos = () => {
+  const getMuyAvanzados = () => {
     return planificacion.filter((item) => {
-      return item.level === Level.MUY_AVANZADO
+      return item.level.slug === Level.MUY_AVANZADO.slug
     })
   }
 
@@ -45,17 +45,17 @@ export default function PlanificationContent({ planificacion = [] }: Planificati
         // @ts-expect-error
         onSelectionChange={setSelectedKeys}
       >
-        <AccordionItem key={Level.PRINCIPIANTE} aria-label={Level.PRINCIPIANTE} title={Level.PRINCIPIANTE}>
-          <PlanificationList list={getPrincipiantes()} label="Contenido para personas con un nivel principiantes" />
+        <AccordionItem key={Level.PRINCIPIANTE.slug} aria-label={Level.PRINCIPIANTE.value} title={Level.PRINCIPIANTE.value}>
+          <PlanificationList level={Level.PRINCIPIANTE.slug} list={getPrincipiantes()} label="Contenido para personas con un nivel principiantes" />
         </AccordionItem>
-        <AccordionItem key={Level.INTERMEDIO} aria-label={Level.INTERMEDIO} title={Level.INTERMEDIO}>
-          <PlanificationList list={getIntermedios()} label="Contenido para personas con un nivel intermedio" />
+        <AccordionItem key={Level.INTERMEDIO.slug} aria-label={Level.INTERMEDIO.value} title={Level.INTERMEDIO.value}>
+          <PlanificationList level={Level.INTERMEDIO.slug} list={getIntermedios()} label="Contenido para personas con un nivel intermedio" />
         </AccordionItem>
-        <AccordionItem key={Level.AVANZADO} aria-label={Level.AVANZADO} title={Level.AVANZADO}>
-          <PlanificationList list={getAvanzados()} label="Contenido para personas con un nivel avanzado" />
+        <AccordionItem key={Level.AVANZADO.slug} aria-label={Level.AVANZADO.value} title={Level.AVANZADO.value}>
+          <PlanificationList level={Level.AVANZADO.slug} list={getAvanzados()} label="Contenido para personas con un nivel avanzado" />
         </AccordionItem>
-        <AccordionItem key={Level.MUY_AVANZADO} aria-label={Level.MUY_AVANZADO} title={Level.MUY_AVANZADO}>
-          <PlanificationList list={getExpertos()} label="Contenido para personas con un nivel experto" />
+        <AccordionItem key={Level.MUY_AVANZADO.slug} aria-label={Level.MUY_AVANZADO.value} title={Level.MUY_AVANZADO.value}>
+          <PlanificationList level={Level.MUY_AVANZADO.slug} list={getMuyAvanzados()} label="Contenido para personas con un nivel muy avanzado" />
         </AccordionItem>
       </Accordion>
     </>

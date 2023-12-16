@@ -1,8 +1,9 @@
 import { Repeticion } from "../types/reps";
 import { Tempo } from "../types/tempo";
 import { IExercise } from "../types/training-plan";
+import { Serializable } from "./Serialize.interface";
 
-export class Exercise implements IExercise {
+export class Exercise implements IExercise, Serializable {
   private _name: string;
   private _repes: Repeticion;
   private _intensidad?: string | undefined;
@@ -15,6 +16,15 @@ export class Exercise implements IExercise {
     this._description = description;
     this._intensidad = intensidad;
     this._tempo = tempo;
+  }
+  serialize(): object {
+    return {
+      name: this.name,
+      repes: this.repes,
+      description: this.description,
+      intensidad: this.intensidad,
+      tempo: this.tempo,
+    }
   }
 
   get name() {
