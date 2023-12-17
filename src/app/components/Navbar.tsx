@@ -48,7 +48,7 @@ export default function Navbar() {
   }, [isMenuOpen])
 
   return (
-    <div className="sticky top-0 z-40">
+    <div className="sticky top-0 z-10">
       <NextNavbar height={"var(--cm-navbar-height)"}
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}>
