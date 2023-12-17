@@ -15,7 +15,7 @@ export const exercises: IExerciseDescriptor[] = [
       Z.TRICEPS,
       Z.DELTOIDES,
       Z.CORE
-    ]),
+    ]).serialize(),
   {
     id: randomId(),
     name: {

@@ -1,3 +1,3 @@
-export interface Serializable {
-  serialize(): object;
+export interface Serializable<T> {
+  serialize(): T;
 }

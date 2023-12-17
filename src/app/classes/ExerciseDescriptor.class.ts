@@ -1,8 +1,9 @@
 import { randomId } from "@/utils/random"
 import { Level } from "../types/level";
 import { Equipment, IExerciseDescriptor, Modality, MuscleWorkZone } from "../types/exercises";
+import { Serializable } from "./Serialize.interface";
 
-export class ExerciseDescriptor implements IExerciseDescriptor {
+export class ExerciseDescriptor implements IExerciseDescriptor, Serializable<IExerciseDescriptor> {
   private readonly _id: string = randomId();
   private readonly _name: Record<"english" | "spanish", string>;
   private readonly _instructions: string[];
@@ -16,7 +17,7 @@ export class ExerciseDescriptor implements IExerciseDescriptor {
     spanishName: string,
     instructions: string[],
     level: Level,
-    workZones: MuscleWorkZone[],
+    workZones: MuscleWorkZone[] = [],
     equipment: Equipment[] = [],
     modality: Modality = Modality.DINAMICO
   ) {
@@ -29,6 +30,18 @@ export class ExerciseDescriptor implements IExerciseDescriptor {
     this._workZones = workZones;
     this._equipment = equipment;
     this._modality = modality;
+  }
+
+  serialize(): IExerciseDescriptor {
+    return {
+      id: this.id,
+      name: this.name,
+      instructions: this.instructions,
+      level: this.level,
+      muscleWorkZones: this.muscleWorkZones,
+      equipment: this.equipment,
+      modality: this.modality
+    }
   }
 
   get id() {

@@ -41,14 +41,14 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
       filters: Object
         .values(Level)
         .filter(level => exercises.findIndex(ex => ex.level.slug === level.slug) !== -1)
-        .map(mod => ({
-          text: mod.value,
-          value: mod.value
+        .map(({ value, slug }) => ({
+          text: value,
+          value: slug
         })),
       onFilter: (value, record) => {
-        return record.level.value === value
+        return record.level.slug === value
       },
-      render: (value) => renderLevel(value)
+      render: (value: Level) => renderLevel(value)
     },
     {
       title: "ZONAS DE TRABAJO",
@@ -99,13 +99,13 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
     },
   ]
 
-  const getRate = (level: Level) => {
+  const getRate = (level: Level['slug']) => {
     switch (level) {
-      case Level.PRINCIPIANTE:
+      case Level.PRINCIPIANTE.slug:
         return 1;
-      case Level.INTERMEDIO:
+      case Level.INTERMEDIO.slug:
         return 2;
-      case Level.AVANZADO:
+      case Level.AVANZADO.slug:
         return 3;
       default:
         return 4;
@@ -115,7 +115,13 @@ export default function ExerciseDescriptorTable({ exercises }: ExerciseDescripto
   const renderLevel = useCallback((level: Level) => {
     return <div className="flex flex-col gap-2">
       <em>{level.value}</em>
-      <Rate count={4} value={getRate(level)} character={<>💪</>} disabled className="flex" />
+      <Rate
+        className="flex"
+        disabled
+        count={Object.values(Level).length}
+        value={getRate(level.slug)}
+        character={<>💪</>}
+      />
     </div>
   }, [])
 
