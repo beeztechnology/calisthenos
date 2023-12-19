@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Divider } from "@nextui-org/react";
+import { Card } from "antd";
 import Link from "next/link";
 
 export interface TrainingPlanProps {
@@ -10,27 +9,23 @@ export interface TrainingPlanProps {
 
 export default function TrainingPlan({ title, short_description, link }: TrainingPlanProps) {
   return (
-    <Card className="max-w-[400px]">
-      <CardHeader className="flex gap-3">
-        <div className="flex flex-col">
-          <p className="text-md font-bold">Plan de entrenamiento</p>
-          <p className="text-small text-default-500">{title}</p>
-        </div>
-      </CardHeader>
-      <Divider />
-      <CardBody>
-        <p>{short_description}</p>
-      </CardBody>
-      <Divider />
-      <CardFooter>
-        <Link
-          href={link}
-          className="flex gap-2 items-center link"
-        >
-          <p>Comenzar</p>
+    <Link
+      href={link}
+      className="link p-2"
+    >
+      <Card title={(
+        <>
+          <div className="flex flex-col">
+            <p className="text-md font-bold">Plan de entrenamiento</p>
+            <p className="text-sm font-normal text-default-500">{title}</p>
+          </div>
+        </>
+      )}
+        extra={
           <i className="fa-solid fa-arrow-right" style={{ color: 'inherit' }}></i>
-        </Link>
-      </CardFooter>
-    </Card>
+        }>
+        <p>{short_description}</p>
+      </Card>
+    </Link>
   );
 }

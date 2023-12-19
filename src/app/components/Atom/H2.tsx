@@ -1,4 +1,4 @@
-import { cn } from "@nextui-org/react";
+import cn from "classnames";
 import React from 'react'
 
 interface H2Props {
@@ -7,6 +7,6 @@ interface H2Props {
 
 export default function H2({ children, noMargin }: H2Props & React.PropsWithChildren) {
   return (
-    <h2 className={cn("text-4xl font-black", !noMargin && "mb-6")}>{children}</h2>
+    <h2 className={cn("text-4xl font-black", { "mb-6": !noMargin })}>{children}</h2>
   )
 }
