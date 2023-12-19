@@ -1,12 +1,10 @@
 'use client'
-import { HomeOutlined } from "@ant-design/icons"
-import React, { useEffect } from 'react'
 import { useBreadcrumbStore } from "@/store/useBreadcrumbStore"
-import { usePathname } from "next/navigation"
+import { HomeOutlined } from "@ant-design/icons"
+import { useEffect } from 'react'
 
 export default function RootLayoutClient() {
   const addItem = useBreadcrumbStore((state) => state.addItem)
-  const currentPath = usePathname()
 
   useEffect(() => {
     addItem({
@@ -16,7 +14,5 @@ export default function RootLayoutClient() {
     })
   }, [addItem])
 
-  return (
-    <></>
-  )
+  return <></>
 }
