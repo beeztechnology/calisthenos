@@ -25,7 +25,7 @@ export function PlanificationList({ list, level }: PlanificationListProps) {
         return (
           <List.Item>
             <Link href={getPath(item)} className="w-full link">
-              <List.Item.Meta title={textValue} />
+              <List.Item.Meta title={textValue} className="select-none" />
             </Link>
           </List.Item>
         )

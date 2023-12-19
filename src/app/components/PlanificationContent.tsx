@@ -1,4 +1,5 @@
 'use client'
+import { CaretRightOutlined } from "@ant-design/icons";
 import { Collapse, CollapseProps } from "antd";
 import { Level } from "../types/level";
 import { IPlanificacion } from "../types/training-plan";
@@ -9,58 +10,30 @@ interface PlanificationContentProps {
   planificacion?: IPlanificacion[];
 }
 
-export default function PlanificationContent({ planificacion = [] }: PlanificationContentProps) {
-  const getPrincipiantes = () => {
-    return planificacion.filter((item) => {
-      return item.level.slug === Level.PRINCIPIANTE.slug
+export default function PlanificationContent({ planificacion: list = [] }: PlanificationContentProps) {
+  const getListFiltered = (slug: string) => {
+    return list.filter((item) => {
+      return item.level.slug === slug
     })
   }
 
-  const getIntermedios = () => {
-    return planificacion.filter((item) => {
-      return item.level.slug === Level.INTERMEDIO.slug
-    })
-  }
-
-  const getAvanzados = () => {
-    return planificacion.filter((item) => {
-      return item.level.slug === Level.AVANZADO.slug
-    })
-  }
-
-  const getMuyAvanzados = () => {
-    return planificacion.filter((item) => {
-      return item.level.slug === Level.MUY_AVANZADO.slug
-    })
-  }
-
-  const items: CollapseProps['items'] = [
-    {
-      key: Level.PRINCIPIANTE.slug,
-      label: Level.PRINCIPIANTE.value,
-      children: <PlanificationList level={Level.PRINCIPIANTE.slug} list={getPrincipiantes()} />,
-    },
-    {
-      key: Level.INTERMEDIO.slug,
-      label: Level.INTERMEDIO.value,
-      children: <PlanificationList level={Level.INTERMEDIO.slug} list={getIntermedios()} />,
-    },
-    {
-      key: Level.AVANZADO.slug,
-      label: Level.AVANZADO.value,
-      children: <PlanificationList level={Level.AVANZADO.slug} list={getAvanzados()} />,
-    },
-    {
-      key: Level.MUY_AVANZADO.slug,
-      label: Level.MUY_AVANZADO.value,
-      children: <PlanificationList level={Level.MUY_AVANZADO.slug} list={getMuyAvanzados()} />,
-    },
-  ];
+  const items: CollapseProps['items'] = Object.values(Level).map(lvl => ({
+      key: lvl.slug,
+      label: <p className="select-none">{lvl.value}</p>,
+      children: <PlanificationList level={lvl.slug} list={getListFiltered(lvl.slug)} />,
+  }))
 
   return (
     <>
       <H3>Contenido de la planificación</H3>
-      <Collapse size="large" accordion defaultActiveKey={['1']} items={items} />
+      <Collapse
+        expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+        size="large"
+        accordion
+        ghost
+        defaultActiveKey={['1']}
+        items={items}
+      />
     </>
   );
 }

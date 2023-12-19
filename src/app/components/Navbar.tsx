@@ -48,7 +48,7 @@ export default function Navbar() {
   }, [isMenuOpen])
 
   return (
-    <div className="sticky top-0 z-10">
+    <div className="sticky top-0 z-10 select-none">
       <NextNavbar height={"var(--cm-navbar-height)"}
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}>
@@ -62,7 +62,7 @@ export default function Navbar() {
             </Link>
           </NavbarBrand>
         </NavbarContent>
-        <NavbarMenu>
+        <NavbarMenu className="select-none">
           {menuItems.map((item, index) => (
             <NavbarMenuItem
               className="mx-auto w-full max-w-4xl"
