@@ -7,10 +7,9 @@ import './styles.css'
 interface PlanificationListProps {
   list: IPlanificacion[];
   level: string;
-  label: string;
 }
 
-export function PlanificationList({ list, level, label }: PlanificationListProps) {
+export function PlanificationList({ list, level }: PlanificationListProps) {
   const currentPathname = usePathname()
 
   const getPath = ({ month }: IPlanificacion) => {
