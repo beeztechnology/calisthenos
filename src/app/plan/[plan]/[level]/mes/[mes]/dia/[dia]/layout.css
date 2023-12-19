@@ -3,5 +3,10 @@
 
   .ant-segmented-item-label {
     @apply p-0;
+
+    a {
+      color: #1677ff;
+      text-decoration: none;
+    }
   }
 }
