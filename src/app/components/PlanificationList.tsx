@@ -12,10 +12,7 @@ interface PlanificationListProps {
 export function PlanificationList({ list, level, label }: PlanificationListProps) {
   const currentPathname = usePathname()
 
-  const getPath = ({ link, month }: IPlanificacion) => {
-    if (link.length > 0) {
-      return currentPathname + link;
-    }
+  const getPath = ({ month }: IPlanificacion) => {
     return `${currentPathname}/${level}/mes/${month.toString()}/dia/1`
   }
 
