@@ -1,7 +1,8 @@
-import { Listbox, ListboxItem } from "@nextui-org/react";
-import { usePathname } from "next/navigation";
-import { IPlanificacion } from "../types/training-plan";
+import { List } from "antd";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { IPlanificacion } from "../../types/training-plan";
+import './styles.css'
 
 interface PlanificationListProps {
   list: IPlanificacion[];
@@ -17,21 +18,19 @@ export function PlanificationList({ list, level, label }: PlanificationListProps
   }
 
   return (
-    <Listbox variant="bordered" aria-label={label}>
-      {list.map((item, index, arr) => {
+    <List
+      className="PlanificationList"
+      dataSource={list}
+      renderItem={(item) => {
         const textValue = `Mes ${item.month}`
         return (
-          <ListboxItem
-            key={item.id}
-            showDivider={index !== arr.length - 1}
-            textValue={textValue}
-          >
+          <List.Item>
             <Link href={getPath(item)} className="w-full link">
-              {textValue}
+              <List.Item.Meta title={textValue} />
             </Link>
-          </ListboxItem>
+          </List.Item>
         )
-      })}
-    </Listbox>
+      }}
+    />
   )
 }
