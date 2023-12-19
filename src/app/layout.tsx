@@ -5,6 +5,7 @@ import './globals.css';
 import styles from './layout.styles.module.css';
 import { metadata as _metadata } from "./metadata";
 import RootLayoutClient from "./components/RootLayoutClient";
+import '@/lib/firebase/config'
 
 const font = Bitter({ subsets: ['latin'] })
 

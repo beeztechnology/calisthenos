@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export interface TrainingPlanProps {
   title: string;
-  description: string;
+  short_description?: string;
   link: string;
 }
 
-export default function TrainingPlan({ title, description, link }: TrainingPlanProps) {
+export default function TrainingPlan({ title, short_description, link }: TrainingPlanProps) {
   return (
     <Card className="max-w-[400px]">
       <CardHeader className="flex gap-3">
@@ -19,7 +19,7 @@ export default function TrainingPlan({ title, description, link }: TrainingPlanP
       </CardHeader>
       <Divider />
       <CardBody>
-        <p>{description}</p>
+        <p>{short_description}</p>
       </CardBody>
       <Divider />
       <CardFooter>

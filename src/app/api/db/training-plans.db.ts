@@ -11,79 +11,68 @@ const sinEquipamiento: ITrainPlan = {
   description: '¿Te gustaría comenzar tu entrenamiento en casa? ¿Quizás sin necesidad de equipamiento o con lo mínimo indispensable? Si nunca has experimentado con ejercicios utilizando tu propio peso corporal, has llegado al lugar indicado. Aquí te presentamos la sección teórica de "Peso Corporal", donde encontrarás todo lo que necesitas saber y aprender antes de dar inicio a tu rutina de entrenamiento en casa. Tómate el tiempo necesario (será poco, ¡no te preocupes!), porque una vez que adquieras estos conocimientos, podrás aprovechar al máximo no solo esta planificación de entrenamiento, sino también el resto de los contenidos disponibles en la Plataforma. ¡Vamos a empezar!',
   planificacion: [
     {
-      month: 1,
-      link: '',
       id: randomId(),
+      month: 1,
       level: Level.PRINCIPIANTE,
       routine: []
     },
     {
-      month: 2,
-      link: '',
       id: randomId(),
+      month: 2,
       level: Level.PRINCIPIANTE,
       routine: []
     },
     {
-      month: 3,
-      link: '',
       id: randomId(),
+      month: 3,
       level: Level.PRINCIPIANTE,
       routine: []
     },
     {
-      month: 1,
-      link: '',
       id: randomId(),
+      month: 1,
       level: Level.INTERMEDIO,
       routine: []
     },
     {
+      id: randomId(),
       month: 2,
-      link: '',
-      id: randomId(),
       level: Level.INTERMEDIO,
       routine: []
     },
     {
+      id: randomId(),
       month: 3,
-      link: '',
-      id: randomId(),
       level: Level.INTERMEDIO,
       routine: []
     },
     {
-      month: 1,
-      link: '',
       id: randomId(),
+      month: 1,
       level: Level.AVANZADO,
       routine: []
     },
     {
+      id: randomId(),
       month: 2,
-      link: '',
-      id: randomId(),
       level: Level.AVANZADO,
       routine: []
     },
     {
+      id: randomId(),
       month: 3,
-      link: '',
-      id: randomId(),
       level: Level.AVANZADO,
       routine: []
     },
     {
-      month: 1,
-      link: '',
       id: randomId(),
+      month: 1,
       level: Level.MUY_AVANZADO,
       routine: []
     },
     {
-      month: 2,
-      link: '',
       id: randomId(),
+      month: 2,
       level: Level.MUY_AVANZADO,
       routine: [
         [
@@ -405,9 +394,8 @@ const sinEquipamiento: ITrainPlan = {
       ]
     },
     {
-      month: 3,
-      link: '',
       id: randomId(),
+      month: 3,
       level: Level.MUY_AVANZADO,
       routine: [
         [
